@@ -56,11 +56,7 @@
                                     {{ $product['description'] }}
                                 </p>
                                 @if($index === 0)
-                                    <div class="flex flex-wrap items-center gap-4 pt-4">
-                                        <a href="mailto:{{ config('app.contact_email', 'info@maklostrader.com') }}" class="js-products-cta inline-flex items-center rounded-full bg-maklos-500 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-maklos-500/30 transition-all duration-300 hover:-translate-y-1 hover:bg-maklos-400 hover:shadow-xl">
-                                            Request full catalog
-                                        </a>
-                                    </div>
+                                    {{-- Removed Request full catalog button --}}
                                 @elseif($product['slug'])
                                     <div class="flex flex-wrap items-center gap-4 pt-4">
                                         <span class="js-products-link inline-flex items-center gap-2 text-base font-semibold text-maklos-600 group-hover:gap-4 transition-all duration-300">
@@ -86,19 +82,8 @@
                 <div class="js-products-image-container relative w-full h-full">
                     @foreach ($products as $index => $product)
                         @php
-                            // Get image URL with proper fallback
-                            $imageUrl = null;
-                            if (is_array($productImages) && count($productImages) > 0) {
-                                $imageIndex = $index % count($productImages);
-                                if (!empty($productImages[$imageIndex] ?? null)) {
-                                    $imageUrl = $productImages[$imageIndex];
-                                } elseif (!empty($productImages[0] ?? null)) {
-                                    $imageUrl = $productImages[0];
-                                }
-                            }
-                            if (!$imageUrl) {
-                                $imageUrl = '/storage/assets/IMG_6745.JPG';
-                            }
+                            // Get image URL from product data
+                            $imageUrl = $product['image'] ?? asset('storage/assets/IMG_6745.JPG');
                         @endphp
                         @if($product['slug'])
                             <a href="{{ route('products.show', $product['slug']) }}" class="js-product-image-panel js-product-image-panel-{{ $index }} absolute inset-0 {{ $index === 0 ? '' : 'opacity-0 pointer-events-none' }} cursor-pointer group">
@@ -130,18 +115,8 @@
                 @foreach ($products as $index => $product)
                     @if($index > 0)
                         @php
-                            $imageUrl = null;
-                            if (is_array($productImages) && count($productImages) > 0) {
-                                $imageIndex = $index % count($productImages);
-                                if (!empty($productImages[$imageIndex] ?? null)) {
-                                    $imageUrl = $productImages[$imageIndex];
-                                } elseif (!empty($productImages[0] ?? null)) {
-                                    $imageUrl = $productImages[0];
-                                }
-                            }
-                            if (!$imageUrl) {
-                                $imageUrl = '/storage/assets/IMG_6745.JPG';
-                            }
+                            // Get image URL from product data
+                            $imageUrl = $product['image'] ?? asset('storage/assets/IMG_6745.JPG');
                         @endphp
                         <a href="{{ route('products.show', $product['slug']) }}" class="js-product-mobile-item block space-y-6 group">
                             <div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden bg-gradient-to-br from-maklos-50 to-maklos-100 transition-transform duration-500 group-hover:scale-[1.02]">

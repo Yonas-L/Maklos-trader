@@ -21,5 +21,16 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // CMS Seeders
+        $this->call([
+            HeroSlideSeeder::class,
+            ProductHighlightSeeder::class,
+            AboutContentSeeder::class,
+            AboutValueSeeder::class,
+            ManufacturingStepSeeder::class,
+            FaqItemSeeder::class,
+            SiteSettingSeeder::class,
+        ]);
     }
 }

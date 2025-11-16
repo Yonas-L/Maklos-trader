@@ -7,20 +7,20 @@
 
     <div class="relative z-10 mx-auto max-w-7xl px-6">
         <div class="text-center mb-40 lg:mb-24">
-            <p class="js-about-label text-sm font-semibold uppercase tracking-[0.3em] text-maklos-500 mb-6">About Us</p>
+            <p class="js-about-label text-sm font-semibold uppercase tracking-[0.3em] text-maklos-500 mb-6">{{ $aboutContent->label ?? 'About Us' }}</p>
             <div class="js-about-expertise-wrapper mb-6">
                 <h2 class="js-about-expertise font-display text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-extrabold leading-none tracking-tight">
-                    <span class="js-about-expertise-number inline-block bg-gradient-to-r from-maklos-600 to-eucalyptus-600 bg-clip-text text-transparent">11</span>
+                    <span class="js-about-expertise-number inline-block bg-gradient-to-r from-maklos-600 to-eucalyptus-600 bg-clip-text text-transparent">{{ $aboutContent->experience_years ?? 11 }}</span>
                     <span class="js-about-expertise-text inline-block ml-2 sm:ml-3 lg:ml-4 from-maklos-600 to-eucalyptus-600">years of expertise</span>
                 </h2>
             </div>
             <h3 class="js-about-title font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal leading-tight mb-0">
                 <span class="block bg-gradient-to-r from-maklos-600 to-eucalyptus-600 bg-clip-text text-transparent">
-                    now focused on sustainable household care
+                    {{ $aboutContent->headline ?? 'now focused on sustainable household care' }}
                 </span>
             </h3>
             <p class="js-about-description text-lg text-charcoal/70 sm:text-xl lg:text-xl max-w-4xl mx-auto leading-relaxed">
-                Maklos Trading is a high-quality soap manufacturing company serving Africa and beyond. We design, manufacture, and supply premium bathing soaps with a focus on natural freshness, consistent quality, and export-ready packaging. Our signature product line, Future Eucalyptus Soap, delivers a clean, refreshing experience with natural antibacterial and antifungal benefits.
+                {{ $aboutContent->description ?? 'Maklos Trading is a high-quality soap manufacturing company serving Africa and beyond. We design, manufacture, and supply premium bathing soaps with a focus on natural freshness, consistent quality, and export-ready packaging. Our signature product line, Future Eucalyptus Soap, delivers a clean, refreshing experience with natural antibacterial and antifungal benefits.' }}
             </p>
         </div>
 
@@ -66,13 +66,13 @@ z        <!-- Interconnected Mission, Vision, Values Section -->
 
                                 <!-- Title -->
                                 <h3 class="js-mvv-title font-display text-3xl lg:text-4xl font-bold text-eucalyptus-600 mb-4 drop-shadow-lg" style="color: #0d9488;">
-                                    Our Mission
+                                    {{ $aboutContent->mission_title ?? 'Our Mission' }}
                                 </h3>
 
                                 <!-- Default Description -->
                                 <div class="js-mvv-default">
                                     <p class="text-base lg:text-lg leading-relaxed max-w-xs" style="color: #0d9488;">
-                                        To be Africa's trusted source of high-quality, affordable, and safe bathing soaps.
+                                        {{ $aboutContent->mission_description ?? 'To be Africa\'s trusted source of high-quality, affordable, and safe bathing soaps.' }}
                                     </p>
                                 </div>
                             </div>
@@ -84,22 +84,31 @@ z        <!-- Interconnected Mission, Vision, Values Section -->
                             <div class="js-mvv-expanded relative z-10 h-full flex flex-col justify-center">
                                 <div class="text-center mb-4">
                                     <h3 class="font-display text-2xl lg:text-3xl font-bold mb-3 drop-shadow-lg" style="color: #0d9488;">
-                                        Our Mission
+                                        {{ $aboutContent->mission_title ?? 'Our Mission' }}
                                     </h3>
                                     <p class="text-sm leading-relaxed mb-4" style="color: #0d9488;">
-                        To be Africa's trusted source of high-quality, affordable, and safe bathing soaps — combining modern manufacturing precision with natural ingredients.
+                                        {{ $aboutContent->mission_description ?? 'To be Africa\'s trusted source of high-quality, affordable, and safe bathing soaps.' }}
                     </p>
                                 </div>
                                 <div class="space-y-2">
-                        @foreach ([
-                            ['label' => 'Quality Control', 'copy' => 'Every formulation is tested for purity, stability, and consistency.'],
-                            ['label' => 'Affordable Care', 'copy' => 'Pricing remains accessible without compromising performance.'],
-                        ] as $item)
+                        @if ($aboutContent && $aboutContent->mission_highlights)
+                            @foreach (json_decode($aboutContent->mission_highlights, true) as $item)
                                         <div class="rounded-xl border border-eucalyptus-600/30 bg-eucalyptus-600/10 backdrop-blur-sm p-2.5 shadow-sm">
                                             <p class="text-xs font-semibold uppercase tracking-[0.1em] mb-0.5" style="color: #0d9488;">{{ $item['label'] }}</p>
                                             <p class="text-xs leading-tight" style="color: #0d9488;">{{ $item['copy'] }}</p>
                             </div>
                         @endforeach
+                        @else
+                            @foreach ([
+                                ['label' => 'Quality Control', 'copy' => 'Every formulation is tested for purity, stability, and consistency.'],
+                                ['label' => 'Affordable Care', 'copy' => 'Pricing remains accessible without compromising performance.'],
+                            ] as $item)
+                                        <div class="rounded-xl border border-eucalyptus-600/30 bg-eucalyptus-600/10 backdrop-blur-sm p-2.5 shadow-sm">
+                                            <p class="text-xs font-semibold uppercase tracking-[0.1em] mb-0.5" style="color: #0d9488;">{{ $item['label'] }}</p>
+                                            <p class="text-xs leading-tight" style="color: #0d9488;">{{ $item['copy'] }}</p>
+                            </div>
+                        @endforeach
+                        @endif
                     </div>
                             </div>
                         </div>
@@ -120,13 +129,13 @@ z        <!-- Interconnected Mission, Vision, Values Section -->
 
                                 <!-- Title -->
                                 <h3 class="js-mvv-title font-display text-3xl lg:text-4xl font-bold mb-4 drop-shadow-lg" style="color: #0d9488;">
-                                    Our Vision
+                                    {{ $aboutContent->vision_title ?? 'Our Vision' }}
                                 </h3>
 
                                 <!-- Default Description -->
                                 <div class="js-mvv-default">
                                     <p class="text-base lg:text-lg leading-relaxed max-w-xs" style="color: #0d9488;">
-                                        To lead the region's soap manufacturing industry through sustainable innovation.
+                                        {{ $aboutContent->vision_description ?? 'To lead the region\'s soap manufacturing industry through sustainable innovation.' }}
                                     </p>
                                 </div>
                             </div>
@@ -138,22 +147,31 @@ z        <!-- Interconnected Mission, Vision, Values Section -->
                             <div class="js-mvv-expanded relative z-10 h-full flex flex-col justify-center">
                                 <div class="text-center mb-4">
                                     <h3 class="font-display text-2xl lg:text-3xl font-bold mb-3 drop-shadow-lg" style="color: #0d9488;">
-                                        Our Vision
+                                        {{ $aboutContent->vision_title ?? 'Our Vision' }}
                                     </h3>
                                     <p class="text-sm leading-relaxed mb-4" style="color: #0d9488;">
-                        To lead the region's soap manufacturing industry through sustainable innovation, customer partnership, and export excellence.
+                                        {{ $aboutContent->vision_description ?? 'To lead the region\'s soap manufacturing industry through sustainable innovation, customer partnership, and export excellence.' }}
                     </p>
                                 </div>
                                 <div class="space-y-2">
-                        @foreach ([
-                            ['title' => 'Sustainable Innovation', 'detail' => 'Scale greener production systems that elevate quality while reducing waste.'],
-                            ['title' => 'Customer Partnership', 'detail' => 'Co-create OEM and white-label runs tailored to regional market shifts.'],
-                        ] as $point)
+                        @if ($aboutContent && $aboutContent->vision_highlights)
+                            @foreach (json_decode($aboutContent->vision_highlights, true) as $point)
                                         <div class="rounded-xl border border-eucalyptus-600/30 bg-eucalyptus-600/10 backdrop-blur-sm p-2.5 shadow-sm">
                                             <p class="text-xs font-semibold mb-0.5" style="color: #0d9488;">{{ $point['title'] }}</p>
                                             <p class="text-xs leading-tight" style="color: #0d9488;">{{ $point['detail'] }}</p>
                                         </div>
                                     @endforeach
+                                @else
+                                    @foreach ([
+                                        ['title' => 'Sustainable Innovation', 'detail' => 'Scale greener production systems that elevate quality while reducing waste.'],
+                                        ['title' => 'Customer Partnership', 'detail' => 'Co-create OEM and white-label runs tailored to regional market shifts.'],
+                                    ] as $point)
+                                        <div class="rounded-xl border border-eucalyptus-600/30 bg-eucalyptus-600/10 backdrop-blur-sm p-2.5 shadow-sm">
+                                            <p class="text-xs font-semibold mb-0.5" style="color: #0d9488;">{{ $point['title'] }}</p>
+                                            <p class="text-xs leading-tight" style="color: #0d9488;">{{ $point['detail'] }}</p>
+                                        </div>
+                                    @endforeach
+                                @endif
                                 </div>
                             </div>
                         </div>
@@ -174,13 +192,13 @@ z        <!-- Interconnected Mission, Vision, Values Section -->
 
                                 <!-- Title -->
                                 <h3 class="js-mvv-title font-display text-3xl lg:text-4xl font-bold mb-4 drop-shadow-lg" style="color: #0d9488;">
-                                    Our Values
+                                    {{ $aboutContent->values_title ?? 'Our Values' }}
                                 </h3>
 
                                 <!-- Default Description -->
                                 <div class="js-mvv-default">
                                     <p class="text-base lg:text-lg leading-relaxed max-w-xs" style="color: #0d9488;">
-                                        These pillars guide every Maklos partnership—from R&D to on-time fulfilment.
+                                        {{ $aboutContent->values_description ?? 'These pillars guide every Maklos partnership—from R&D to on-time fulfilment.' }}
                                     </p>
                                 </div>
                             </div>
@@ -192,23 +210,32 @@ z        <!-- Interconnected Mission, Vision, Values Section -->
                             <div class="js-mvv-expanded relative z-10 h-full flex flex-col justify-center">
                                 <div class="text-center mb-4">
                                     <h3 class="font-display text-2xl lg:text-3xl font-bold mb-3 drop-shadow-lg" style="color: #0d9488;">
-                                        Our Values
+                                        {{ $aboutContent->values_title ?? 'Our Values' }}
                                     </h3>
                                     <p class="text-sm leading-relaxed mb-4" style="color: #0d9488;">
-                        These pillars guide every Maklos partnership—from R&D to on-time fulfilment.
+                        {{ $aboutContent->values_description ?? 'These pillars guide every Maklos partnership—from R&D to on-time fulfilment.' }}
                     </p>
                                 </div>
                                 <div class="space-y-2">
-                        @foreach ([
-                            ['name' => 'Quality', 'desc' => 'Every batch is tested for purity, stability, and consistency.'],
-                            ['name' => 'Integrity', 'desc' => 'Ethical sourcing and transparent operations with every supplier.'],
-                            ['name' => 'Innovation', 'desc' => 'Product development driven by science and market feedback loops.'],
-                        ] as $value)
+                        @if ($aboutValues && $aboutValues->count() > 0)
+                            @foreach ($aboutValues as $value)
+                                        <div class="rounded-xl border border-eucalyptus-600/30 bg-eucalyptus-600/10 backdrop-blur-sm p-2.5 shadow-sm">
+                                            <p class="text-xs font-semibold uppercase tracking-[0.1em] mb-0.5" style="color: #0d9488;">{{ $value->title }}</p>
+                                            <p class="text-xs leading-tight" style="color: #0d9488;">{{ $value->summary }}</p>
+                            </div>
+                        @endforeach
+                        @else
+                            @foreach ([
+                                ['name' => 'Quality', 'desc' => 'Every batch is tested for purity, stability, and consistency.'],
+                                ['name' => 'Integrity', 'desc' => 'Ethical sourcing and transparent operations with every supplier.'],
+                                ['name' => 'Innovation', 'desc' => 'Product development driven by science and market feedback loops.'],
+                            ] as $value)
                                         <div class="rounded-xl border border-eucalyptus-600/30 bg-eucalyptus-600/10 backdrop-blur-sm p-2.5 shadow-sm">
                                             <p class="text-xs font-semibold uppercase tracking-[0.1em] mb-0.5" style="color: #0d9488;">{{ $value['name'] }}</p>
                                             <p class="text-xs leading-tight" style="color: #0d9488;">{{ $value['desc'] }}</p>
                             </div>
                         @endforeach
+                        @endif
             </div>
                             </div>
                         </div>

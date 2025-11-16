@@ -1,4 +1,4 @@
-@props(['slides' => []])
+@props(['slides' => [], 'heroContent' => null])
 
 <section id="home" class="js-home-hero relative overflow-hidden bg-gradient-to-b from-maklos-50/50 via-white to-maklos-50/30">
     {{-- Animated Soap Bubbles Background --}}
@@ -26,19 +26,19 @@
     <div class="relative z-20">
         <div class="mx-auto grid max-w-7xl gap-12 px-6 py-32 pb-40 lg:gap-24 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-center ">
             <div class="js-hero-copy max-w-3xl space-y-10">
-                <h1 class="js-hero-title font-display text-5xl font-semibold leading-[1.4] tracking-tight text-charcoal sm:text-6xl lg:text-6xl">
-                    Eucalyptus-powered care for cleaner, healthier living.
-                </h1>
-                <p class="js-hero-description text-l leading-relaxed text-charcoal/70 sm:text-2xl text-justify">
-                    Discover our portfolio of detergents and cosmetics crafted with natural botanicals and trusted science. Highlighting our signature eucalyptus-based soaps for homes and businesses across Ethiopia.
-                </p>
+                <h1 class="js-hero-title font-display text-5xl font-semibold leading-[1.4] tracking-tight text-charcoal sm:text-6xl lg:text-6xl">{{ $heroContent->title ?? '' }}</h1>
+                <p class="js-hero-description text-l leading-relaxed text-charcoal/70 sm:text-2xl text-justify">{{ $heroContent->description ?? '' }}</p>
                 <div class="js-hero-buttons flex flex-wrap items-center gap-5 text-base font-semibold">
-                    <a href="https://wa.me/{{ config('app.whatsapp_number', '251931674207') }}" class="hero-button inline-flex items-center rounded-full bg-maklos-500 px-7 py-3 text-white shadow-lg shadow-maklos-500/30 transition-all duration-300 hover:-translate-y-0.5 hover:bg-maklos-400 hover:shadow-xl">
-                        Chat on WhatsApp
-                    </a>
-                    <a href="#products" class="hero-button inline-flex items-center rounded-full border border-maklos-200 px-7 py-3 text-maklos-700/85 transition-all duration-300 hover:border-maklos-400 hover:text-maklos-500 hover:bg-maklos-50/50">
-                        Explore Products
-                    </a>
+                    @if($heroContent->button_primary_label)
+                        <a href="{{ $heroContent->button_primary_url }}" class="hero-button inline-flex items-center rounded-full bg-maklos-500 px-7 py-3 text-white shadow-lg shadow-maklos-500/30 transition-all duration-300 hover:-translate-y-0.5 hover:bg-maklos-400 hover:shadow-xl">
+                            {{ $heroContent->button_primary_label }}
+                        </a>
+                    @endif
+                    @if($heroContent->button_secondary_label)
+                        <a href="{{ $heroContent->button_secondary_url }}" class="hero-button inline-flex items-center rounded-full border border-maklos-200 px-7 py-3 text-maklos-700/85 transition-all duration-300 hover:border-maklos-400 hover:text-maklos-500 hover:bg-maklos-50/50">
+                            {{ $heroContent->button_secondary_label }}
+                        </a>
+                    @endif
                 </div>
             </div>
 

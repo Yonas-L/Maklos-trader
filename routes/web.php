@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [ProductController::class, 'index'])->name('welcome');
+Route::get('/', [HomeController::class, 'index'])->name('welcome');
 Route::get('/products/{slug}', [ProductController::class, 'show'])->name('products.show');
 
 Route::get('/dashboard', function () {
