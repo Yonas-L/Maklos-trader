@@ -1,0 +1,234 @@
+<section id="about" class="js-about-section relative bg-gradient-to-br from-maklos-50 via-white to-eucalyptus-50 overflow-hidden py-0 lg:py-20">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-20 -left-20 w-96 h-96 bg-maklos-200/30 rounded-full blur-3xl animate-aurora"></div>
+        <div class="absolute bottom-20 -right-20 w-96 h-96 bg-eucalyptus-200/30 rounded-full blur-3xl animate-aurora" style="animation-delay: 2s;"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-maklos-100/20 rounded-full blur-3xl animate-aurora" style="animation-delay: 4s;"></div>
+    </div>
+
+    <div class="relative z-10 mx-auto max-w-7xl px-6">
+        <div class="text-center mb-40 lg:mb-24">
+            <p class="js-about-label text-sm font-semibold uppercase tracking-[0.3em] text-maklos-500 mb-6">About Us</p>
+            <div class="js-about-expertise-wrapper mb-6">
+                <h2 class="js-about-expertise font-display text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-extrabold leading-none tracking-tight">
+                    <span class="js-about-expertise-number inline-block bg-gradient-to-r from-maklos-600 to-eucalyptus-600 bg-clip-text text-transparent">11</span>
+                    <span class="js-about-expertise-text inline-block ml-2 sm:ml-3 lg:ml-4 from-maklos-600 to-eucalyptus-600">years of expertise</span>
+                </h2>
+            </div>
+            <h3 class="js-about-title font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal leading-tight mb-0">
+                <span class="block bg-gradient-to-r from-maklos-600 to-eucalyptus-600 bg-clip-text text-transparent">
+                    now focused on sustainable household care
+                </span>
+            </h3>
+            <p class="js-about-description text-lg text-charcoal/70 sm:text-xl lg:text-xl max-w-4xl mx-auto leading-relaxed">
+                Maklos Trading is a high-quality soap manufacturing company serving Africa and beyond. We design, manufacture, and supply premium bathing soaps with a focus on natural freshness, consistent quality, and export-ready packaging. Our signature product line, Future Eucalyptus Soap, delivers a clean, refreshing experience with natural antibacterial and antifungal benefits.
+            </p>
+        </div>
+
+z        <!-- Interconnected Mission, Vision, Values Section -->
+        <div class="js-mvv-section relative mb-20">
+            <!-- SVG Lines Container for connecting lines -->
+            <svg class="js-mvv-lines absolute inset-0 w-full h-full pointer-events-none z-0" style="overflow: visible;">
+                <defs>
+                    <linearGradient id="mvvLineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#1f58be;stop-opacity:0.7" />
+                        <stop offset="50%" style="stop-color:#0d9488;stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#1f58be;stop-opacity:0.7" />
+                    </linearGradient>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                <!-- Connecting lines will be drawn here by GSAP -->
+                <path class="js-mvv-line-1" d="" stroke="url(#mvvLineGradient)" stroke-width="2" fill="none" opacity="0" filter="url(#glow)"/>
+                <path class="js-mvv-line-2" d="" stroke="url(#mvvLineGradient)" stroke-width="2" fill="none" opacity="0" filter="url(#glow)"/>
+            </svg>
+
+            <!-- Floating Bubbles Container -->
+            <div class="js-mvv-bubbles absolute inset-0 pointer-events-none z-0"></div>
+
+            <!-- 3 Column Grid -->
+            <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+                <!-- Mission Column -->
+                <div class="js-mvv-column js-mvv-mission group relative perspective-1000">
+                    <div class="js-mvv-card-wrapper relative h-[520px] preserve-3d">
+                        <!-- Front Face -->
+                        <div class="js-mvv-card js-mvv-card-front absolute inset-0 w-full h-full rounded-2xl border-2 border-eucalyptus-500/50 bg-gradient-to-br from-white via-eucalyptus-50/30 to-white p-8 lg:p-10 shadow-2xl shadow-eucalyptus-500/20 cursor-pointer overflow-hidden" style="backface-visibility: hidden; transform-style: preserve-3d;">
+                            <!-- Content -->
+                            <div class="relative z-10 h-full flex flex-col items-center justify-center text-center">
+                                <!-- Number Badge -->
+                                <div class="js-mvv-number inline-flex items-center justify-center w-16 h-16 rounded-xl bg-eucalyptus-600/10 backdrop-blur-sm text-eucalyptus-600 font-bold text-2xl mb-6 shadow-lg border border-eucalyptus-600/30">
+                                    01
+                                </div>
+
+                                <!-- Title -->
+                                <h3 class="js-mvv-title font-display text-3xl lg:text-4xl font-bold text-eucalyptus-600 mb-4 drop-shadow-lg" style="color: #0d9488;">
+                                    Our Mission
+                                </h3>
+
+                                <!-- Default Description -->
+                                <div class="js-mvv-default">
+                                    <p class="text-base lg:text-lg leading-relaxed max-w-xs" style="color: #0d9488;">
+                                        To be Africa's trusted source of high-quality, affordable, and safe bathing soaps.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Back Face -->
+                        <div class="js-mvv-card js-mvv-card-back absolute inset-0 w-full h-full rounded-2xl border-2 border-eucalyptus-500/50 bg-gradient-to-br from-white via-eucalyptus-50/30 to-white p-6 lg:p-8 shadow-2xl shadow-eucalyptus-500/20 cursor-pointer overflow-hidden" style="backface-visibility: hidden; transform: rotateY(180deg); transform-style: preserve-3d;">
+                            <!-- Expanded Content -->
+                            <div class="js-mvv-expanded relative z-10 h-full flex flex-col justify-center">
+                                <div class="text-center mb-4">
+                                    <h3 class="font-display text-2xl lg:text-3xl font-bold mb-3 drop-shadow-lg" style="color: #0d9488;">
+                                        Our Mission
+                                    </h3>
+                                    <p class="text-sm leading-relaxed mb-4" style="color: #0d9488;">
+                        To be Africa's trusted source of high-quality, affordable, and safe bathing soaps — combining modern manufacturing precision with natural ingredients.
+                    </p>
+                                </div>
+                                <div class="space-y-2">
+                        @foreach ([
+                            ['label' => 'Quality Control', 'copy' => 'Every formulation is tested for purity, stability, and consistency.'],
+                            ['label' => 'Affordable Care', 'copy' => 'Pricing remains accessible without compromising performance.'],
+                        ] as $item)
+                                        <div class="rounded-xl border border-eucalyptus-600/30 bg-eucalyptus-600/10 backdrop-blur-sm p-2.5 shadow-sm">
+                                            <p class="text-xs font-semibold uppercase tracking-[0.1em] mb-0.5" style="color: #0d9488;">{{ $item['label'] }}</p>
+                                            <p class="text-xs leading-tight" style="color: #0d9488;">{{ $item['copy'] }}</p>
+                            </div>
+                        @endforeach
+                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vision Column -->
+                <div class="js-mvv-column js-mvv-vision group relative perspective-1000">
+                    <div class="js-mvv-card-wrapper relative h-[520px] preserve-3d">
+                        <!-- Front Face -->
+                        <div class="js-mvv-card js-mvv-card-front absolute inset-0 w-full h-full rounded-2xl border-2 border-eucalyptus-500/50 bg-gradient-to-br from-white via-eucalyptus-50/30 to-white p-8 lg:p-10 shadow-2xl shadow-eucalyptus-500/20 cursor-pointer overflow-hidden" style="backface-visibility: hidden; transform-style: preserve-3d;">
+                            <!-- Content -->
+                            <div class="relative z-10 h-full flex flex-col items-center justify-center text-center">
+                                <!-- Number Badge -->
+                                <div class="js-mvv-number inline-flex items-center justify-center w-16 h-16 rounded-xl bg-eucalyptus-600/10 backdrop-blur-sm text-eucalyptus-600 font-bold text-2xl mb-6 shadow-lg border border-eucalyptus-600/30">
+                                    02
+                                </div>
+
+                                <!-- Title -->
+                                <h3 class="js-mvv-title font-display text-3xl lg:text-4xl font-bold mb-4 drop-shadow-lg" style="color: #0d9488;">
+                                    Our Vision
+                                </h3>
+
+                                <!-- Default Description -->
+                                <div class="js-mvv-default">
+                                    <p class="text-base lg:text-lg leading-relaxed max-w-xs" style="color: #0d9488;">
+                                        To lead the region's soap manufacturing industry through sustainable innovation.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Back Face -->
+                        <div class="js-mvv-card js-mvv-card-back absolute inset-0 w-full h-full rounded-2xl border-2 border-eucalyptus-500/50 bg-gradient-to-br from-white via-eucalyptus-50/30 to-white p-6 lg:p-8 shadow-2xl shadow-eucalyptus-500/20 cursor-pointer overflow-hidden" style="backface-visibility: hidden; transform: rotateY(180deg); transform-style: preserve-3d;">
+                            <!-- Expanded Content -->
+                            <div class="js-mvv-expanded relative z-10 h-full flex flex-col justify-center">
+                                <div class="text-center mb-4">
+                                    <h3 class="font-display text-2xl lg:text-3xl font-bold mb-3 drop-shadow-lg" style="color: #0d9488;">
+                                        Our Vision
+                                    </h3>
+                                    <p class="text-sm leading-relaxed mb-4" style="color: #0d9488;">
+                        To lead the region's soap manufacturing industry through sustainable innovation, customer partnership, and export excellence.
+                    </p>
+                                </div>
+                                <div class="space-y-2">
+                        @foreach ([
+                            ['title' => 'Sustainable Innovation', 'detail' => 'Scale greener production systems that elevate quality while reducing waste.'],
+                            ['title' => 'Customer Partnership', 'detail' => 'Co-create OEM and white-label runs tailored to regional market shifts.'],
+                        ] as $point)
+                                        <div class="rounded-xl border border-eucalyptus-600/30 bg-eucalyptus-600/10 backdrop-blur-sm p-2.5 shadow-sm">
+                                            <p class="text-xs font-semibold mb-0.5" style="color: #0d9488;">{{ $point['title'] }}</p>
+                                            <p class="text-xs leading-tight" style="color: #0d9488;">{{ $point['detail'] }}</p>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Values Column -->
+                <div class="js-mvv-column js-mvv-values group relative perspective-1000">
+                    <div class="js-mvv-card-wrapper relative h-[520px] preserve-3d">
+                        <!-- Front Face -->
+                        <div class="js-mvv-card js-mvv-card-front absolute inset-0 w-full h-full rounded-2xl border-2 border-eucalyptus-500/50 bg-gradient-to-br from-white via-eucalyptus-50/30 to-white p-8 lg:p-10 shadow-2xl shadow-eucalyptus-500/20 cursor-pointer overflow-hidden" style="backface-visibility: hidden; transform-style: preserve-3d;">
+                            <!-- Content -->
+                            <div class="relative z-10 h-full flex flex-col items-center justify-center text-center">
+                                <!-- Number Badge -->
+                                <div class="js-mvv-number inline-flex items-center justify-center w-16 h-16 rounded-xl bg-eucalyptus-600/10 backdrop-blur-sm text-eucalyptus-600 font-bold text-2xl mb-6 shadow-lg border border-eucalyptus-600/30">
+                                    03
+                                </div>
+
+                                <!-- Title -->
+                                <h3 class="js-mvv-title font-display text-3xl lg:text-4xl font-bold mb-4 drop-shadow-lg" style="color: #0d9488;">
+                                    Our Values
+                                </h3>
+
+                                <!-- Default Description -->
+                                <div class="js-mvv-default">
+                                    <p class="text-base lg:text-lg leading-relaxed max-w-xs" style="color: #0d9488;">
+                                        These pillars guide every Maklos partnership—from R&D to on-time fulfilment.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Back Face -->
+                        <div class="js-mvv-card js-mvv-card-back absolute inset-0 w-full h-full rounded-2xl border-2 border-eucalyptus-500/50 bg-gradient-to-br from-white via-eucalyptus-50/30 to-white p-6 lg:p-8 shadow-2xl shadow-eucalyptus-500/20 cursor-pointer overflow-hidden" style="backface-visibility: hidden; transform: rotateY(180deg); transform-style: preserve-3d;">
+                            <!-- Expanded Content -->
+                            <div class="js-mvv-expanded relative z-10 h-full flex flex-col justify-center">
+                                <div class="text-center mb-4">
+                                    <h3 class="font-display text-2xl lg:text-3xl font-bold mb-3 drop-shadow-lg" style="color: #0d9488;">
+                                        Our Values
+                                    </h3>
+                                    <p class="text-sm leading-relaxed mb-4" style="color: #0d9488;">
+                        These pillars guide every Maklos partnership—from R&D to on-time fulfilment.
+                    </p>
+                                </div>
+                                <div class="space-y-2">
+                        @foreach ([
+                            ['name' => 'Quality', 'desc' => 'Every batch is tested for purity, stability, and consistency.'],
+                            ['name' => 'Integrity', 'desc' => 'Ethical sourcing and transparent operations with every supplier.'],
+                            ['name' => 'Innovation', 'desc' => 'Product development driven by science and market feedback loops.'],
+                        ] as $value)
+                                        <div class="rounded-xl border border-eucalyptus-600/30 bg-eucalyptus-600/10 backdrop-blur-sm p-2.5 shadow-sm">
+                                            <p class="text-xs font-semibold uppercase tracking-[0.1em] mb-0.5" style="color: #0d9488;">{{ $value['name'] }}</p>
+                                            <p class="text-xs leading-tight" style="color: #0d9488;">{{ $value['desc'] }}</p>
+                            </div>
+                        @endforeach
+            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- <div class="js-about-cta text-center mt-16">
+            <div class="inline-block rounded-3xl bg-gradient-to-r from-maklos-500 to-eucalyptus-500 p-[2px] shadow-2xl">
+                <div class="rounded-3xl bg-white px-8 py-6">
+                    <p class="text-lg font-semibold text-charcoal mb-2">Ready to partner with us?</p>
+                    <a href="mailto:{{ config('app.contact_email', 'info@maklostrader.com') }}" class="inline-flex items-center gap-2 text-maklos-600 font-semibold hover:gap-4 transition-all duration-300 group">
+                        Get in touch
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div> --}}
+    </div>
+</section>

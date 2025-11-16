@@ -52,169 +52,71 @@
         @endphp
         @include('layouts.navigation')
 
-        <main class="pt-24">
-            <section id="home" class="relative overflow-hidden bg-gradient-to-b from-white via-maklos-50/70 to-white">
-                <div class="pointer-events-none absolute inset-0">
-                    <div class="absolute -left-40 top-[-22%] h-[520px] w-[520px] animate-aurora rounded-full bg-gradient-to-br from-eucalyptus/35 via-maklos-200/30 to-white/0 blur-[220px]"></div>
-                    <div class="absolute -right-48 bottom-[-25%] h-[600px] w-[600px] animate-aurora rounded-full bg-gradient-to-tr from-maklos-200/40 via-eucalyptus/30 to-white/0 blur-[240px]" style="animation-delay: -8s"></div>
-                    <div class="absolute inset-0 -z-10">
-                        <div class="absolute left-[22%] top-[28%] h-[360px] w-[360px] animate-aurora rounded-full bg-gradient-to-br from-eucalyptus/30 via-maklos-200/25 to-white/0 blur-[200px] opacity-80" style="animation-delay: -3s"></div>
-                        <div class="absolute right-[18%] top-[32%] h-[420px] w-[420px] animate-aurora rounded-full bg-gradient-to-bl from-maklos-100/30 via-eucalyptus/25 to-white/0 blur-[220px] opacity-70" style="animation-delay: -11s"></div>
-                    </div>
+        <main class="pt-2">
+            {{-- Hero section --}}
+            <x-hero :slides="$heroSlides" />
+
+            {{-- Products section --}}
+            @php
+                $products = [
+                    [
+                        'label' => 'Products',
+                        'title' => 'Signature formulations for everyday brilliance',
+                        'description' => 'Discover our curated collection of premium detergents and cosmetics, each crafted with natural botanicals and trusted science. From our signature eucalyptus-based soaps to specialized cleaning solutions, every product is designed for superior performance and environmental consciousness.',
+                        'slug' => null,
+                    ],
+                    [
+                        'label' => 'Products',
+                        'title' => 'Eucalyptus Laundry Soap',
+                        'description' => 'Gentle on fabrics, tough on stains with natural essential oils. Perfect for delicate and everyday laundry needs. Our hero product combines powerful cleaning with natural eucalyptus oil for a refreshing, effective laundry experience.',
+                        'slug' => 'eucalyptus-laundry-soap',
+                    ],
+                    [
+                        'label' => 'Products',
+                        'title' => 'Botanical Body Soap',
+                        'description' => 'Moisturizing blend with eucalyptus and aloe for daily skin care. Nourishes while it cleanses, leaving your skin feeling refreshed and hydrated. Perfect for those who value natural ingredients in their daily routine.',
+                        'slug' => 'botanical-body-soap',
+                    ],
+                    [
+                        'label' => 'Products',
+                        'title' => 'Premium Toilet Cleaner',
+                        'description' => 'High-impact disinfectant with refreshing scent and swift action. Keeps your space clean and fresh with powerful cleaning agents that eliminate bacteria and odors effectively.',
+                        'slug' => 'premium-toilet-cleaner',
+                    ],
+                ];
+            @endphp
+            <x-product-showcase :products="$products" :product-images="$productImages" />
+
+             <div class="w-full lg:col-span-2">
+                @include('partials.shape-divider')
+            </div>
+
+            {{-- About section --}}
+            <x-about-section />
+
+             <div class="w-full lg:col-span-2">
+                @include('partials.shape-divider')
+            </div>
+
+            {{-- Manufacturing Excellence Section --}}
+            <x-manufacturing-section />
+
+                <div class="w-full lg:col-span-2">
+                    @include('partials.shape-divider')
                 </div>
-                <div class="absolute inset-0 -z-10"></div>
-                <div class="mx-auto grid max-w-7xl gap-16 px-6 py-32 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-center">
-                    <div class="max-w-3xl space-y-10">
-                        <span class="inline-flex items-center gap-2 rounded-full border border-maklos-200 px-5 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-maklos-600">
-                            Maklos Trader
-                        </span>
-                        <h1 class="font-display text-5xl font-semibold leading-tight text-charcoal sm:text-6xl lg:text-7xl">
-                            Eucalyptus-powered care for cleaner, healthier living.
-                        </h1>
-                        <p class="text-xl leading-relaxed text-charcoal/70 sm:text-2xl">
-                            Discover our portfolio of detergents and cosmetics crafted with natural botanicals and trusted science. Highlighting our signature eucalyptus-based soaps for homes and businesses across Ethiopia.
-                        </p>
-                        <div class="flex flex-wrap items-center gap-5 text-base font-semibold">
-                            <a href="https://wa.me/{{ config('app.whatsapp_number', '251000000000') }}" class="inline-flex items-center rounded-full bg-maklos-500 px-7 py-3 text-white shadow-lg shadow-maklos-500/30 transition hover:-translate-y-0.5 hover:bg-maklos-400">
-                                Chat on WhatsApp
-                            </a>
-                            <a href="#products" class="inline-flex items-center rounded-full border border-maklos-200 px-7 py-3 text-maklos-700/85 transition hover:border-maklos-400 hover:text-maklos-500">
-                                Explore Products
-                            </a>
-                        </div>
-                    </div>
 
-                    <div class="relative flex w-full justify-center lg:w-auto">
-                        <div class="absolute -inset-10 rounded-full bg-maklos-100 blur-3xl"></div>
-                        <div
-                            x-data="heroCarousel({ slides: @js($heroSlides), interval: 5000 })"
-                            x-init="start()"
-                            @mouseenter="stop()"
-                            @mouseleave="start()"
-                            class="relative flex h-[560px] w-full max-w-2xl items-center justify-center"
-                        >
-                            <template x-for="(slide, index) in slides" :key="index">
-                                <figure
-                                    class="absolute flex h-[520px] w-96 cursor-pointer flex-col overflow-hidden rounded-[3.5rem] border border-white/60 bg-white shadow-2xl transition-all duration-700 ease-out"
-                                    :class="classes(index)"
-                                    :style="classes(index).includes('opacity-0') ? 'visibility:hidden;' : 'visibility:visible;'"
-                                    @click="goTo(index)"
-                                >
-                                    <div class="relative h-[380px] overflow-hidden">
-                                        <img
-                                            :src="slideImage(slide)"
-                                            :alt="slideTitle(slide)"
-                                            class="h-full w-full object-cover"
-                                        />
-                                    </div>
-                                    <figcaption class="flex flex-1 flex-col gap-3 px-8 py-6">
-                                        <h3 class="font-display text-2xl text-charcoal" x-text="slideTitle(slide)"></h3>
-                                        <p class="text-base text-charcoal/60" x-text="slideCaption(slide)"></p>
-                                    </figcaption>
-                                </figure>
-                            </template>
+            {{-- Quality & Compliance Section --}}
+            {{-- <x-quality-section />
+            
+                <div class="w-full lg:col-span-2">
+                    @include('partials.shape-divider')
+                </div> --}}
 
-                            <div class="absolute -bottom-16 flex items-center gap-4">
-                                <template x-for="(slide, index) in slides" :key="`indicator-${index}`">
-                                    <button
-                                        type="button"
-                                        class="h-3 rounded-full transition-all duration-300"
-                                        :class="indicatorClasses(index)"
-                                        @click="goTo(index)"
-                                        :aria-label="`Show slide ${index + 1}`"
-                                    ></button>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            {{-- FAQ Section --}}   
 
-            <section id="products" class="bg-white py-24 text-charcoal">
-                <div class="mx-auto max-w-7xl px-6">
-                    <div class="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-                        <div>
-                            <p class="text-sm font-semibold uppercase tracking-[0.3em] text-maklos-500">Products</p>
-                            <h2 class="mt-3 font-display text-3xl text-charcoal sm:text-4xl">Signature formulations for everyday brilliance</h2>
-                        </div>
-                        <a href="mailto:{{ config('app.contact_email', 'info@maklostrader.com') }}" class="inline-flex items-center rounded-full border border-maklos-200 px-6 py-3 text-sm font-semibold text-maklos-700 transition hover:border-maklos-400 hover:text-maklos-500">
-                            Request full catalog
-                        </a>
-                    </div>
-
-                    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        @foreach ([
-                            ['title' => 'Eucalyptus Laundry Soap', 'description' => 'Gentle on fabrics, tough on stains with natural essential oils.', 'tag' => 'Hero Product'],
-                            ['title' => 'Botanical Body Soap', 'description' => 'Moisturizing blend with eucalyptus and aloe for daily skin care.', 'tag' => 'Skin Care'],
-                            ['title' => 'Premium Toilet Cleaner', 'description' => 'High-impact disinfectant with refreshing scent and swift action.', 'tag' => 'Sanitation'],
-                        ] as $index => $product)
-                            <article class="group flex flex-col overflow-hidden rounded-3xl border border-maklos-100 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-                                <div class="aspect-square overflow-hidden bg-maklos-50">
-                                    <img src="{{ $productImages[$index] ?? $productImages[0] }}" alt="{{ $product['title'] }}" class="h-full w-full object-cover transition duration-300 group-hover:scale-105" />
-                                </div>
-                                <div class="flex flex-1 flex-col p-6">
-                                    <span class="inline-flex rounded-full bg-maklos-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-maklos-600">{{ $product['tag'] }}</span>
-                                    <h3 class="mt-4 font-display text-2xl text-charcoal transition group-hover:text-maklos-600">{{ $product['title'] }}</h3>
-                                    <p class="mt-3 flex-1 text-sm text-charcoal/70">{{ $product['description'] }}</p>
-                                    <div class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-maklos-600">
-                                        View details
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </article>
-                        @endforeach
-                    </div>
-                </div>
-            </section>
-
-            <section id="about" class="bg-maklos-50 py-24">
-                <div class="mx-auto max-w-5xl px-6 text-center text-charcoal">
-                    <p class="text-sm font-semibold uppercase tracking-[0.3em] text-maklos-500">About Us</p>
-                    <h2 class="mt-4 font-display text-3xl text-charcoal sm:text-4xl">
-                        11 years of expertise now focused on sustainable household care.
-                    </h2>
-                    <p class="mt-6 text-base text-charcoal/70 sm:text-lg">
-                        Maklos Trader brings seasoned knowledge from leading trading houses into a new chapter centered on high-performance detergents and cosmetics. We combine responsible sourcing with modern production to serve retailers, institutions, and communities nationwide.
-                    </p>
-                    <div class="mt-10 grid gap-6 sm:grid-cols-3">
-                        @foreach ([
-                            ['metric' => '30+', 'label' => 'Retail Partners'],
-                            ['metric' => '5K', 'label' => 'Weekly Units'],
-                            ['metric' => '100%', 'label' => 'Natural Fragrance Oils'],
-                        ] as $stat)
-                            <div class="rounded-3xl border border-white bg-white p-6 shadow-sm">
-                                <p class="font-display text-3xl text-maklos-600">{{ $stat['metric'] }}</p>
-                                <p class="mt-2 text-sm uppercase tracking-[0.3em] text-charcoal/60">{{ $stat['label'] }}</p>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </section>
-
-            <section id="faq" class="bg-white py-24 text-charcoal">
-                <div class="mx-auto max-w-5xl px-6">
-                    <p class="text-sm font-semibold uppercase tracking-[0.3em] text-maklos-500">FAQ</p>
-                    <h2 class="mt-4 font-display text-3xl text-charcoal sm:text-4xl">Answers for quick decision-making</h2>
-                    <div class="mt-10 space-y-6">
-                        @foreach ([
-                            ['question' => 'Do you offer private labeling?', 'answer' => 'Yes, we collaborate with retailers to create custom packages and fragrances aligned with brand guidelines.'],
-                            ['question' => 'How soon can we receive a product catalog?', 'answer' => 'Catalogs and samples are available upon request—contact us via WhatsApp or email for tailored selections.'],
-                            ['question' => 'What logistics support is available?', 'answer' => 'We ship nationwide with reliable distributors and can coordinate recurring delivery schedules.'],
-                        ] as $faq)
-                            <article class="rounded-3xl border border-maklos-100 bg-white px-6 py-5 shadow-sm transition hover:border-maklos-200 hover:shadow-md">
-                                <h3 class="font-display text-xl text-charcoal">{{ $faq['question'] }}</h3>
-                                <p class="mt-2 text-sm text-charcoal/70">{{ $faq['answer'] }}</p>
-                            </article>
-                        @endforeach
-                    </div>
-                </div>
-            </section>
+            <x-faq-section />
         </main>
 
-        <footer class="bg-maklos-900 py-12 text-center text-sm text-white/75">
-            © {{ now()->year }} Maklos Trader. All rights reserved.
-        </footer>
+        <x-footer />
     </body>
 </html>

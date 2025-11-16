@@ -14,6 +14,7 @@
                 ['label' => 'Home', 'href' => '#home'],
                 ['label' => 'Products', 'href' => '#products'],
                 ['label' => 'About Us', 'href' => '#about'],
+                ['label' => 'Manufacturing', 'href' => '#manufacturing'],
                 ['label' => 'FAQ', 'href' => '#faq'],
             ] as $item)
                 <a
@@ -56,7 +57,7 @@
 
     <div x-show="open" x-transition class="lg:hidden">
         <div class="space-y-3 bg-white/95 px-6 pb-6 pt-2 backdrop-blur">
-            @foreach (['home', 'products', 'about', 'faq'] as $section)
+            @foreach (['home', 'products', 'about', 'manufacturing', 'faq'] as $section)
                 <a
                     href="#{{ $section }}"
                     class="block rounded-lg px-4 py-3 text-base font-semibold text-maklos-700/85 transition hover:bg-maklos-50"
