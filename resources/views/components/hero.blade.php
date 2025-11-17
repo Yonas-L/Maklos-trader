@@ -29,7 +29,7 @@
             <div class="js-hero-copy max-w-4xl space-y-10 pt-64  ">
                 <h1 class="js-hero-title font-display text-4xl font-bold leading-[1.2] tracking-tight text-charcoal sm:text-5xl lg:text-6xl">
                  
-                    {{ $heroContent->title ?? '' }}
+                    {{ $heroContent->title ?? ' ' }}
                 </h1>
                 <p class="js-hero-description text-base leading-relaxed text-charcoal/70 sm:text-lg text-justify">{{ $heroContent->description ?? '' }}</p>
                 <div class="js-hero-buttons flex flex-wrap items-center gap-5 text-base font-semibold">
