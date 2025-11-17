@@ -16,6 +16,11 @@ class HeroContent extends Model
         'button_primary_url',
         'button_secondary_label',
         'button_secondary_url',
+        'facebook_url',
+        'instagram_url',
+        'twitter_url',
+        'linkedin_url',
+        'show_social_icons',
         'is_active',
     ];
 }

@@ -35,6 +35,31 @@ class HeroContentResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('button_secondary_url')
                     ->maxLength(255),
+                Forms\Components\Section::make('Social Media Links')
+                    ->description('Configure social media icons displayed in hero section')
+                    ->schema([
+                        Forms\Components\Toggle::make('show_social_icons')
+                            ->label('Show Social Icons')
+                            ->default(true),
+                        Forms\Components\TextInput::make('facebook_url')
+                            ->label('Facebook URL')
+                            ->url()
+                            ->prefix('https://facebook.com/'),
+                        Forms\Components\TextInput::make('instagram_url')
+                            ->label('Instagram URL')
+                            ->url()
+                            ->prefix('https://instagram.com/'),
+                        Forms\Components\TextInput::make('twitter_url')
+                            ->label('X/Twitter URL')
+                            ->url()
+                            ->prefix('https://twitter.com/'),
+                        Forms\Components\TextInput::make('linkedin_url')
+                            ->label('LinkedIn URL')
+                            ->url()
+                            ->prefix('https://linkedin.com/'),
+                    ])
+                    ->columns(2)
+                    ->collapsible(),
                 Forms\Components\Toggle::make('is_active')
                     ->required(),
             ]);

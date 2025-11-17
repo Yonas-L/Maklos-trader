@@ -5,8 +5,8 @@
     class="fixed inset-x-0 top-0 z-50 transition-colors duration-300 backdrop-blur"
 >
     <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <a href="{{ url('/') }}" class="font-display text-2xl font-semibold text-maklos-700">
-            Maklos Trader
+        <a href="{{ url('/') }}" class="flex items-center">
+            <x-animated-navbar-text />
         </a>
 
         <div class="hidden items-center gap-10 lg:flex">
