@@ -24,8 +24,8 @@
 
     {{-- Content wrapper --}}
     <div class="relative z-20">
-        <div class="mx-auto grid max-w-7xl gap-12 px-6 py-32 pb-8 lg:gap-24 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-center ">
-            <div class="js-hero-copy max-w-4xl space-y-10">
+        <div class="mx-auto grid max-w-7xl gap-12 px-6 pb-8 lg:gap-24 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-start">
+            <div class="js-hero-copy max-w-4xl space-y-10 pt-32">
                 <h1 class="js-hero-title font-display text-4xl font-bold leading-[1.2] tracking-tight text-charcoal sm:text-5xl lg:text-6xl">
                  
                     {{ $heroContent->title ?? '' }}
@@ -228,7 +228,7 @@
                 </style>
             </div>
 
-            <div class="relative flex w-full justify-center lg:w-auto mt-12 lg:mt-0">
+            <div class="relative flex w-full justify-center lg:w-auto mt-12 lg:mt-32">
                 <div class="absolute -inset-10 rounded-full bg-maklos-100 blur-3xl"></div>
                 <div
                     x-data="heroCarousel({ slides: @js($slides), interval: 5000 })"

@@ -8,20 +8,15 @@
     <div class="relative z-10 mx-auto max-w-7xl px-6">
         <div class="text-center mb-40 lg:mb-24">
             <p class="js-about-label text-sm font-semibold uppercase tracking-[0.3em] text-maklos-500 mb-6">{{ $aboutContent->label ?? 'About Us' }}</p>
-            <div class="js-about-expertise-wrapper mb-6">
+            <div class="js-about-expertise-wrapper">
                 <h2 class="js-about-expertise font-display text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-extrabold leading-none tracking-tight">
                     <span class="js-about-expertise-number inline-block bg-gradient-to-r from-maklos-600 to-eucalyptus-600 bg-clip-text text-transparent">{{ $aboutContent->experience_years ?? 11 }}</span>
-                    <span class="js-about-expertise-text inline-block ml-2 sm:ml-3 lg:ml-4 from-maklos-600 to-eucalyptus-600">years of expertise</span>
+                    <span class="js-about-expertise-text inline-block ml-1 sm:ml-2 lg:ml-3 from-maklos-600 to-eucalyptus-600">years of expertise</span>
                 </h2>
+                <p class="js-about-description text-lg text-charcoal/70 sm:text-xl lg:text-xl max-w-3xl mx-auto mt-12 leading-relaxed">
+                    {{ $aboutContent->description ?? 'Maklos Trading is a high-quality soap manufacturing company serving Africa and beyond. We design, manufacture, and supply premium bathing soaps with a focus on natural freshness, consistent quality, and export-ready packaging. Our signature product line, Future Eucalyptus Soap, delivers a clean, refreshing experience with natural antibacterial and antifungal benefits.' }}
+                </p>
             </div>
-            <h3 class="js-about-title font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal leading-tight mb-0">
-                <span class="block bg-gradient-to-r from-maklos-600 to-eucalyptus-600 bg-clip-text text-transparent">
-                    {{ $aboutContent->headline ?? 'now focused on sustainable household care' }}
-                </span>
-            </h3>
-            <p class="js-about-description text-lg text-charcoal/70 sm:text-xl lg:text-xl max-w-4xl mx-auto leading-relaxed">
-                {{ $aboutContent->description ?? 'Maklos Trading is a high-quality soap manufacturing company serving Africa and beyond. We design, manufacture, and supply premium bathing soaps with a focus on natural freshness, consistent quality, and export-ready packaging. Our signature product line, Future Eucalyptus Soap, delivers a clean, refreshing experience with natural antibacterial and antifungal benefits.' }}
-            </p>
         </div>
 
 z        <!-- Interconnected Mission, Vision, Values Section -->
