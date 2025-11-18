@@ -433,7 +433,7 @@ const animateProductShowcase = () => {
                     ease: 'power3.out',
                 }, 0.3);
             }
-        },z
+        },
     });
 
     // Animate explore more button after 3rd product scroll
@@ -441,102 +441,29 @@ const animateProductShowcase = () => {
     const exploreMoreBtn = section.querySelector('.js-explore-more-btn');
     
     if (exploreMoreContainer && exploreMoreBtn) {
-        // Set initial state for the container and its children
-        const exploreContent = exploreMoreContainer.querySelector('div');
-        const exploreHeading = exploreMoreContainer.querySelector('h2');
-        const exploreText = exploreMoreContainer.querySelector('p');
+        // Set initial state
+        gsap.set(exploreMoreContainer, { opacity: 0, y: 30 });
+        gsap.set(exploreMoreBtn, { scale: 0.8, opacity: 0 });
         
-        gsap.set([exploreMoreContainer, exploreContent, exploreHeading, exploreText, exploreMoreBtn], { 
-            opacity: 0,
-            y: 30,
-            pointerEvents: 'none'
-        });
-        
-        // Create scroll trigger for the explore more section
+        // Create scroll trigger for explore more button
         ScrollTrigger.create({
-            trigger: exploreMoreContainer,
-            start: 'top center+=100',
-            end: 'bottom center',
-            scrub: 1,
+            trigger: section,
+            start: () => `top+=${window.innerHeight * 3 * 1.2 * 0.85} top`, // After 85% of 3rd product scroll
+            once: true,
             onEnter: () => {
-                // Enable pointer events when visible
-                gsap.set(exploreMoreContainer, { pointerEvents: 'auto' });
+                const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
                 
-                // Create a timeline for the entrance animation
-                const tl = gsap.timeline({ 
-                    defaults: { ease: 'power3.out' },
-                    onComplete: () => {
-                        // Add a subtle pulse effect to the button
-                        gsap.to(exploreMoreBtn, {
-                            scale: 1.03,
-                            duration: 1.5,
-                            yoyo: true,
-                            repeat: -1,
-                            ease: 'sine.inOut'
-                        });
-                    }
-                });
-                
-                // Animate the container
                 tl.to(exploreMoreContainer, {
                     opacity: 1,
                     y: 0,
-                    duration: 0.8
-                }, 0);
-                
-                // Animate the heading
-                tl.to(exploreHeading, {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.8
-                }, 0.2);
-                
-                // Animate the text
-                tl.to(exploreText, {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.8
-                }, 0.3);
-                
-                // Animate the button
-                tl.to(exploreMoreBtn, {
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
                     duration: 0.8,
-                    ease: 'back.out(1.8)'
-                }, 0.4);
+                })
+                .to(exploreMoreBtn, {
+                    scale: 1,
+                    opacity: 1,
+                    duration: 0.6,
+                }, 0.3);
             },
-            onLeaveBack: () => {
-                // Reset states when scrolling back up
-                gsap.set([exploreMoreContainer, exploreContent, exploreHeading, exploreText, exploreMoreBtn], { 
-                    opacity: 0,
-                    y: 30,
-                    pointerEvents: 'none' 
-                });
-                
-                // Kill any ongoing animations
-                gsap.killTweensOf([exploreMoreContainer, exploreContent, exploreHeading, exploreText, exploreMoreBtn]);
-            }
-        });
-        
-        // Add hover effect to the button
-        exploreMoreBtn.addEventListener('mouseenter', () => {
-            gsap.to(exploreMoreBtn, {
-                scale: 1.03,
-                duration: 0.3,
-                ease: 'power2.out',
-                overwrite: 'auto'
-            });
-        });
-        
-        exploreMoreBtn.addEventListener('mouseleave', () => {
-            gsap.to(exploreMoreBtn, {
-                scale: 1,
-                duration: 0.3,
-                ease: 'power2.out',
-                overwrite: 'auto'
-            });
         });
     }
 };
