@@ -31,7 +31,7 @@ class HomeController extends Controller
                     return [
                         'title' => $slide->title,
                         'caption' => $slide->caption,
-                        'image' => $slide->image_path ? Storage::disk('public')->url($slide->image_path) : asset('storage/assets/IMG_6745.JPG'),
+                        'image' => $slide->image_path ? asset('storage/' . $slide->image_path) : asset('storage/assets/IMG_6745.JPG'),
                         'button_primary_label' => $slide->button_primary_label,
                         'button_primary_url' => $slide->button_primary_url,
                         'button_secondary_label' => $slide->button_secondary_label,
@@ -42,6 +42,7 @@ class HomeController extends Controller
             $heroContent = HeroContent::where('is_active', true)->first();
 
             $productHighlights = ProductHighlight::orderBy('sort_order')
+                ->take(3)
                 ->get()
                 ->map(function ($item) {
                     return [
@@ -49,7 +50,7 @@ class HomeController extends Controller
                         'title' => $item->title,
                         'description' => $item->description,
                         'slug' => $item->slug,
-                        'image' => $item->image_path ? Storage::disk('public')->url($item->image_path) : asset('storage/assets/IMG_6745.JPG'),
+                        'image' => $item->image_path ? asset('storage/' . $item->image_path) : asset('storage/assets/IMG_6745.JPG'),
                     ];
                 });
 
@@ -69,7 +70,7 @@ class HomeController extends Controller
                         'title' => $step->title,
                         'description' => $step->description,
                         'features' => json_decode($step->features, true) ?? [],
-                        'image' => $step->image_path ? Storage::disk('public')->url($step->image_path) : asset('storage/assets/IMG_6745.JPG'),
+                        'image' => $step->image_path ? asset('storage/' . $step->image_path) : asset('storage/assets/IMG_6745.JPG'),
                     ];
                 });
 

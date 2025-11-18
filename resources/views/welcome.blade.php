@@ -122,9 +122,7 @@
             {{-- Manufacturing Excellence Section --}}
             <x-manufacturing-section :manufacturing-steps="$manufacturingSteps" />
 
-                <div class="w-full lg:col-span-2">
-                    @include('partials.shape-divider')
-                </div>
+              
 
             {{-- Quality & Compliance Section --}}
             {{-- <x-quality-section />

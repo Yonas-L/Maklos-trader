@@ -433,8 +433,112 @@ const animateProductShowcase = () => {
                     ease: 'power3.out',
                 }, 0.3);
             }
-        },
+        },z
     });
+
+    // Animate explore more button after 3rd product scroll
+    const exploreMoreContainer = section.querySelector('.js-explore-more-container');
+    const exploreMoreBtn = section.querySelector('.js-explore-more-btn');
+    
+    if (exploreMoreContainer && exploreMoreBtn) {
+        // Set initial state for the container and its children
+        const exploreContent = exploreMoreContainer.querySelector('div');
+        const exploreHeading = exploreMoreContainer.querySelector('h2');
+        const exploreText = exploreMoreContainer.querySelector('p');
+        
+        gsap.set([exploreMoreContainer, exploreContent, exploreHeading, exploreText, exploreMoreBtn], { 
+            opacity: 0,
+            y: 30,
+            pointerEvents: 'none'
+        });
+        
+        // Create scroll trigger for the explore more section
+        ScrollTrigger.create({
+            trigger: exploreMoreContainer,
+            start: 'top center+=100',
+            end: 'bottom center',
+            scrub: 1,
+            onEnter: () => {
+                // Enable pointer events when visible
+                gsap.set(exploreMoreContainer, { pointerEvents: 'auto' });
+                
+                // Create a timeline for the entrance animation
+                const tl = gsap.timeline({ 
+                    defaults: { ease: 'power3.out' },
+                    onComplete: () => {
+                        // Add a subtle pulse effect to the button
+                        gsap.to(exploreMoreBtn, {
+                            scale: 1.03,
+                            duration: 1.5,
+                            yoyo: true,
+                            repeat: -1,
+                            ease: 'sine.inOut'
+                        });
+                    }
+                });
+                
+                // Animate the container
+                tl.to(exploreMoreContainer, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8
+                }, 0);
+                
+                // Animate the heading
+                tl.to(exploreHeading, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8
+                }, 0.2);
+                
+                // Animate the text
+                tl.to(exploreText, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8
+                }, 0.3);
+                
+                // Animate the button
+                tl.to(exploreMoreBtn, {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.8,
+                    ease: 'back.out(1.8)'
+                }, 0.4);
+            },
+            onLeaveBack: () => {
+                // Reset states when scrolling back up
+                gsap.set([exploreMoreContainer, exploreContent, exploreHeading, exploreText, exploreMoreBtn], { 
+                    opacity: 0,
+                    y: 30,
+                    pointerEvents: 'none' 
+                });
+                
+                // Kill any ongoing animations
+                gsap.killTweensOf([exploreMoreContainer, exploreContent, exploreHeading, exploreText, exploreMoreBtn]);
+            }
+        });
+        
+        // Add hover effect to the button
+        exploreMoreBtn.addEventListener('mouseenter', () => {
+            gsap.to(exploreMoreBtn, {
+                scale: 1.03,
+                duration: 0.3,
+                ease: 'power2.out',
+                overwrite: 'auto'
+            });
+        });
+        
+        exploreMoreBtn.addEventListener('mouseleave', () => {
+            gsap.to(exploreMoreBtn, {
+                scale: 1,
+                duration: 0.3,
+                ease: 'power2.out',
+                overwrite: 'auto'
+            });
+        });
+    }
 };
 
 // Animate soap bubbles in hero section
@@ -1518,6 +1622,8 @@ const animateManufacturingSection = () => {
         const stepNumber = card.querySelector('.js-manufacturing-step-number');
         const stepTitle = card.querySelector('.js-manufacturing-step-title');
         const stepDescription = card.querySelector('.js-manufacturing-step-description');
+        const imageWrapper = card.querySelector('.js-manufacturing-image-wrapper');
+        const image = card.querySelector('.js-manufacturing-image img');
 
         const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
@@ -1556,6 +1662,31 @@ const animateManufacturingSection = () => {
                 stagger: 0.08,
             }, 0.3);
         }
+
+        // Enhanced image animation with Lenis smooth scroll
+        if (imageWrapper) {
+            tl.to(imageWrapper, {
+                opacity: 1,
+                scale: 1,
+                duration: 1.2,
+                ease: 'power2.out',
+            }, 0.4);
+        }
+
+        if (image) {
+            tl.to(image, {
+                scale: 1,
+                filter: 'blur(0px)',
+                opacity: 1,
+                duration: 1.4,
+                ease: 'power2.out',
+            }, 0.3)
+            .to(image, {
+                y: 0,
+                duration: 1.6,
+                ease: 'power3.out',
+            }, 0.2);
+        }
     };
 
     // Initial states
@@ -1564,7 +1695,8 @@ const animateManufacturingSection = () => {
         const stepNumber = card.querySelector('.js-manufacturing-step-number');
         const stepTitle = card.querySelector('.js-manufacturing-step-title');
         const stepDescription = card.querySelector('.js-manufacturing-step-description');
-        const image = card.querySelector('.js-manufacturing-image');
+        const image = card.querySelector('.js-manufacturing-image img');
+        const imageWrapper = card.querySelector('.js-manufacturing-image-wrapper');
 
         gsap.set(card, {
             opacity: index === 0 ? 1 : 0.35,
@@ -1585,10 +1717,17 @@ const animateManufacturingSection = () => {
         }
         if (image) {
             gsap.set(image, {
-                opacity: 0,
-                y: 40,
-                scale: 0.95,
-                filter: 'blur(10px)',
+                opacity: index === 0 ? 1 : 0.8,
+                scale: index === 0 ? 1 : 1.02,
+                filter: index === 0 ? 'blur(0px)' : 'blur(2px)',
+                transform: `scale(${index === 0 ? 1 : 1.02})`,
+                y: index === 0 ? 0 : 10,
+            });
+        }
+        if (imageWrapper) {
+            gsap.set(imageWrapper, {
+                opacity: index === 0 ? 1 : 0.8,
+                scale: index === 0 ? 1 : 1.05,
             });
         }
     });
@@ -1629,9 +1768,48 @@ const animateManufacturingSection = () => {
                     ease: 'power2.out',
                     overwrite: true,
                 });
+
+                // Add parallax effect to active image
+                const image = card.querySelector('.js-manufacturing-image img');
+                if (image && isActive) {
+                    const parallaxY = (progress - (index / (totalCards - 1))) * 20;
+                    gsap.to(image, {
+                        y: parallaxY,
+                        duration: 0.3,
+                        ease: 'power2.out',
+                        overwrite: true,
+                    });
+                }
             });
 
             if (activeIndex !== lastActiveIndex && activeIndex >= 0 && activeIndex < totalCards) {
+                // Reset previous card's image animation
+                if (lastActiveIndex >= 0 && lastActiveIndex < totalCards) {
+                    const prevCard = cards[lastActiveIndex];
+                    const prevImage = prevCard.querySelector('.js-manufacturing-image img');
+                    const prevImageWrapper = prevCard.querySelector('.js-manufacturing-image-wrapper');
+                    
+                    if (prevImage) {
+                        gsap.to(prevImage, {
+                            opacity: 0.6,
+                            scale: 1.02,
+                            filter: 'blur(2px)',
+                            y: 10,
+                            duration: 0.5,
+                            ease: 'power2.in',
+                        });
+                    }
+                    if (prevImageWrapper) {
+                        gsap.to(prevImageWrapper, {
+                            opacity: 0.7,
+                            scale: 1.05,
+                            duration: 0.5,
+                            ease: 'power2.in',
+                        });
+                    }
+                }
+                
+                // Animate current card's content
                 animateCardContent(cards[activeIndex]);
                 lastActiveIndex = activeIndex;
             }

@@ -16,30 +16,37 @@ class ProductController extends Controller
      */
     public function index(): View
     {
+        // Get products from config
         $products = $this->products();
-        $storageImages = $this->storageImages();
+        
+        // Group products by category
+        $categories = $products
+            ->groupBy('category')
+            ->map(function ($categoryProducts, $categoryName) {
+                return [
+                    'name' => $categoryName,
+                    'slug' => Str::slug($categoryName),
+                    'image' => $categoryProducts->first()['hero_image_url'] ?? asset('storage/assets/IMG_6745.JPG'),
+                    'products' => $categoryProducts,
+                ];
+            })
+            ->values();
 
-        $heroSlides = $storageImages
-            ->filter(fn ($image) => filled($image['url']))
-            ->map(fn ($image) => [
-                'image' => $image['url'],
-                'title' => $image['title'],
-                'caption' => 'Captured from our Maklos production portfolio.',
-            ]);
-
-        $heroSlides = $heroSlides->concat(
-            $products->map(fn ($product) => [
+        // Create hero slides from products
+        $heroSlides = $products
+            ->map(fn ($product) => [
                 'image' => $product['hero_image_url'] ?? $product['hero_image'] ?? null,
                 'title' => $product['name'] ?? '',
                 'caption' => $product['excerpt'] ?? '',
-            ])->filter(fn ($slide) => filled($slide['image']))
-        )->unique('image')->values();
+            ])
+            ->filter(fn ($slide) => filled($slide['image']))
+            ->unique('image')
+            ->values();
 
-        return view('welcome', [
+        return view('products.index', [
             'products' => $products,
-            'featured' => $products->take(3),
+            'categories' => $categories,
             'heroSlides' => $heroSlides,
-            'storageImageUrls' => $storageImages->pluck('url')->filter()->unique()->values(),
         ]);
     }
 
