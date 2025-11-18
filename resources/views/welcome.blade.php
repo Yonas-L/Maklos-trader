@@ -25,76 +25,73 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/dist/lenis.min.js"></script>
-        <!-- Hero carousel functions - loaded after Alpine.js -->
+        
         <script>
-            document.addEventListener('alpine:initialized', () => {
-                window.slideTitle = function(slide) {
-                    return slide.title || '';
-                };
-                
-                window.slideCaption = function(slide) {
-                    return slide.caption || '';
-                };
-                
-                window.slideImage = function(slide) {
-                    return slide.image || '';
-                };
-                
-                window.heroCarousel = function({ slides, interval = 5000 }) {
-                    return {
-                        slides,
-                        current: 0,
-                        autoplay: null,
-                        
-                        init() {
+            // Initialize Lenis smooth scrolling
+            document.addEventListener('alpine:init', () => {
+                // Lenis smooth scrolling
+                const lenis = new Lenis({
+                    duration: 1.2,
+                    easing: (t) => Math.min(1, 1.0025 - Math.pow(2.718, -10 * t)),
+                    smoothTouch: true,
+                    smoothWheel: true,
+                });
+
+                function raf(time) {
+                    lenis.raf(time);
+                    requestAnimationFrame(raf);
+                }
+
+                requestAnimationFrame(raf);
+
+                // Hero carousel component
+                Alpine.data('heroCarousel', () => ({
+                    current: 0,
+                    slides: [],
+                    interval: null,
+                    
+                    init() {
+                        this.slides = Array.from(this.$el.querySelectorAll('[x-bind="slide"]'));
+                        if (this.slides.length > 0) {
                             this.start();
-                        },
-                        
-                        start() {
-                            this.stop();
-                            this.autoplay = setInterval(() => {
-                                this.next();
-                            }, interval);
-                        },
-                        
-                        stop() {
-                            if (this.autoplay) {
-                                clearInterval(this.autoplay);
-                            }
-                        },
-                        
-                        next() {
-                            this.current = (this.current + 1) % this.slides.length;
-                        },
-                        
-                        prev() {
-                            this.current = (this.current - 1 + this.slides.length) % this.slides.length;
-                        },
-                        
-                        goTo(index) {
-                            this.current = index;
-                        },
-                        
-                        classes(index) {
-                            const diff = index - this.current;
-                            const total = this.slides.length;
-                            const normalized = ((diff % total) + total) % total;
-                            
-                            if (normalized === 0) return ['opacity-100', 'scale-100', 'z-30', 'translate-x-0'];
-                            if (normalized === 1) return ['opacity-70', 'scale-95', 'z-20', 'translate-x-24'];
-                            if (normalized === 2) return ['opacity-40', 'scale-90', 'z-10', 'translate-x-48'];
-                            if (normalized === total - 1) return ['opacity-70', 'scale-95', 'z-20', '-translate-x-24'];
-                            if (normalized === total - 2) return ['opacity-40', 'scale-90', 'z-10', '-translate-x-48'];
-                            return ['opacity-0', 'scale-85', 'z-0', 'translate-x-full'];
-                        },
-                        
-                        indicatorClasses(index) {
-                            return index === this.current 
-                                ? 'w-12 bg-maklos-500' 
-                                : 'w-3 bg-maklos-200 hover:bg-maklos-300';
                         }
+                    },
+                    
+                    start() {
+                        this.interval = setInterval(() => {
+                            this.next();
+                        }, 5000);
+                    },
+                    
+                    stop() {
+                        if (this.interval) {
+                            clearInterval(this.interval);
+                            this.interval = null;
+                        }
+                    },
+                    
+                    next() {
+                        this.goTo((this.current + 1) % this.slides.length);
+                    },
+                    
+                    prev() {
+                        this.goTo((this.current - 1 + this.slides.length) % this.slides.length);
+                    },
+                    
+                    goTo(index) {
+                        if (index >= 0 && index < this.slides.length) {
+                            this.slides[this.current]?.classList.remove('active');
+                            this.current = index;
+                            this.slides[this.current]?.classList.add('active');
+                        }
+                    },
+                    
+                    indicatorClasses(index) {
+                        return index === this.current 
+                            ? 'w-12 bg-maklos-500' 
+                            : 'w-3 bg-maklos-200 hover:bg-maklos-300';
                     }
-                };
+                }));
             });
         </script>
     </head>
