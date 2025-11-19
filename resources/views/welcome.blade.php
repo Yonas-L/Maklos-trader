@@ -131,6 +131,9 @@
             {{-- FAQ Section --}}   
 
             <x-faq-section :faq-items="$faqItems" />
+
+            {{-- Contact Section --}}
+            <x-contact-section :settings="(object)$siteSettings" />
         </main>
 
         <!-- Main Animation Scripts -->
