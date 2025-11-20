@@ -7,19 +7,24 @@
 
     <div class="relative z-10 mx-auto max-w-7xl px-6">
         <div class="text-center mb-40 lg:mb-24">
-            <p class="js-about-label text-sm font-semibold uppercase tracking-[0.3em] text-maklos-500 mb-6">{{ $aboutContent->label ?? 'About Us' }}</p>
-            <div class="js-about-expertise-wrapper">
-                <h2 class="js-about-expertise font-display text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-extrabold leading-none tracking-tight">
-                    <span class="js-about-expertise-number inline-block bg-gradient-to-r from-maklos-600 to-eucalyptus-600 bg-clip-text text-transparent">{{ $aboutContent->experience_years ?? 11 }}</span>
-                    <span class="js-about-expertise-text inline-block ml-1 sm:ml-2 lg:ml-3 from-maklos-600 to-eucalyptus-600">years of expertise</span>
+            <!-- Section header styled like Product header -->
+            <div class="js-about-header mb-10  flex items-center justify-center h-16 lg:h-24">
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-center transform translate-y-1 lg:translate-y-2">
+                    <span class="text-black">About</span>
+                    <span class="ml-3" style="color: #0d9488;">Us</span>
                 </h2>
-                <p class="js-about-description text-lg text-charcoal/70 sm:text-xl lg:text-xl max-w-3xl mx-auto mt-12 leading-relaxed">
+            </div>
+            <div class="js-about-expertise-wrapper">
+                <h2 class="js-about-expertise font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight">
+                    <span class="js-about-expertise-number inline-flex items-baseline gap-2 bg-gradient-to-r from-maklos-600 to-eucalyptus-600 bg-clip-text text-transparent">{{ $aboutContent->experience_years ?? 11 }}</span>
+                    <span class="js-about-expertise-text inline-flex items-baseline ml-2 sm:ml-3 text-charcoal font-light">years of expertise</span>
+                </h2>
+                <p class="js-about-description text-justify text-base text-charcoal/70 lg:text-lg max-w-3xl mx-auto mt-8 leading-relaxed">
                     {{ $aboutContent->description ?? 'Maklos Trading is a high-quality soap manufacturing company serving Africa and beyond. We design, manufacture, and supply premium bathing soaps with a focus on natural freshness, consistent quality, and export-ready packaging. Our signature product line, Future Eucalyptus Soap, delivers a clean, refreshing experience with natural antibacterial and antifungal benefits.' }}
                 </p>
             </div>
         </div>
-
-z        <!-- Interconnected Mission, Vision, Values Section -->
+        <!-- Interconnected Mission, Vision, Values Section -->
         <div class="js-mvv-section relative mb-20">
             <!-- SVG Lines Container for connecting lines -->
             <svg class="js-mvv-lines absolute inset-0 w-full h-full pointer-events-none z-0" style="overflow: visible;">
@@ -54,10 +59,6 @@ z        <!-- Interconnected Mission, Vision, Values Section -->
                         <div class="js-mvv-card js-mvv-card-front absolute inset-0 w-full h-full rounded-2xl border-2 border-eucalyptus-500/50 bg-gradient-to-br from-white via-eucalyptus-50/30 to-white p-8 lg:p-10 shadow-2xl shadow-eucalyptus-500/20 cursor-pointer overflow-hidden" style="backface-visibility: hidden; transform-style: preserve-3d;">
                             <!-- Content -->
                             <div class="relative z-10 h-full flex flex-col items-center justify-center text-center">
-                                <!-- Number Badge -->
-                                <div class="js-mvv-number inline-flex items-center justify-center w-16 h-16 rounded-xl bg-eucalyptus-600/10 backdrop-blur-sm text-eucalyptus-600 font-bold text-2xl mb-6 shadow-lg border border-eucalyptus-600/30">
-                                    01
-                                </div>
 
                                 <!-- Title -->
                                 <h3 class="js-mvv-title font-display text-3xl lg:text-4xl font-bold text-eucalyptus-600 mb-4 drop-shadow-lg" style="color: #0d9488;">
@@ -117,10 +118,6 @@ z        <!-- Interconnected Mission, Vision, Values Section -->
                         <div class="js-mvv-card js-mvv-card-front absolute inset-0 w-full h-full rounded-2xl border-2 border-eucalyptus-500/50 bg-gradient-to-br from-white via-eucalyptus-50/30 to-white p-8 lg:p-10 shadow-2xl shadow-eucalyptus-500/20 cursor-pointer overflow-hidden" style="backface-visibility: hidden; transform-style: preserve-3d;">
                             <!-- Content -->
                             <div class="relative z-10 h-full flex flex-col items-center justify-center text-center">
-                                <!-- Number Badge -->
-                                <div class="js-mvv-number inline-flex items-center justify-center w-16 h-16 rounded-xl bg-eucalyptus-600/10 backdrop-blur-sm text-eucalyptus-600 font-bold text-2xl mb-6 shadow-lg border border-eucalyptus-600/30">
-                                    02
-                                </div>
 
                                 <!-- Title -->
                                 <h3 class="js-mvv-title font-display text-3xl lg:text-4xl font-bold mb-4 drop-shadow-lg" style="color: #0d9488;">
@@ -180,10 +177,6 @@ z        <!-- Interconnected Mission, Vision, Values Section -->
                         <div class="js-mvv-card js-mvv-card-front absolute inset-0 w-full h-full rounded-2xl border-2 border-eucalyptus-500/50 bg-gradient-to-br from-white via-eucalyptus-50/30 to-white p-8 lg:p-10 shadow-2xl shadow-eucalyptus-500/20 cursor-pointer overflow-hidden" style="backface-visibility: hidden; transform-style: preserve-3d;">
                             <!-- Content -->
                             <div class="relative z-10 h-full flex flex-col items-center justify-center text-center">
-                                <!-- Number Badge -->
-                                <div class="js-mvv-number inline-flex items-center justify-center w-16 h-16 rounded-xl bg-eucalyptus-600/10 backdrop-blur-sm text-eucalyptus-600 font-bold text-2xl mb-6 shadow-lg border border-eucalyptus-600/30">
-                                    03
-                                </div>
 
                                 <!-- Title -->
                                 <h3 class="js-mvv-title font-display text-3xl lg:text-4xl font-bold mb-4 drop-shadow-lg" style="color: #0d9488;">

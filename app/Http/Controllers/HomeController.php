@@ -20,7 +20,9 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        $cacheKey = 'homepage_data';
+        // Cache key that auto-busts when hero slides change (count or last update)
+        $slidesVersion = (HeroSlide::max('updated_at')?->timestamp ?? 0) . ':' . HeroSlide::count();
+        $cacheKey = 'homepage_data:' . $slidesVersion;
         $ttl = now()->addHours(12);
 
         $data = Cache::remember($cacheKey, $ttl, function () {
