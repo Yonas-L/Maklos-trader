@@ -117,6 +117,12 @@ const animateProductShowcase = () => {
         });
     });
 
+    // Header element for this section - fade in on entrance
+    const productsHeader = section.querySelector('.js-products-header');
+    if (productsHeader) {
+        gsap.set(productsHeader, { autoAlpha: 0, y: 18 });
+    }
+
     // Get column containers for entrance animation and position swapping
     const textColumn = section.querySelector('.js-products-text-column');
     const imageColumn = section.querySelector('.js-products-image-column');
@@ -191,7 +197,8 @@ const animateProductShowcase = () => {
         pin: pinWrapper,
         pinSpacing: true,
         anticipatePin: 1,
-        scrub: 1,
+        // Use immediate scrubbing so the pinned section unpins instantly at the end
+        scrub: true,
         onUpdate: (self) => {
             const progress = self.progress;
             const totalPanels = textPanels.length;
@@ -199,7 +206,7 @@ const animateProductShowcase = () => {
             // Calculate which panel transition we're in
             const panelProgress = progress * totalPanels;
             const currentIndex = Math.min(Math.floor(panelProgress), totalPanels - 1);
-            const transitionProgress = panelProgress - currentIndex;
+            const transitionProgress = Math.max(0, Math.min(1, panelProgress - currentIndex));
 
             // Determine target positions for current and next panels
             const currentImageLeft = isImageOnLeft(currentIndex);
@@ -208,163 +215,79 @@ const animateProductShowcase = () => {
             // Get cached swap distance (calculated once for consistency)
             const swapDistance = calculateSwapDistance();
 
-            // Animate column positions during transition with precise pixel calculation
-            // Add delay threshold - only start swapping after 60% of transition progress
-            // This means users need to scroll longer before columns alternate
-            const swapThreshold = 0.6;
-            const delayedProgress = transitionProgress < swapThreshold
-                ? 0
-                : (transitionProgress - swapThreshold) / (1 - swapThreshold);
+            // Smooth column swap: start earlier and use eased progress for a gentle motion
+            const swapThreshold = 0.45; // start swap slightly earlier for smoother perception
+            const swapStartProgress = Math.max(0, (transitionProgress - swapThreshold) / (1 - swapThreshold));
+            const swapProgress = Math.min(1, swapStartProgress);
 
             if (textColumn && imageColumn && swapDistance > 0) {
                 if (currentIndex < totalPanels - 1 && currentImageLeft !== nextImageLeft) {
-                    // Columns need to swap positions smoothly with delay
-                    const swapProgress = Math.min(1, delayedProgress);
-
+                    // Columns need to swap positions smoothly
                     if (currentImageLeft) {
-                        // Currently: image left, text right
-                        // Text is at x = swapDistance, Image is at x = -swapDistance
-                        // Target: text left, image right
-                        // Text moves from swapDistance to 0
-                        // Image moves from -swapDistance to 0
-                        gsap.set(textColumn, {
-                            x: swapDistance * (1 - swapProgress),
-                        });
-                        gsap.set(imageColumn, {
-                            x: -swapDistance * (1 - swapProgress),
-                        });
+                        // Currently: image left, text right -> move to text left, image right
+                        gsap.set(textColumn, { x: swapDistance * (1 - swapProgress) });
+                        gsap.set(imageColumn, { x: -swapDistance * (1 - swapProgress) });
                     } else {
-                        // Currently: text left, image right
-                        // Text is at x = 0, Image is at x = 0
-                        // Target: image left, text right
-                        // Text moves from 0 to swapDistance
-                        // Image moves from 0 to -swapDistance
-                        gsap.set(textColumn, {
-                            x: swapDistance * swapProgress,
-                        });
-                        gsap.set(imageColumn, {
-                            x: -swapDistance * swapProgress,
-                        });
+                        // Currently: text left, image right -> move to image left, text right
+                        gsap.set(textColumn, { x: swapDistance * swapProgress });
+                        gsap.set(imageColumn, { x: -swapDistance * swapProgress });
                     }
                 } else {
                     // No swap needed - set final positions based on current index
                     const finalImageLeft = isImageOnLeft(currentIndex);
                     if (finalImageLeft) {
-                        // Image left, text right (swapped)
-                        // Text moves right, Image moves left
                         gsap.set(textColumn, { x: swapDistance });
                         gsap.set(imageColumn, { x: -swapDistance });
                     } else {
-                        // Text left, image right (default)
-                        // Both at their natural grid positions
                         gsap.set(textColumn, { x: 0 });
                         gsap.set(imageColumn, { x: 0 });
                     }
                 }
             }
 
-            // Animate text panels - sequential: fade out current first, then fade in next
-            // First 50% of transition: fade out current with blur
-            // Second 50% of transition: fade in next
-            const fadeOutProgress = Math.min(1, transitionProgress * 2); // 0 to 1 in first half
-            const fadeInProgress = Math.max(0, (transitionProgress - 0.5) * 2); // 0 to 1 in second half
+            // Smooth eased crossfade for text and images to avoid persistent blur
+            const easeCross = (t) => (1 - Math.cos(Math.max(0, Math.min(1, t)) * Math.PI)) / 2;
+            const cross = easeCross(transitionProgress);
 
+            // Text panels crossfade with blur mapping
             textPanels.forEach((panel, index) => {
                 if (index === currentIndex && currentIndex < totalPanels - 1) {
-                    // Current panel fading out completely before next appears
-                    const opacity = 1 - fadeOutProgress;
-                    const blur = fadeOutProgress * 10; // Blur increases as it fades
-                    gsap.set(panel, {
-                        autoAlpha: opacity,
-                        filter: `blur(${blur}px)`,
-                        y: 30 * fadeOutProgress,
-                    });
+                    const opacity = 1 - cross;
+                    const blur = cross * 10; // max blur for text
+                    gsap.set(panel, { autoAlpha: opacity, filter: `blur(${blur}px)`, y: 30 * cross });
+                    if (opacity <= 0.005) gsap.set(panel, { clearProps: 'filter,y' });
                 } else if (index === currentIndex + 1) {
-                    // Next panel only starts appearing after 50% transition
-                    if (transitionProgress >= 0.5) {
-                        const opacity = fadeInProgress;
-                        const blur = (1 - fadeInProgress) * 10; // Blur decreases as it appears
-                        gsap.set(panel, {
-                            autoAlpha: opacity,
-                            filter: `blur(${blur}px)`,
-                            y: 30 * (1 - fadeInProgress),
-                        });
-                    } else {
-                        // Keep completely hidden until fade out is done
-                        gsap.set(panel, {
-                            autoAlpha: 0,
-                            filter: 'blur(10px)',
-                            y: 30,
-                        });
-                    }
+                    const opacity = cross;
+                    const blur = (1 - cross) * 10;
+                    gsap.set(panel, { autoAlpha: opacity, filter: `blur(${blur}px)`, y: 30 * (1 - cross) });
+                    if (opacity >= 0.995) gsap.set(panel, { clearProps: 'filter,y' });
                 } else if (index === currentIndex && currentIndex === totalPanels - 1) {
-                    // Last panel - stay visible
-                    gsap.set(panel, {
-                        autoAlpha: 1,
-                        filter: 'blur(0px)',
-                        y: 0,
-                    });
+                    gsap.set(panel, { autoAlpha: 1, filter: 'blur(0px)', y: 0 });
+                    gsap.set(panel, { clearProps: 'filter,y' });
                 } else {
-                    // All other panels - keep completely hidden
-                    gsap.set(panel, {
-                        autoAlpha: 0,
-                        filter: 'blur(10px)',
-                        y: 30,
-                    });
+                    gsap.set(panel, { autoAlpha: 0, filter: 'blur(10px)', y: 30 });
                 }
             });
 
-            // Animate image panels - sequential: fade out current first, then fade in next
-            // Synchronized with text panels
+            // Image panels crossfade with blur and scale mapping
             imagePanels.forEach((panel, index) => {
                 if (index === currentIndex && currentIndex < totalPanels - 1) {
-                    // Current panel fading out completely with blur
-                    const opacity = 1 - fadeOutProgress;
-                    const blur = fadeOutProgress * 15; // More blur for images
-                    const scale = 1 - (fadeOutProgress * 0.1);
-                    gsap.set(panel, {
-                        autoAlpha: opacity,
-                        filter: `blur(${blur}px)`,
-                        scale: scale,
-                        y: 40 * fadeOutProgress,
-                    });
+                    const opacity = 1 - cross;
+                    const blur = cross * 15;
+                    const scale = 1 - (cross * 0.1);
+                    gsap.set(panel, { autoAlpha: opacity, filter: `blur(${blur}px)`, scale: scale, y: 40 * cross });
+                    if (opacity <= 0.005) gsap.set(panel, { clearProps: 'filter,scale,y' });
                 } else if (index === currentIndex + 1) {
-                    // Next panel only starts appearing after 50% transition
-                    if (transitionProgress >= 0.5) {
-                        const opacity = fadeInProgress;
-                        const blur = (1 - fadeInProgress) * 15; // Blur decreases as it appears
-                        const scale = 0.9 + (fadeInProgress * 0.1);
-                        gsap.set(panel, {
-                            autoAlpha: opacity,
-                            filter: `blur(${blur}px)`,
-                            scale: scale,
-                            y: 40 * (1 - fadeInProgress),
-                        });
-                    } else {
-                        // Keep completely hidden until fade out is done
-                        gsap.set(panel, {
-                            autoAlpha: 0,
-                            filter: 'blur(15px)',
-                            scale: 0.9,
-                            y: 40,
-                        });
-                    }
+                    const opacity = cross;
+                    const blur = (1 - cross) * 15;
+                    const scale = 0.9 + (cross * 0.1);
+                    gsap.set(panel, { autoAlpha: opacity, filter: `blur(${blur}px)`, scale: scale, y: 40 * (1 - cross) });
+                    if (opacity >= 0.995) gsap.set(panel, { clearProps: 'filter,scale,y' });
                 } else if (index === currentIndex && currentIndex === totalPanels - 1) {
-                    // Last panel - stay visible
-                    gsap.set(panel, {
-                        autoAlpha: 1,
-                        filter: 'blur(0px)',
-                        scale: 1,
-                        y: 0,
-                    });
+                    gsap.set(panel, { autoAlpha: 1, filter: 'blur(0px)', scale: 1, y: 0 });
+                    gsap.set(panel, { clearProps: 'filter,scale,y' });
                 } else {
-                    // All other panels - keep completely hidden
-                    gsap.set(panel, {
-                        autoAlpha: 0,
-                        filter: 'blur(15px)',
-                        scale: 0.9,
-                        y: 40,
-                    });
+                    gsap.set(panel, { autoAlpha: 0, filter: 'blur(15px)', scale: 0.9, y: 40 });
                 }
             });
         },
@@ -390,6 +313,16 @@ const animateProductShowcase = () => {
                     opacity: 0,
                     x: -40,
                     duration: 1,
+                }, 0);
+            }
+
+            // Fade in section header if present
+            if (productsHeader) {
+                tl.to(productsHeader, {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power3.out',
                 }, 0);
             }
 

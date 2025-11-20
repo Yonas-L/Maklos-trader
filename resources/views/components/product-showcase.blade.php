@@ -35,6 +35,13 @@
     </div>
     
     <div class="mx-auto max-w-7xl px-6 relative z-10">
+        {{-- Section header: fades in on entrance, centered and styled to match shape divider color --}}
+        <div class="js-products-header mb-8 flex items-center justify-center h-28 lg:h-32">
+            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-center">
+                <span class="text-black">Our</span>
+                <span class="ml-3" style="color: #0d9488;">Products</span>
+            </h2>
+        </div>
         <div class="js-products-pin-wrapper grid min-h-screen lg:grid-cols-2 lg:gap-12 lg:items-center py-16 lg:py-20">
             {{-- Left column: Text content that swaps on scroll --}}
             <div class="js-products-text-column relative lg:h-[600px] lg:flex lg:items-center">
