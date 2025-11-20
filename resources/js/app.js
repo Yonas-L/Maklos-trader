@@ -18,6 +18,8 @@ document.addEventListener('alpine:init', () => {
         interval,
         current: 0,
         timer: null,
+        touchStartX: 0,
+        touchEndX: 0,
         start() {
             this.stop();
             if (this.slides.length <= 1) { return; }
@@ -49,6 +51,21 @@ document.addEventListener('alpine:init', () => {
         slideTitle(slide) { return (typeof slide === 'object' && slide?.title) ? slide.title : 'Maklos Product'; },
         slideCaption(slide) { return (typeof slide === 'object' && slide?.caption) ? slide.caption : ''; },
         indicatorClasses(index) { return this.current === index ? 'w-6 bg-maklos-500' : 'w-2 bg-maklos-200'; },
+        handleTouchStart(e) {
+            this.touchStartX = e.changedTouches[0].screenX;
+        },
+        handleTouchEnd(e) {
+            this.touchEndX = e.changedTouches[0].screenX;
+            this.handleSwipe();
+        },
+        handleSwipe() {
+            if (this.touchEndX < this.touchStartX - 50) {
+                this.next(); // Swipe Left -> Next Slide
+            }
+            if (this.touchEndX > this.touchStartX + 50) {
+                this.prev(); // Swipe Right -> Prev Slide
+            }
+        },
     }));
 });
 

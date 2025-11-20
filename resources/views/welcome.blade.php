@@ -1533,7 +1533,11 @@
         <x-hero :slides="$heroSlides" :heroContent="$heroContent" />
 
         {{-- Products section --}}
+        {{-- Desktop Product Showcase --}}
         <x-product-showcase :products="$productHighlights" />
+
+        {{-- Mobile Product Showcase --}}
+        <x-product-showcase-mobile :products="$productHighlights" />
 
         <div class="w-full lg:col-span-2">
             @include('partials.shape-divider')
@@ -1547,7 +1551,11 @@
         </div>
 
         {{-- Manufacturing Excellence Section --}}
+        {{-- Desktop Manufacturing --}}
         <x-manufacturing-section :manufacturing-steps="$manufacturingSteps" />
+
+        {{-- Mobile Manufacturing --}}
+        <x-manufacturing-section-mobile :manufacturing-steps="$manufacturingSteps" />
 
 
 

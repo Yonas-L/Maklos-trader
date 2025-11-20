@@ -45,24 +45,26 @@
   <div class="relative z-20">
     <div
       class="mx-auto grid max-w-7xl gap-12 px-6 pb-8 lg:gap-24 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-start">
-      <div class="js-hero-copy max-w-4xl space-y-10 pt-48    ">
+      <div class="js-hero-copy max-w-4xl space-y-10 pt-24 lg:pt-48">
         <h1
           class="js-hero-title font-display text-4xl font-bold leading-[1.2] tracking-tight text-charcoal sm:text-5xl lg:text-6xl">
 
           {{ $heroContent->title ?? '' }}
         </h1>
         <p class="js-hero-description text-base lg:text-lg leading-relaxed text-charcoal/70 text-justify">
-          {{ $heroContent->description ?? '' }}</p>
-        <div class="js-hero-buttons flex flex-wrap items-center gap-5 text-base font-semibold">
+          {{ $heroContent->description ?? '' }}
+        </p>
+        <div
+          class="js-hero-buttons flex flex-nowrap lg:flex-wrap items-center justify-between lg:justify-start w-full lg:w-auto gap-3 lg:gap-5 text-sm lg:text-base font-semibold">
           @if($heroContent->button_primary_label)
             <a href="{{ $heroContent->button_primary_url }}"
-              class="hero-button inline-flex items-center rounded-full bg-maklos-500 px-7 py-3 text-white shadow-lg shadow-maklos-500/30 transition-all duration-300 hover:-translate-y-0.5 hover:bg-maklos-400 hover:shadow-xl">
+              class="hero-button inline-flex items-center justify-center whitespace-nowrap rounded-full bg-maklos-500 px-4 lg:px-7 py-3 text-white shadow-lg shadow-maklos-500/30 transition-all duration-300 hover:-translate-y-0.5 hover:bg-maklos-400 hover:shadow-xl">
               {{ $heroContent->button_primary_label }}
             </a>
           @endif
           @if($heroContent->button_secondary_label)
             <a href="{{ $heroContent->button_secondary_url }}"
-              class="hero-button inline-flex items-center rounded-full border border-maklos-200 px-7 py-3 text-maklos-700/85 transition-all duration-300 hover:border-maklos-400 hover:text-maklos-500 hover:bg-maklos-50/50">
+              class="hero-button inline-flex items-center justify-center whitespace-nowrap rounded-full border border-maklos-200 px-4 lg:px-7 py-3 text-maklos-700/85 transition-all duration-300 hover:border-maklos-400 hover:text-maklos-500 hover:bg-maklos-50/50">
               {{ $heroContent->button_secondary_label }}
             </a>
           @endif
@@ -114,6 +116,13 @@
             padding-top: 0.5rem;
             max-width: 48rem;
             flex-wrap: wrap;
+            justify-content: space-evenly;
+          }
+
+          @media (min-width: 1024px) {
+            .social-bar {
+              justify-content: flex-start;
+            }
           }
 
           /* Button base: soft glassmorphism + gradient ring on hover */
@@ -261,14 +270,14 @@
       <div class="relative flex w-full justify-center lg:w-auto mt-12 lg:mt-32">
         <div class="absolute -inset-10 rounded-full bg-maklos-100 blur-3xl"></div>
         <div x-data="heroCarousel({ slides: @js($slides), interval: 5000 })" x-init="start()" @mouseenter="stop()"
-          @mouseleave="start()"
-          class="js-hero-carousel relative flex h-[560px] w-full max-w-2xl items-center justify-center">
+          @mouseleave="start()" @touchstart="handleTouchStart($event)" @touchend="handleTouchEnd($event)"
+          class="js-hero-carousel relative flex h-[400px] lg:h-[560px] w-full max-w-2xl items-center justify-center">
           <template x-for="(slide, index) in slides" :key="index">
             <figure @click="goTo(index)"
-              class="js-hero-carousel-item hero-carousel-card absolute flex h-[520px] w-96 flex-col overflow-hidden rounded-[3.5rem] border border-white/60 bg-white shadow-2xl transition-all duration-700 ease-out cursor-pointer"
+              class="js-hero-carousel-item hero-carousel-card absolute flex h-[350px] lg:h-[520px] w-[280px] sm:w-80 lg:w-96 flex-col overflow-hidden rounded-[2rem] lg:rounded-[3.5rem] border border-white/60 bg-white shadow-2xl transition-all duration-700 ease-out cursor-pointer"
               :class="classes(index)"
               :style="classes(index).includes('opacity-0') ? 'visibility:hidden;' : 'visibility:visible;'">
-              <div class="relative h-[380px] overflow-hidden">
+              <div class="relative h-[220px] lg:h-[380px] overflow-hidden">
                 <img :src="slideImage(slide)" :alt="slideTitle(slide)" class="h-full w-full object-cover" />
               </div>
               <figcaption class="flex flex-1 flex-col gap-3 px-8 py-6">

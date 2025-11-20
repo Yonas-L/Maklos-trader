@@ -3,7 +3,9 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import HeroAnimations from './HeroAnimations';
 import ProductShowcase from './ProductShowcase';
+import { initMobileProductShowcase } from './ProductShowcaseMobile';
 import ManufacturingAnimations from './ManufacturingAnimations';
+import { initMobileManufacturing } from './ManufacturingMobile';
 import AboutAnimations from './AboutAnimations';
 import FaqAnimations from './FaqAnimations';
 import ContactAnimations from './ContactAnimations';
@@ -21,7 +23,9 @@ export default class AppAnimations {
         // Initialize section animations
         new HeroAnimations();
         new ProductShowcase();
+        initMobileProductShowcase(); // Initialize mobile product animations
         new ManufacturingAnimations();
+        initMobileManufacturing(); // Initialize mobile manufacturing animations
         new AboutAnimations();
         new FaqAnimations();
         new ContactAnimations();

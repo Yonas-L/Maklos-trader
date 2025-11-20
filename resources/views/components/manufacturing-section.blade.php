@@ -1,5 +1,5 @@
 <section id="manufacturing"
-  class="js-manufacturing-section relative bg-[#030c24] overflow-hidden py-12 md:py-16 lg:py-20 flex items-center justify-center">
+  class="js-manufacturing-section hidden lg:flex relative bg-[#030c24] overflow-hidden py-12 md:py-16 lg:py-20 items-center justify-center">
 
   <!-- Decorative fades (behind content) -->
   <div

@@ -149,13 +149,17 @@
 
     /* Responsive adjustments */
     @media (max-width: 768px) {
+      .animated-footer-text {
+        height: 200px;
+      }
+
       .animated-footer-text svg {
-        max-width: 100%;
+        max-width: 150%;
         height: auto;
       }
 
       .bubble {
-        transform: scale(0.8);
+        transform: scale(1);
       }
     }
 
