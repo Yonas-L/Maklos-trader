@@ -22,7 +22,7 @@
 
     <!-- Header -->
     <div class="text-center mb-6 md:mb-8">
-      <p class="js-manufacturing-label text-sm font-semibold uppercase tracking-[0.25em] text-white/70 mb-4">
+      <p class="js-manufacturing-label text-xs font-semibold uppercase tracking-[0.25em] text-white/70 mb-3">
         Manufacturing Excellence
       </p>
       <h2
@@ -32,7 +32,7 @@
         <span class="js-manufacturing-word inline-flex">Every</span>
         <span class="js-manufacturing-word inline-flex">Bar</span>
       </h2>
-      <p class="js-manufacturing-description text-base sm:text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
+      <p class="js-manufacturing-description text-base lg:text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
         A streamlined process built on science, consistency, and relentless quality checks.
       </p>
     </div>

@@ -15,7 +15,7 @@
                     <span class="ml-3" style="color: #0d9488;">Touch</span>
                 </h2>
             </div>
-            <p class="text-maklos-600 text-lg font-semibold">
+            <p class="text-maklos-600 text-base font-semibold">
                 Work with Us - Let's Build Something Great Together
             </p>
         </div>
