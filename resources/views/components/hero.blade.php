@@ -47,7 +47,7 @@
       class="mx-auto grid max-w-7xl gap-12 px-6 pb-8 lg:gap-24 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-start">
       <div class="js-hero-copy max-w-4xl space-y-10 pt-24 lg:pt-48">
         <h1
-          class="js-hero-title font-display text-4xl font-bold leading-[1.2] tracking-tight text-charcoal sm:text-5xl lg:text-6xl">
+          class="js-hero-title font-display text-4xl font-semibold  leading-[1.2] tracking-tight text-charcoal sm:text-5xl lg:text-6xl">
 
           {{ $heroContent->title ?? '' }}
         </h1>

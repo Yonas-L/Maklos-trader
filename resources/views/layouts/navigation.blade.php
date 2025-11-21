@@ -4,8 +4,8 @@
     :class="solid ? 'bg-white/95 shadow-lg shadow-black/5' : 'bg-white/80'"
     class="fixed inset-x-0 top-0 z-50 transition-colors duration-300 backdrop-blur"
 >
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <a href="{{ url('/') }}" class="flex items-center">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6" style="height: 60px; overflow: visible;">
+        <a href="{{ url('/') }}" class="flex items-center" style="overflow: visible;">
             <x-animated-navbar-text />
         </a>
 
