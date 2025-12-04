@@ -49,20 +49,20 @@
         <h1
           class="js-hero-title font-display text-4xl font-semibold  leading-[1.2] tracking-tight text-charcoal sm:text-5xl lg:text-6xl">
 
-          {{ $heroContent->title ?? '' }}
+          {{ $heroContent?->title ?? '' }}
         </h1>
         <p class="js-hero-description text-base lg:text-lg leading-relaxed text-charcoal/70 text-justify">
-          {{ $heroContent->description ?? '' }}
+          {{ $heroContent?->description ?? '' }}
         </p>
         <div
           class="js-hero-buttons flex flex-nowrap lg:flex-wrap items-center justify-between lg:justify-start w-full lg:w-auto gap-3 lg:gap-5 text-sm lg:text-base font-semibold">
-          @if($heroContent->button_primary_label)
+          @if($heroContent?->button_primary_label)
             <a href="{{ $heroContent->button_primary_url }}"
               class="hero-button inline-flex items-center justify-center whitespace-nowrap rounded-full bg-maklos-500 px-4 lg:px-7 py-3 text-white shadow-lg shadow-maklos-500/30 transition-all duration-300 hover:-translate-y-0.5 hover:bg-maklos-400 hover:shadow-xl">
               {{ $heroContent->button_primary_label }}
             </a>
           @endif
-          @if($heroContent->button_secondary_label)
+          @if($heroContent?->button_secondary_label)
             <a href="{{ $heroContent->button_secondary_url }}"
               class="hero-button inline-flex items-center justify-center whitespace-nowrap rounded-full border border-maklos-200 px-4 lg:px-7 py-3 text-maklos-700/85 transition-all duration-300 hover:border-maklos-400 hover:text-maklos-500 hover:bg-maklos-50/50">
               {{ $heroContent->button_secondary_label }}
@@ -71,7 +71,7 @@
         </div>
 
         {{-- Social Icons --}}
-        @if($heroContent->show_social_icons && ($heroContent->facebook_url || $heroContent->instagram_url || $heroContent->twitter_url || $heroContent->linkedin_url))
+        @if($heroContent?->show_social_icons && ($heroContent?->facebook_url || $heroContent?->instagram_url || $heroContent?->twitter_url || $heroContent?->linkedin_url))
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
             integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />

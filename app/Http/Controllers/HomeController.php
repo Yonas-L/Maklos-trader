@@ -88,6 +88,7 @@ class HomeController extends Controller
                 });
 
             $siteSettings = SiteSetting::pluck('value', 'key')->all();
+            $manufacturingPromo = \App\Models\ManufacturingPromo::where('is_active', true)->first();
 
             return compact(
                 'heroSlides',
@@ -97,7 +98,9 @@ class HomeController extends Controller
                 'aboutValues',
                 'manufacturingSteps',
                 'faqItems',
-                'siteSettings'
+                'faqItems',
+                'siteSettings',
+                'manufacturingPromo'
             );
         });
 

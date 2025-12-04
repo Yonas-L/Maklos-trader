@@ -1557,6 +1557,9 @@
         {{-- Mobile Manufacturing --}}
         <x-manufacturing-section-mobile :manufacturing-steps="$manufacturingSteps" />
 
+        <!-- Image promo under manufacturing section -->
+
+
 
 
         {{-- Quality & Compliance Section --}}
@@ -1565,10 +1568,14 @@
         <div class="w-full lg:col-span-2">
             @include('partials.shape-divider')
         </div> --}}
-
+        <x-manufacturing-image-promo
+            :image-url="$manufacturingPromo && $manufacturingPromo->image_path ? asset('storage/' . $manufacturingPromo->image_path) : asset('storage/assets/products/allproducts.jpeg')"
+            :heading="$manufacturingPromo->heading ?? 'From Essentials to Excellence — Explore the Full Maklos Collection'" />
         {{-- FAQ Section --}}
 
         <x-faq-section :faq-items="$faqItems" />
+
+
 
         {{-- Contact Section --}}
         <x-contact-section :settings="(object) $siteSettings" />

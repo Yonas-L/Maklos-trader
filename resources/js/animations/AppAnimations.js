@@ -7,6 +7,7 @@ import { initMobileProductShowcase } from './ProductShowcaseMobile';
 import ManufacturingAnimations from './ManufacturingAnimations';
 import { initMobileManufacturing } from './ManufacturingMobile';
 import AboutAnimations from './AboutAnimations';
+import initManufacturingImagePromo from './ManufacturingImagePromo';
 import FaqAnimations from './FaqAnimations';
 import ContactAnimations from './ContactAnimations';
 import NavbarAnimations from './NavbarAnimations';
@@ -30,6 +31,9 @@ export default class AppAnimations {
         new FaqAnimations();
         new ContactAnimations();
         new NavbarAnimations();
+
+        // Initialize manufacturing image promo (desktop + mobile)
+        initManufacturingImagePromo();
     }
 
     initLenis() {

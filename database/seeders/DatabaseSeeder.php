@@ -25,12 +25,15 @@ class DatabaseSeeder extends Seeder
         // CMS Seeders
         $this->call([
             HeroSlideSeeder::class,
+            HeroContentSeeder::class,
             ProductHighlightSeeder::class,
+            ProductSeeder::class,
             AboutContentSeeder::class,
             AboutValueSeeder::class,
             ManufacturingStepSeeder::class,
             FaqItemSeeder::class,
             SiteSettingSeeder::class,
+            NavbarLogoSeeder::class,
         ]);
     }
 }

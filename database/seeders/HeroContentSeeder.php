@@ -13,8 +13,8 @@ class HeroContentSeeder extends Seeder
     public function run(): void
     {
         HeroContent::create([
-            'title' => 'Eucalyptus-powered care for cleaner, healthier living.',
-            'description' => 'Discover our portfolio of detergents and cosmetics crafted with natural botanicals and trusted science. Highlighting our signature eucalyptus-based soaps for homes and businesses across Ethiopia.',
+            'title' => "Maklos Trading's Premium Soap Manufacturer",
+            'description' => "Experience the perfect blend of natural ingredients and manufacturing precision with Maklos Trading's premium bathing soaps. Our signature Future Eucalyptus line delivers refreshing cleanliness with antibacterial benefits, while our OEM services help brands launch their own soap products with confidence and quality",
             'button_primary_label' => 'Explore Products',
             'button_primary_url' => '#products',
             'button_secondary_label' => 'Chat on WhatsApp',
