@@ -17,7 +17,9 @@ class HeroContentResource extends Resource
 {
     protected static ?string $model = HeroContent::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-home';
+    protected static ?string $navigationGroup = 'Homepage';
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {

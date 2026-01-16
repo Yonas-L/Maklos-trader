@@ -18,6 +18,7 @@ class ManageContactSettings extends Page implements HasForms
 
     protected static ?string $navigationIcon = 'heroicon-o-phone';
     protected static ?string $navigationLabel = 'Contact Settings';
+    protected static ?string $navigationGroup = 'Settings';
     protected static ?string $title = 'Manage Contact Info';
     protected static ?int $navigationSort = 2;
 

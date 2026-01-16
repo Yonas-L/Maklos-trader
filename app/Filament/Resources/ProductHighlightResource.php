@@ -17,7 +17,9 @@ class ProductHighlightResource extends Resource
 {
     protected static ?string $model = ProductHighlight::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-star';
+    protected static ?string $navigationGroup = 'Homepage';
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {

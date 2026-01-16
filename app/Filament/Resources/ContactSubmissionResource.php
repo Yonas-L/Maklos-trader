@@ -19,6 +19,13 @@ class ContactSubmissionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-envelope';
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+
+    protected static ?string $navigationGroup = 'Communications';
+
     protected static ?string $navigationLabel = 'Contact Messages';
 
     protected static ?string $modelLabel = 'Contact Message';
@@ -125,8 +132,8 @@ class ContactSubmissionResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->label('Mark as Read')
                     ->icon('heroicon-o-check-circle')
-                    ->visible(fn (ContactSubmission $record) => !$record->is_read)
-                    ->action(fn (ContactSubmission $record) => $record->update(['is_read' => true])),
+                    ->visible(fn(ContactSubmission $record) => !$record->is_read)
+                    ->action(fn(ContactSubmission $record) => $record->update(['is_read' => true])),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
@@ -134,7 +141,7 @@ class ContactSubmissionResource extends Resource
                     Tables\Actions\BulkAction::make('markAsRead')
                         ->label('Mark as Read')
                         ->icon('heroicon-o-check-circle')
-                        ->action(fn ($records) => $records->each->update(['is_read' => true]))
+                        ->action(fn($records) => $records->each->update(['is_read' => true]))
                         ->deselectRecordsAfterCompletion()
                         ->color('success'),
                     Tables\Actions\DeleteBulkAction::make(),

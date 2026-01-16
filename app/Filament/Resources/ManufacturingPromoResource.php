@@ -17,7 +17,9 @@ class ManufacturingPromoResource extends Resource
 {
     protected static ?string $model = ManufacturingPromo::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-photo';
+    protected static ?string $navigationIcon = 'heroicon-o-megaphone';
+    protected static ?string $navigationGroup = 'Homepage';
+    protected static ?int $navigationSort = 4;
 
     protected static ?string $navigationLabel = 'Manufacturing Promo';
 
