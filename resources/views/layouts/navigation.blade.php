@@ -20,9 +20,10 @@
             ] as $item)
                 <a
                     href="{{ $item['href'] }}"
-                    class="text-sm font-medium uppercase tracking-[0.2em] text-maklos-700/80 transition hover:text-maklos-600"
+                    class="group relative py-1 text-sm font-bold uppercase tracking-[0.15em] text-maklos-700/80 transition-colors duration-300 hover:text-[#0d9488]"
                 >
-                    {{ $item['label'] }}
+                    <span>{{ $item['label'] }}</span>
+                    <span class="absolute -bottom-1 left-0 h-[2px] w-full origin-center scale-x-0 bg-[#0d9488] transition-transform duration-300 group-hover:scale-x-100"></span>
                 </a>
             @endforeach
         </div>
