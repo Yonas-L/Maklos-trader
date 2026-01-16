@@ -53,6 +53,14 @@
             {{-- THE CARDS GRID --}}
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 relative z-10">
 
+                {{-- DATA PREPARATION --}}
+                @php
+                    $vals = $aboutValues ?? collect();
+                    $missionValues = $vals->where('type', 'mission');
+                    $visionValues = $vals->where('type', 'vision');
+                    $coreValues = $vals->where('type', 'values');
+                @endphp
+
                 {{-- CARD 1: MISSION --}}
                 <div class="group relative perspective-1000 h-[340px]">
                     <div
@@ -92,22 +100,34 @@
                                 class="text-lg font-bold text-[#0d9488] mb-4 text-center border-b border-[#0d9488]/20 pb-2">
                                 Mission Highlights</h3>
                             <div class="space-y-3">
-                                @php
-                                    $missionPoints = $aboutContent && $aboutContent->mission_highlights
-                                        ? json_decode($aboutContent->mission_highlights, true)
-                                        : [['label' => 'Quality', 'copy' => 'Tested for purity & safety.'], ['label' => 'Affordability', 'copy' => 'Accessible premium care.']];
-                                @endphp
-                                @foreach($missionPoints as $item)
+                                @forelse($missionValues as $item)
                                     <div
                                         class="flex items-start gap-3 bg-white/60 p-2.5 rounded-lg border border-[#0d9488]/20">
                                         <div class="mt-1 w-1.5 h-1.5 rounded-full bg-[#0d9488] flex-shrink-0"></div>
                                         <div>
                                             <span
-                                                class="block text-[11px] font-bold text-[#0d9488] uppercase">{{ $item['label'] }}</span>
-                                            <span class="text-xs text-slate-600 leading-tight">{{ $item['copy'] }}</span>
+                                                class="block text-[11px] font-bold text-[#0d9488] uppercase">{{ $item->title }}</span>
+                                            <span class="text-xs text-slate-600 leading-tight">{{ $item->summary }}</span>
                                         </div>
                                     </div>
-                                @endforeach
+                                @empty
+                                    @php
+                                        $missionPoints = $aboutContent && $aboutContent->mission_highlights
+                                            ? json_decode($aboutContent->mission_highlights, true)
+                                            : [['label' => 'Quality', 'copy' => 'Tested for purity & safety.'], ['label' => 'Affordability', 'copy' => 'Accessible premium care.']];
+                                    @endphp
+                                    @foreach($missionPoints as $item)
+                                        <div
+                                            class="flex items-start gap-3 bg-white/60 p-2.5 rounded-lg border border-[#0d9488]/20">
+                                            <div class="mt-1 w-1.5 h-1.5 rounded-full bg-[#0d9488] flex-shrink-0"></div>
+                                            <div>
+                                                <span
+                                                    class="block text-[11px] font-bold text-[#0d9488] uppercase">{{ $item['label'] }}</span>
+                                                <span class="text-xs text-slate-600 leading-tight">{{ $item['copy'] }}</span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endforelse
                             </div>
                         </div>
                     </div>
@@ -153,22 +173,34 @@
                                 class="text-lg font-bold text-[#1f58be] mb-4 text-center border-b border-[#1f58be]/20 pb-2">
                                 Future Goals</h3>
                             <div class="space-y-3">
-                                @php
-                                    $visionPoints = $aboutContent && $aboutContent->vision_highlights
-                                        ? json_decode($aboutContent->vision_highlights, true)
-                                        : [['title' => 'Innovation', 'detail' => 'Greener production systems.'], ['title' => 'Growth', 'detail' => 'Pan-African distribution.']];
-                                @endphp
-                                @foreach($visionPoints as $item)
+                                @forelse($visionValues as $item)
                                     <div
                                         class="flex items-start gap-3 bg-white/60 p-2.5 rounded-lg border border-[#1f58be]/20">
                                         <div class="mt-1 w-1.5 h-1.5 rounded-full bg-[#1f58be] flex-shrink-0"></div>
                                         <div>
                                             <span
-                                                class="block text-[11px] font-bold text-[#1f58be] uppercase">{{ $item['title'] }}</span>
-                                            <span class="text-xs text-slate-600 leading-tight">{{ $item['detail'] }}</span>
+                                                class="block text-[11px] font-bold text-[#1f58be] uppercase">{{ $item->title }}</span>
+                                            <span class="text-xs text-slate-600 leading-tight">{{ $item->summary }}</span>
                                         </div>
                                     </div>
-                                @endforeach
+                                @empty
+                                    @php
+                                        $visionPoints = $aboutContent && $aboutContent->vision_highlights
+                                            ? json_decode($aboutContent->vision_highlights, true)
+                                            : [['title' => 'Innovation', 'detail' => 'Greener production systems.'], ['title' => 'Growth', 'detail' => 'Pan-African distribution.']];
+                                    @endphp
+                                    @foreach($visionPoints as $item)
+                                        <div
+                                            class="flex items-start gap-3 bg-white/60 p-2.5 rounded-lg border border-[#1f58be]/20">
+                                            <div class="mt-1 w-1.5 h-1.5 rounded-full bg-[#1f58be] flex-shrink-0"></div>
+                                            <div>
+                                                <span
+                                                    class="block text-[11px] font-bold text-[#1f58be] uppercase">{{ $item['title'] }}</span>
+                                                <span class="text-xs text-slate-600 leading-tight">{{ $item['detail'] }}</span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endforelse
                             </div>
                         </div>
                     </div>
@@ -212,15 +244,7 @@
                                 class="text-lg font-bold text-slate-700 mb-4 text-center border-b border-slate-200 pb-2">
                                 Core Principles</h3>
                             <div class="space-y-3">
-                                @php
-                                    $vals = $aboutValues ?? [];
-                                    $defaults = [
-                                        (object) ['title' => 'Integrity', 'summary' => 'Transparent Ops'],
-                                        (object) ['title' => 'Quality', 'summary' => 'Consistent output']
-                                    ];
-                                    $displayValues = count($vals) > 0 ? $vals : $defaults;
-                                @endphp
-                                @foreach($displayValues as $val)
+                                @forelse($coreValues as $val)
                                     @if($loop->index < 2) {{-- Limit to 2 items to ensure fit in reduced height --}}
                                         <div class="flex items-start gap-3 bg-white p-2.5 rounded-lg border border-slate-200">
                                             <div class="mt-1 w-1.5 h-1.5 rounded-full bg-slate-600 flex-shrink-0"></div>
@@ -231,7 +255,24 @@
                                             </div>
                                         </div>
                                     @endif
-                                @endforeach
+                                @empty
+                                    @php
+                                        $defaults = [
+                                            (object) ['title' => 'Integrity', 'summary' => 'Transparent Ops'],
+                                            (object) ['title' => 'Quality', 'summary' => 'Consistent output']
+                                        ];
+                                    @endphp
+                                    @foreach($defaults as $val)
+                                        <div class="flex items-start gap-3 bg-white p-2.5 rounded-lg border border-slate-200">
+                                            <div class="mt-1 w-1.5 h-1.5 rounded-full bg-slate-600 flex-shrink-0"></div>
+                                            <div>
+                                                <span
+                                                    class="block text-[11px] font-bold text-slate-700 uppercase">{{ $val->title }}</span>
+                                                <span class="text-xs text-slate-500 leading-tight">{{ $val->summary }}</span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endforelse
                             </div>
                         </div>
                     </div>
