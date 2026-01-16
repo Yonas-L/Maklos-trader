@@ -60,11 +60,11 @@
               </span>
             </div>
 
-            <h3 class="js-manufacturing-step-title text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4">
+            <h3 class="js-manufacturing-step-title text-3xl sm:text-4xl lg:text-5xl font-medium text-slate-900 mb-4">
               {{ $step['title'] }}
             </h3>
 
-            <p class="js-manufacturing-step-description text-lg md:text-xl text-slate-600 leading-relaxed mb-5">
+            <p class="js-manufacturing-step-description text-sm lg:text-base text-slate-600 leading-relaxed mb-5">
               {{ $step['description'] }}
             </p>
 
