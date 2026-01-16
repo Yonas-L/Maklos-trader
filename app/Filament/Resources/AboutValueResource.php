@@ -23,9 +23,9 @@ class AboutValueResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('about_content_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('about_content_id')
+                    ->relationship('aboutContent', 'title')
+                    ->required(),
                 Forms\Components\TextInput::make('type')
                     ->required()
                     ->maxLength(255)
