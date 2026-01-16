@@ -1,6 +1,7 @@
 @props(['manufacturingSteps' => []])
 
-<section class="lg:hidden relative bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden pt-12 pb-2">
+<section id="manufacturing-mobile"
+    class="lg:hidden relative bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden pt-12 pb-2">
     <!-- Floating bubbles background -->
     <div class="js-manufacturing-bubbles-mobile pointer-events-none absolute inset-0 overflow-hidden z-0">
         @foreach (range(1, 8) as $i)

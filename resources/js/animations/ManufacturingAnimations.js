@@ -8,8 +8,15 @@ export default class ManufacturingAnimations {
 
     init() {
         gsap.registerPlugin(ScrollTrigger);
-        this.animateManufacturingSection();
-        this.animateManufacturingBubbles();
+
+        let mm = gsap.matchMedia();
+
+        // Only run these animations on desktop (min-width: 1024px)
+        // because the section .js-manufacturing-section has 'hidden lg:flex' classes
+        mm.add("(min-width: 1024px)", () => {
+            this.animateManufacturingSection();
+            this.animateManufacturingBubbles();
+        });
     }
 
     animateManufacturingSection() {
@@ -80,29 +87,6 @@ export default class ManufacturingAnimations {
             return;
         }
 
-        // Mobile / small screens: no horizontal pinning, just fade/slide in cards
-        if (window.innerWidth < 1024) {
-            gsap.set(cards, { opacity: 0, y: 40 });
-
-            cards.forEach((card) => {
-                ScrollTrigger.create({
-                    trigger: card,
-                    start: 'top 85%',
-                    toggleActions: 'play none none reverse',
-                    onEnter: () => {
-                        gsap.to(card, {
-                            opacity: 1,
-                            y: 0,
-                            duration: 0.9,
-                            ease: 'power3.out',
-                        });
-                    },
-                });
-            });
-
-            return;
-        }
-
         // Desktop: horizontal scrolling track, pinned section
         const totalCards = cards.length;
         const scrollDistance = window.innerHeight * totalCards;
@@ -135,6 +119,7 @@ export default class ManufacturingAnimations {
                     y: 0,
                     scale: 1,
                     duration: 0.85,
+                    opacity: 1,
                 }, 0.1);
             }
 

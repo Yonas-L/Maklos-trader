@@ -181,14 +181,14 @@
 
     <!-- Notification Modal -->
     <div id="notificationModal"
-        class="fixed inset-0 z-[100] flex items-center justify-center px-4 pointer-events-none opacity-0 transition-opacity duration-300">
+        class="hidden fixed inset-0 z-[100] flex items-center justify-center px-4 opacity-0 transition-opacity duration-300">
         <!-- Backdrop -->
         <div class="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity" style="clip-path: none;"
             onclick="closeModal()"></div>
 
         <!-- Modal Card -->
         <div
-            class="relative bg-white rounded-2xl shadow-2xl p-8 max-w-sm w-full text-center transform scale-95 transition-all duration-300 pointer-events-auto">
+            class="relative bg-white rounded-2xl shadow-2xl p-8 max-w-sm w-full text-center transform scale-95 transition-all duration-300">
             <!-- Icon Wrapper -->
             <div id="modalIconBg"
                 class="mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-4 transition-colors">
@@ -237,16 +237,23 @@
         modalTitle.textContent = title;
         modalMessage.textContent = message;
 
-        // Show (Fade In)
-        modal.classList.remove('opacity-0', 'pointer-events-none');
+        // Show (Fade In) - Remove hidden first, then animate
+        modal.classList.remove('hidden');
+        // Force reflow to enable transition
+        void modal.offsetWidth;
+        modal.classList.remove('opacity-0');
         modal.querySelector('.transform').classList.remove('scale-95');
         modal.querySelector('.transform').classList.add('scale-100');
     }
 
     function closeModal() {
-        modal.classList.add('opacity-0', 'pointer-events-none');
+        modal.classList.add('opacity-0');
         modal.querySelector('.transform').classList.remove('scale-100');
         modal.querySelector('.transform').classList.add('scale-95');
+        // Add hidden after transition completes
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
     }
 
     document.addEventListener('DOMContentLoaded', function () {
