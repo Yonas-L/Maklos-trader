@@ -24,9 +24,9 @@
                     class="font-display text-2xl lg:text-3xl font-bold tracking-tight mb-4 flex items-center justify-center gap-2">
                     <span
                         class="bg-gradient-to-r from-[#1f58be] via-[#0d9488] to-[#1f58be] bg-clip-text text-transparent font-extrabold">
-                        {{ $aboutContent->experience_years ?? 11 }}
+                        {{ $aboutContent->experience_years ?? 10 }}
                     </span>
-                    <span class="text-slate-400 font-light">years of expertise</span>
+                    <span class="text-slate-400 font-light">Plus Years of Experience in the Market</span>
                 </h2>
                 <p class="text-slate-600 text-sm lg:text-lg max-w-3xl mx-auto leading-relaxed">
                     {{ $aboutContent->description ?? 'Maklos Trading designs, manufactures, and supplies premium bathing soaps with a focus on natural freshness and export-ready quality.' }}
