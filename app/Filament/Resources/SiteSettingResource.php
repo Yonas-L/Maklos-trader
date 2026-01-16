@@ -42,7 +42,8 @@ class SiteSettingResource extends Resource
                     ->helperText('Type of setting value'),
 
                 // Conditional field based on type
-                Forms\Components\FileUpload::make('value')
+                // Conditional field based on type
+                Forms\Components\FileUpload::make('image_value')
                     ->label('Image')
                     ->image()
                     ->directory('logos')
@@ -52,20 +53,24 @@ class SiteSettingResource extends Resource
                     ->imagePreviewHeight('200')
                     ->helperText('Upload logo image (max 2MB, PNG/JPG/SVG/WebP)')
                     ->visible(fn(callable $get) => $get('type') === 'image')
-                    ->formatStateUsing(fn($state, callable $get) => $get('type') === 'image' ? $state : null)
-                    ->dehydrated(fn(callable $get) => $get('type') === 'image')
+                    ->afterStateHydrated(fn($component, $state, $record) => $record && $record->type === 'image' ? $component->state($record->value) : null)
+                    ->dehydrated(false)
                     ->columnSpanFull(),
 
-                Forms\Components\Textarea::make('value')
+                Forms\Components\Textarea::make('textarea_value')
                     ->label('Value')
                     ->rows(3)
                     ->visible(fn(callable $get) => $get('type') === 'textarea')
+                    ->afterStateHydrated(fn($component, $state, $record) => $record && $record->type === 'textarea' ? $component->state($record->value) : null)
+                    ->dehydrated(false)
                     ->columnSpanFull(),
 
-                Forms\Components\TextInput::make('value')
+                Forms\Components\TextInput::make('text_value')
                     ->label('Value')
                     ->visible(fn(callable $get) => in_array($get('type'), ['text', 'url']))
                     ->url(fn(callable $get) => $get('type') === 'url')
+                    ->afterStateHydrated(fn($component, $state, $record) => $record && in_array($record->type, ['text', 'url']) ? $component->state($record->value) : null)
+                    ->dehydrated(false)
                     ->columnSpanFull(),
 
                 Forms\Components\Textarea::make('meta')
