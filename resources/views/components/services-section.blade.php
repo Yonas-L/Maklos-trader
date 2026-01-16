@@ -73,38 +73,82 @@
             {{-- SERVICES GRID (Dynamic from Database) --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:block">
 
-                @forelse ($services as $service)
-                    @php
-                        $colors = $service->color_classes;
-                        $positionClass = $service->position_classes;
-                        $dotPosition = $service->dot_position;
-                    @endphp
-
-                    <div class="js-service-card group relative lg:absolute {{ $positionClass }} lg:w-[350px] transition-all duration-500 hover:z-30 opacity-0 translate-y-8"
-                        style="transition-delay: {{ $loop->index * 150 }}ms;">
+                {{-- 1. Manufacturing (Top Left) --}}
+                <div class="js-service-card group relative lg:absolute lg:top-10 lg:left-10 lg:w-[350px] transition-all duration-500 hover:z-30 opacity-0 translate-y-8"
+                    style="transition-delay: 0ms;">
+                    <div
+                        class="relative p-8 bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 hover:border-blue-200 transition-all duration-300 group-hover:-translate-y-2">
                         <div
-                            class="relative p-8 bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 {{ $colors['border'] }} transition-all duration-300 group-hover:-translate-y-2">
-                            <div
-                                class="w-16 h-16 rounded-2xl {{ $colors['bg'] }} {{ $colors['text'] }} flex items-center justify-center text-3xl mb-6 {{ $colors['hover_bg'] }} group-hover:text-white transition-colors duration-300 shadow-sm">
-                                <i class="{{ $service->icon }}"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-2">{{ $service->title }}</h3>
-                            <p class="text-slate-500 text-sm leading-relaxed">
-                                {{ $service->description }}
-                            </p>
-                            {{-- Connection Dot --}}
-                            <div
-                                class="hidden lg:block absolute {{ $dotPosition }} w-4 h-4 {{ $colors['dot'] }} rounded-full border-4 border-white shadow-sm z-20">
-                            </div>
+                            class="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-3xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+                            <i class="fa-solid fa-industry"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Manufacturing</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            Premium soap production with consistent quality standards for local and regional markets.
+                        </p>
+                        <div
+                            class="hidden lg:block absolute bottom-8 -right-2 w-4 h-4 bg-blue-500 rounded-full border-4 border-white shadow-sm z-20">
                         </div>
                     </div>
-                @empty
-                    {{-- Fallback: Show placeholder when no services in database --}}
-                    <div class="col-span-2 text-center py-20 text-slate-400">
-                        <i class="fa-solid fa-cog text-6xl mb-4"></i>
-                        <p>No services configured. Add services in the admin panel.</p>
+                </div>
+
+                {{-- 2. Wholesale (Top Right) --}}
+                <div class="js-service-card group relative lg:absolute lg:top-10 lg:right-10 lg:w-[350px] transition-all duration-500 hover:z-30 opacity-0 translate-y-8"
+                    style="transition-delay: 150ms;">
+                    <div
+                        class="relative p-8 bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 hover:border-teal-200 transition-all duration-300 group-hover:-translate-y-2">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center text-3xl mb-6 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+                            <i class="fa-solid fa-boxes-stacked"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Wholesale</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            Bulk supply for retailers and distributors, ensuring steady stock and competitive pricing.
+                        </p>
+                        <div
+                            class="hidden lg:block absolute bottom-8 -left-2 w-4 h-4 bg-teal-500 rounded-full border-4 border-white shadow-sm z-20">
+                        </div>
                     </div>
-                @endforelse
+                </div>
+
+                {{-- 3. Import (Bottom Left) --}}
+                <div class="js-service-card group relative lg:absolute lg:bottom-10 lg:left-10 lg:w-[350px] transition-all duration-500 hover:z-30 opacity-0 translate-y-8"
+                    style="transition-delay: 300ms;">
+                    <div
+                        class="relative p-8 bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 hover:border-indigo-200 transition-all duration-300 group-hover:-translate-y-2">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-3xl mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+                            <i class="fa-solid fa-ship"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Import</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            Sourcing and distribution of related products, connecting global suppliers with local needs.
+                        </p>
+                        <div
+                            class="hidden lg:block absolute top-8 -right-2 w-4 h-4 bg-indigo-500 rounded-full border-4 border-white shadow-sm z-20">
+                        </div>
+                    </div>
+                </div>
+
+                {{-- 4. Export (Bottom Right) --}}
+                <div class="js-service-card group relative lg:absolute lg:bottom-10 lg:right-10 lg:w-[350px] transition-all duration-500 hover:z-30 opacity-0 translate-y-8"
+                    style="transition-delay: 450ms;">
+                    <div
+                        class="relative p-8 bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 hover:border-cyan-200 transition-all duration-300 group-hover:-translate-y-2">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-3xl mb-6 group-hover:bg-cyan-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+                            <i class="fa-solid fa-plane-departure"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Export</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            Supplying products to international markets, expanding reach with reliable trade
+                            partnerships.
+                        </p>
+                        <div
+                            class="hidden lg:block absolute top-8 -left-2 w-4 h-4 bg-cyan-500 rounded-full border-4 border-white shadow-sm z-20">
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
