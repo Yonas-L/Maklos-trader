@@ -18,43 +18,87 @@
 
         {{-- Stacked Cards (Dynamic from Database) --}}
         <div class="space-y-6">
-            @forelse ($services as $index => $service)
-                @php
-                    $colors = $service->color_classes;
-                    $gradientMap = [
-                        'blue' => 'from-blue-600 to-blue-500',
-                        'teal' => 'from-teal-500 to-emerald-500',
-                        'indigo' => 'from-indigo-600 to-purple-600',
-                        'cyan' => 'from-cyan-600 to-blue-600',
-                    ];
-                    $gradient = $gradientMap[$service->color_scheme] ?? 'from-blue-600 to-blue-500';
-                @endphp
-
-                <div class="js-service-mobile-card relative flex items-center p-4 bg-white rounded-2xl shadow-sm border border-slate-100 opacity-0 -translate-x-12 transition-all duration-700 ease-out"
-                    style="transition-delay: {{ $index * 150 }}ms;">
-
-                    {{-- Circular Icon Wrapper --}}
-                    <div class="relative flex-shrink-0 w-16 h-16 mr-5">
-                        <div class="absolute inset-0 rounded-full bg-gradient-to-br {{ $gradient }} opacity-10"></div>
-                        <div class="absolute inset-0 rounded-full flex items-center justify-center">
-                            <i
-                                class="{{ $service->icon }} text-xl bg-gradient-to-br {{ $gradient }} bg-clip-text text-transparent"></i>
-                        </div>
+            {{-- 1. Manufacturing (Slide In from Left) --}}
+            <div class="js-service-mobile-card relative flex items-center p-5 bg-white rounded-2xl shadow-sm border border-slate-100 opacity-0 -translate-x-12 transition-all duration-700 ease-out"
+                style="transition-delay: 0ms;">
+                {{-- Icon --}}
+                <div class="relative flex-shrink-0 w-16 h-16 mr-5">
+                    <div class="absolute inset-0 rounded-full bg-gradient-to-br from-blue-600 to-blue-500 opacity-10">
                     </div>
-
-                    {{-- Text --}}
-                    <div>
-                        <h3 class="font-bold text-slate-900 text-lg mb-1">{{ $service->title }}</h3>
-                        <p class="text-slate-500 text-xs leading-relaxed">{{ $service->description }}</p>
+                    <div class="absolute inset-0 rounded-full flex items-center justify-center">
+                        <i
+                            class="fa-solid fa-industry text-xl bg-gradient-to-br from-blue-600 to-blue-500 bg-clip-text text-transparent"></i>
                     </div>
                 </div>
-            @empty
-                {{-- Fallback: Show placeholder when no services in database --}}
-                <div class="text-center py-10 text-slate-400">
-                    <i class="fa-solid fa-cog text-4xl mb-3"></i>
-                    <p class="text-sm">No services configured.</p>
+                {{-- Text --}}
+                <div>
+                    <h3 class="font-bold text-slate-900 text-lg mb-1">Manufacturing</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Premium soap production with consistent quality
+                        standards.</p>
                 </div>
-            @endforelse
+            </div>
+
+            {{-- 2. Wholesale (Slide In from Right) --}}
+            <div class="js-service-mobile-card relative flex items-center p-5 bg-white rounded-2xl shadow-sm border border-slate-100 opacity-0 translate-x-12 transition-all duration-700 ease-out"
+                style="transition-delay: 150ms;">
+                {{-- Icon --}}
+                <div class="relative flex-shrink-0 w-16 h-16 mr-5">
+                    <div
+                        class="absolute inset-0 rounded-full bg-gradient-to-br from-teal-500 to-emerald-500 opacity-10">
+                    </div>
+                    <div class="absolute inset-0 rounded-full flex items-center justify-center">
+                        <i
+                            class="fa-solid fa-boxes-stacked text-xl bg-gradient-to-br from-teal-500 to-emerald-500 bg-clip-text text-transparent"></i>
+                    </div>
+                </div>
+                {{-- Text --}}
+                <div>
+                    <h3 class="font-bold text-slate-900 text-lg mb-1">Wholesale</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Bulk supply for retailers and distributors,
+                        ensuring steady stock.</p>
+                </div>
+            </div>
+
+            {{-- 3. Import (Slide In from Left) --}}
+            <div class="js-service-mobile-card relative flex items-center p-5 bg-white rounded-2xl shadow-sm border border-slate-100 opacity-0 -translate-x-12 transition-all duration-700 ease-out"
+                style="transition-delay: 300ms;">
+                {{-- Icon --}}
+                <div class="relative flex-shrink-0 w-16 h-16 mr-5">
+                    <div
+                        class="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 opacity-10">
+                    </div>
+                    <div class="absolute inset-0 rounded-full flex items-center justify-center">
+                        <i
+                            class="fa-solid fa-ship text-xl bg-gradient-to-br from-indigo-600 to-purple-600 bg-clip-text text-transparent"></i>
+                    </div>
+                </div>
+                {{-- Text --}}
+                <div>
+                    <h3 class="font-bold text-slate-900 text-lg mb-1">Import</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Sourcing and distribution of related products from
+                        global suppliers.</p>
+                </div>
+            </div>
+
+            {{-- 4. Export (Slide In from Right) --}}
+            <div class="js-service-mobile-card relative flex items-center p-5 bg-white rounded-2xl shadow-sm border border-slate-100 opacity-0 translate-x-12 transition-all duration-700 ease-out"
+                style="transition-delay: 450ms;">
+                {{-- Icon --}}
+                <div class="relative flex-shrink-0 w-16 h-16 mr-5">
+                    <div class="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-600 to-blue-600 opacity-10">
+                    </div>
+                    <div class="absolute inset-0 rounded-full flex items-center justify-center">
+                        <i
+                            class="fa-solid fa-plane-departure text-xl bg-gradient-to-br from-cyan-600 to-blue-600 bg-clip-text text-transparent"></i>
+                    </div>
+                </div>
+                {{-- Text --}}
+                <div>
+                    <h3 class="font-bold text-slate-900 text-lg mb-1">Export</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Supplying products to international markets via
+                        reliable trade.</p>
+                </div>
+            </div>
         </div>
     </div>
 

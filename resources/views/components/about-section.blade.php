@@ -20,8 +20,7 @@
             </h2>
 
             <div class="flex flex-col items-center justify-center">
-                <h2
-                    class="font-display text-2xl lg:text-3xl font-bold tracking-tight mb-4 flex items-center justify-center gap-2">
+                <h2 class="font-display text-2xl lg:text-3xl font-bold tracking-tight mb-4 text-center">
                     <span
                         class="bg-gradient-to-r from-[#1f58be] via-[#0d9488] to-[#1f58be] bg-clip-text text-transparent font-extrabold">
                         {{ $aboutContent->experience_years ?? 10 }}
