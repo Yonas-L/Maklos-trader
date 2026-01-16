@@ -98,7 +98,7 @@
           @endif
         </div>
         <div
-          class="js-hero-buttons flex flex-nowrap lg:flex-wrap items-center justify-start w-full lg:w-auto gap-3 lg:gap-5 text-sm lg:text-base font-semibold">
+          class="js-hero-buttons flex flex-nowrap lg:flex-wrap items-center justify-center lg:justify-start w-full lg:w-auto gap-3 lg:gap-5 text-sm lg:text-base font-semibold">
           <a href="#contact"
             class="hero-button inline-flex items-center justify-center whitespace-nowrap rounded-full border-2 border-maklos-300 px-8 lg:px-10 py-3 text-charcoal transition-all duration-300 hover:border-maklos-500 hover:bg-maklos-50">
             Contact Us
