@@ -7,10 +7,33 @@
 
   {{-- Animated blob gradient background --}}
   <div class="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-    {{-- Large background blobs - more visible --}}
-    <div
-      class="absolute -left-32 top-[-15%] h-[520px] w-[520px] animate-aurora rounded-full bg-gradient-to-br from-eucalyptus/70 via-maklos-400/60 to-maklos-200/50 blur-3xl">
+    {{-- Visible dot grid pattern --}}
+    <div class="absolute inset-0 opacity-20"
+      style="background-image: radial-gradient(#1f58be 2px, transparent 2px); background-size: 40px 40px;"></div>
+
+    {{-- Large, visible blue gradient blob on the left - NO BLUR --}}
+    <div class="absolute -left-20 top-[10%] h-[600px] w-[600px] rounded-full"
+      style="background: radial-gradient(circle, rgba(31,88,190,0.15) 0%, rgba(31,88,190,0.05) 50%, transparent 70%);">
     </div>
+
+    {{-- Additional blob for more coverage - NO BLUR --}}
+    <div class="absolute left-[5%] top-[35%] h-[350px] w-[350px] rounded-full"
+      style="background: radial-gradient(circle, rgba(13,148,136,0.12) 0%, rgba(13,148,136,0.04) 60%, transparent 80%);">
+    </div>
+
+    {{-- Floating decorative elements - VERY visible --}}
+    <div class="absolute left-20 top-[20%] h-48 w-48 border-[3px] border-[#1f58be]/20 rounded-full"></div>
+    <div class="absolute left-[15%] top-[50%] h-28 w-28 border-[3px] border-[#0d9488]/15 rounded-lg rotate-12"></div>
+    <div class="absolute left-[8%] top-[65%] flex gap-3">
+      <div class="h-4 w-4 bg-[#1f58be]/25 rounded-full"></div>
+      <div class="h-4 w-4 bg-[#1f58be]/20 rounded-full"></div>
+      <div class="h-4 w-4 bg-[#1f58be]/15 rounded-full"></div>
+    </div>
+    <div class="absolute left-[22%] top-[30%] h-24 w-24 border-2 border-[#1f58be]/15 rounded-full"></div>
+
+    <div
+      class="absolute right-[-10%] top-[10%] h-[550px] w-[550px] animate-aurora rounded-full bg-gradient-to-tr from-[#1f58be]/30 via-maklos-200/40 to-white/10 blur-[120px]"
+      style="animation-delay: -2s"></div>
     <div
       class="absolute -right-40 bottom-[-20%] h-[580px] w-[580px] animate-aurora rounded-full bg-gradient-to-tr from-maklos-300/75 via-eucalyptus/65 to-maklos-100/55 blur-3xl"
       style="animation-delay: -6s"></div>
@@ -43,31 +66,48 @@
 
   {{-- Content wrapper --}}
   <div class="relative z-20">
-    <div
-      class="mx-auto grid max-w-7xl gap-12 px-6 pb-8 lg:gap-24 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-start">
-      <div class="js-hero-copy max-w-4xl space-y-10 pt-24 lg:pt-48">
-        <h1
-          class="js-hero-title font-display text-4xl font-semibold  leading-[1.2] tracking-tight text-charcoal sm:text-5xl lg:text-6xl">
+    {{-- Desktop Logo - Top Left, aligned with content --}}
+    <div class="hidden lg:block absolute top-0 left-24  z-30">
+      @php
+        $navbarLogo = \App\Models\SiteSetting::where('key', 'navbar_logo')->value('value') ?? 'assets/LOGO/logo2.png';
+      @endphp
+      <a href="{{ url('/') }}" class="block">
+        <img src="{{ asset('storage/' . $navbarLogo) }}" alt="Maklos Trader" class="h-40 w-auto object-contain" />
+      </a>
+    </div>
 
+    <div
+      class="mx-auto lg:mx-48 grid max-w-7xl gap-12  px-6 pb-8 lg:gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-start lg:justify-between">
+
+      <div class="js-hero-copy w-full lg:max-w-6xl space-y-8 pt-24 lg:pt-96   lg:pr-16 ">
+        <h1
+          class="js-hero-title font-display text-3xl font-medium leading-[1.15] tracking-tight text-charcoal text-center lg:text-left sm:text-4xl lg:text-5xl">
           {{ $heroContent?->title ?? '' }}
         </h1>
-        <p class="js-hero-description text-base lg:text-lg leading-relaxed text-charcoal/70 text-justify">
-          {{ $heroContent?->description ?? '' }}
-        </p>
+        <div class="space-y-4">
+          @if($heroContent?->description_one)
+            <p
+              class="js-hero-description text-sm lg:text-base leading-relaxed text-charcoal/70 text-justify lg:text-left">
+              {{ $heroContent->description_one }}
+            </p>
+          @endif
+          @if($heroContent?->description_two)
+            <p class="text-sm lg:text-base leading-relaxed text-charcoal/70 text-justify lg:text-left">
+              {{ $heroContent->description_two }}
+            </p>
+          @endif
+        </div>
         <div
-          class="js-hero-buttons flex flex-nowrap lg:flex-wrap items-center justify-between lg:justify-start w-full lg:w-auto gap-3 lg:gap-5 text-sm lg:text-base font-semibold">
-          @if($heroContent?->button_primary_label)
-            <a href="{{ $heroContent->button_primary_url }}"
-              class="hero-button inline-flex items-center justify-center whitespace-nowrap rounded-full bg-maklos-500 px-4 lg:px-7 py-3 text-white shadow-lg shadow-maklos-500/30 transition-all duration-300 hover:-translate-y-0.5 hover:bg-maklos-400 hover:shadow-xl">
-              {{ $heroContent->button_primary_label }}
-            </a>
-          @endif
-          @if($heroContent?->button_secondary_label)
-            <a href="{{ $heroContent->button_secondary_url }}"
-              class="hero-button inline-flex items-center justify-center whitespace-nowrap rounded-full border border-maklos-200 px-4 lg:px-7 py-3 text-maklos-700/85 transition-all duration-300 hover:border-maklos-400 hover:text-maklos-500 hover:bg-maklos-50/50">
-              {{ $heroContent->button_secondary_label }}
-            </a>
-          @endif
+          class="js-hero-buttons flex flex-nowrap lg:flex-wrap items-center justify-start w-full lg:w-auto gap-3 lg:gap-5 text-sm lg:text-base font-semibold">
+          <a href="#contact"
+            class="hero-button inline-flex items-center justify-center whitespace-nowrap rounded-full border-2 border-maklos-300 px-8 lg:px-10 py-3 text-charcoal transition-all duration-300 hover:border-maklos-500 hover:bg-maklos-50">
+            Contact Us
+          </a>
+          <a href="https://wa.me/{{ $heroContent?->whatsapp_number ?? config('app.whatsapp_number', '251000000000') }}"
+            class="hero-button inline-flex items-center justify-center whitespace-nowrap rounded-full px-8 lg:px-10 py-3 text-white shadow-lg shadow-[#1f58be]/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+            style="background: linear-gradient(to right, #1f58be, #0d9488);">
+            Chat on WhatsApp
+          </a>
         </div>
 
         {{-- Social Icons --}}
@@ -267,7 +307,7 @@
         </style>
       </div>
 
-      <div class="relative flex w-full justify-center lg:w-auto mt-12 lg:mt-32">
+      <div class="relative flex w-full justify-center lg:justify-end lg:w-auto mt-12 lg:mt-64">
         <div class="absolute -inset-10 rounded-full bg-maklos-100 blur-3xl"></div>
         <div x-data="heroCarousel({ slides: @js($slides), interval: 5000 })" x-init="start()" @mouseenter="stop()"
           @mouseleave="start()" @touchstart="handleTouchStart($event)" @touchend="handleTouchEnd($event)"

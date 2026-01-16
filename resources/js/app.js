@@ -71,7 +71,26 @@ document.addEventListener('alpine:init', () => {
 
 Alpine.start();
 
+import HeroAnimations from './animations/HeroAnimations';
+import ManufacturingAnimations from './animations/ManufacturingAnimations';
+import ProductShowcase from './animations/ProductShowcase';
+import AboutAnimations from './animations/AboutAnimations';
+import FaqAnimations from './animations/FaqAnimations';
+import ContactAnimations from './animations/ContactAnimations';
+import ManufacturingImagePromo from './animations/ManufacturingImagePromo';
+import { initMobileManufacturing } from './animations/ManufacturingMobile';
+import ServicesAnimations from './animations/ServicesAnimations';
+
 // Initialize animations when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    new AppAnimations();
+    // new AppAnimations(); // Deprecated in favor of individual initializers
+    new HeroAnimations();
+    new ManufacturingAnimations();
+    new ProductShowcase();
+    new AboutAnimations();
+    new FaqAnimations();
+    new ContactAnimations();
+    new ManufacturingImagePromo();
+    initMobileManufacturing();
+    new ServicesAnimations();
 });

@@ -126,7 +126,8 @@
                     <div class="rounded-[2.5rem] border border-white bg-white/80 p-8 shadow-xl shadow-maklos-100/60">
                         <p class="text-sm font-semibold uppercase tracking-[0.3em] text-maklos-500">Sourcing</p>
                         <h3 class="mt-4 font-display text-2xl text-charcoal">
-                            {{ $product->sourcing['title'] ?? 'Crafted with care' }}</h3>
+                            {{ $product->sourcing['title'] ?? 'Crafted with care' }}
+                        </h3>
                         <p class="mt-4 text-sm text-charcoal/70">
                             {{ $product->sourcing['body'] ?? 'Maklos partners with trusted growers and suppliers to ensure every ingredient meets our sustainability commitments.' }}
                         </p>
@@ -153,7 +154,8 @@
                             class="rounded-3xl border border-maklos-100 bg-maklos-50/40 p-6 shadow-sm shadow-maklos-100/50">
                             <h3 class="font-display text-xl text-charcoal">{{ $availability['label'] ?? 'Offering' }}</h3>
                             <p class="mt-2 text-sm text-charcoal/70">
-                                {{ $availability['description'] ?? 'Tailored solutions available upon request.' }}</p>
+                                {{ $availability['description'] ?? 'Tailored solutions available upon request.' }}
+                            </p>
                         </article>
                     @endforeach
                 </div>

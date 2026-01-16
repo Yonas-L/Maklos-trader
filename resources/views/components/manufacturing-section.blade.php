@@ -1,40 +1,41 @@
-<section id="manufacturing"
-  class="js-manufacturing-section hidden lg:flex relative bg-[#030c24] overflow-hidden py-12 md:py-16 lg:py-20 items-center justify-center">
+\<section id="manufacturing"
+  class="js-manufacturing-section hidden lg:flex relative bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden py-8 md:py-10 lg:py-10 items-center justify-center">
 
-  <!-- Decorative fades (behind content) -->
-  <div
-    class="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white via-white/80 to-transparent z-0">
-  </div>
-  <div
-    class="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white via-white/80 to-transparent z-0">
+  <!-- 1. Ambient Background Effects (Matches other sections) -->
+  <div class="pointer-events-none absolute inset-0 z-0">
+    <!-- Floating Orbs -->
+    <div class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#1f58be]/5 rounded-full blur-[100px] animate-pulse">
+    </div>
+    <div class="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-[#0d9488]/5 rounded-full blur-[100px] animate-pulse"
+      style="animation-delay: 2s;"></div>
+    <!-- Noise Texture -->
+    <div
+      class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-multiply">
+    </div>
   </div>
 
-  <!-- Bubbles (behind content) -->
+  <!-- Bubbles (Updated color for light background) -->
   <div class="js-manufacturing-bubbles pointer-events-none absolute inset-0 overflow-hidden z-0">
     @foreach (range(1, 14) as $i)
       <span
-        class="js-manufacturing-bubble absolute inline-flex rounded-full bg-white/10 ring-1 ring-white/30 opacity-0 shadow-[0_15px_45px_rgba(2,6,23,0.45)]"></span>
+        class="js-manufacturing-bubble absolute inline-flex rounded-full bg-[#1f58be]/10 ring-1 ring-[#1f58be]/20 opacity-0 shadow-sm"></span>
     @endforeach
   </div>
 
-  <!-- Content above decorative layers -->
-  <div class="relative z-50 mx-auto max-w-6xl px-4 js-manufacturing-pin">
+  <!-- Content -->
+  <div class="relative z-10 mx-auto max-w-6xl px-4 js-manufacturing-pin">
 
     <!-- Header -->
-    <div class="text-center mb-6 md:mb-8">
-      <p class="js-manufacturing-label text-xs font-semibold uppercase tracking-[0.25em] text-white/70 mb-3">
-        Manufacturing Excellence
-      </p>
-      <h2
-        class="js-manufacturing-title font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 leading-tight flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
-        <span class="js-manufacturing-word inline-flex">Precision</span>
-        <span class="js-manufacturing-word inline-flex">in</span>
-        <span class="js-manufacturing-word inline-flex">Every</span>
-        <span class="js-manufacturing-word inline-flex">Bar</span>
-      </h2>
-      <p class="js-manufacturing-description text-base lg:text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
-        A streamlined process built on science, consistency, and relentless quality checks.
-      </p>
+    <div class="text-center mb-16 lg:mb-0 relative z-20">
+      <div class="flex items-center justify-center h-12 lg:h-24">
+        <h2
+          class="js-manufacturing-title text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-center flex flex-wrap items-center justify-center gap-x-3">
+          <span class="js-manufacturing-word inline-flex text-black">Precision</span>
+          <span class="js-manufacturing-word inline-flex text-black">in</span>
+          <span class="js-manufacturing-word inline-flex text-black">Every</span>
+          <span class="js-manufacturing-word inline-flex" style="color: #0d9488;">Bar</span>
+        </h2>
+      </div>
     </div>
 
     <!-- Track -->
@@ -43,75 +44,82 @@
 
       @foreach ($manufacturingSteps as $index => $step)
         <article class="js-manufacturing-card relative min-w-full flex items-center justify-between gap-8">
-          <!-- Text -->
+
+          <!-- Text Column -->
           <div class="w-full lg:w-1/2 lg:pr-10">
             <div class="inline-flex items-center gap-3 mb-5">
+              <!-- Step Number -->
               <div
-                class="js-manufacturing-step-number inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/15 text-white text-xl font-semibold shadow-lg ring-1 ring-white/30">
+                class="js-manufacturing-step-number inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white text-[#1f58be] text-xl font-bold shadow-lg shadow-slate-200 ring-1 ring-slate-100">
                 {{ $step['step_number'] }}
               </div>
+              <!-- Badge -->
               <span
-                class="js-manufacturing-badge inline-flex items-center px-4 py-1.5 rounded-full border border-white/30 bg-white/10 text-sm font-medium uppercase tracking-[0.16em] text-white/80">
+                class="js-manufacturing-badge inline-flex items-center px-4 py-1.5 rounded-full border border-[#0d9488]/20 bg-[#0d9488]/5 text-sm font-bold uppercase tracking-[0.16em] text-[#0d9488]">
                 {{ $step['badge'] }}
               </span>
             </div>
-            <h3 class="js-manufacturing-step-title text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+
+            <h3 class="js-manufacturing-step-title text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4">
               {{ $step['title'] }}
             </h3>
-            <p class="js-manufacturing-step-description text-lg md:text-xl text-white/90 leading-relaxed mb-5">
+
+            <p class="js-manufacturing-step-description text-lg md:text-xl text-slate-600 leading-relaxed mb-5">
               {{ $step['description'] }}
             </p>
-            <div class="space-y-2.5 text-base text-white/85">
+
+            <div class="space-y-2.5 text-base text-slate-500 font-medium">
               @foreach ($step['features'] as $feature)
-                <p class="js-manufacturing-feature flex items-center gap-2">
-                  <span class="inline-flex h-1.5 w-1.5 rounded-full bg-white/80"></span>
+                <p class="js-manufacturing-feature flex items-center gap-3">
+                  <span class="inline-flex h-2 w-2 rounded-full bg-[#1f58be]"></span>
                   {{ $feature }}
                 </p>
               @endforeach
             </div>
           </div>
 
-          <!-- Image with amazing styling -->
+          <!-- Image Column -->
           <div class="w-full lg:w-1/2 lg:pl-10 h-[220px] sm:h-[260px] md:h-[300px] lg:h-[360px] relative">
             <div class="js-manufacturing-image absolute inset-0">
               <div class="relative w-full h-full group">
-                <!-- Main glow background -->
+
+                <!-- Main Glow (Updated colors for light theme compatibility) -->
                 <div
-                  class="absolute -inset-4 bg-gradient-to-r from-blue-600/30 via-purple-600/30 to-pink-600/30 rounded-3xl blur-2xl opacity-75 group-hover:opacity-100 transition-opacity duration-700">
+                  class="absolute -inset-4 bg-gradient-to-r from-[#1f58be]/20 via-[#0d9488]/20 to-purple-500/20 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                 </div>
 
-                <!-- Secondary glow for depth -->
+                <!-- Image container -->
                 <div
-                  class="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-blue-500/20 to-indigo-500/20 rounded-3xl blur-xl opacity-60">
-                </div>
+                  class="js-manufacturing-image-wrapper relative w-full h-full rounded-3xl overflow-hidden shadow-2xl shadow-slate-200 ring-4 ring-white">
 
-                <!-- Image container with fancy border -->
-                <div
-                  class="js-manufacturing-image-wrapper relative w-full h-full rounded-3xl overflow-hidden shadow-2xl ring-1 ring-white/20 backdrop-blur-sm">
                   <img src="{{ $step['image'] }}" alt="{{ $step['title'] }}"
                     class="w-full h-full object-cover transform transition-all duration-700 group-hover:scale-105"
                     style="min-height: 260px; display: block !important; visibility: visible !important;"
                     onerror="console.error('Image failed to load:', this.src);"
                     onload="console.log('Image loaded OK:', this.src);" />
 
-                  <!-- Edge blending overlays -->
+                  <!-- Edge overlays (lighter) -->
                   <div
-                    class="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-white/15 pointer-events-none">
-                  </div>
-                  <div
-                    class="absolute inset-0 bg-gradient-to-bl from-transparent via-transparent to-black/25 pointer-events-none">
+                    class="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-white/30 pointer-events-none">
                   </div>
 
                   <!-- Animated border shine effect -->
                   <div
-                    class="absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none">
+                    class="absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none mix-blend-overlay">
                   </div>
 
-                  <!-- Corner accents -->
-                  <div class="absolute top-2 left-2 w-8 h-8 border-t-2 border-l-2 border-white/40 rounded-tl-lg"></div>
-                  <div class="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-white/40 rounded-tr-lg"></div>
-                  <div class="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-white/40 rounded-bl-lg"></div>
-                  <div class="absolute bottom-2 right-2 w-8 h-8 border-b-2 border-r-2 border-white/40 rounded-br-lg">
+                  <!-- Corner accents (Colored) -->
+                  <div
+                    class="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-white/80 rounded-tl-lg shadow-sm">
+                  </div>
+                  <div
+                    class="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-white/80 rounded-tr-lg shadow-sm">
+                  </div>
+                  <div
+                    class="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-white/80 rounded-bl-lg shadow-sm">
+                  </div>
+                  <div
+                    class="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-white/80 rounded-br-lg shadow-sm">
                   </div>
                 </div>
               </div>

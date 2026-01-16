@@ -27,8 +27,8 @@ export default class FaqAnimations {
                 delay: index * 0.1,
                 scrollTrigger: {
                     trigger: item,
-                    start: 'top 85%',
-                    once: true
+                    start: 'top 90%',
+                    toggleActions: 'play none none reverse'
                 },
                 ease: 'power3.out'
             });

@@ -1,249 +1,263 @@
-<section id="about" class="js-about-section relative bg-gradient-to-br from-maklos-50 via-white to-eucalyptus-50 overflow-hidden py-12 lg:py-20">
+@props(['aboutContent' => null, 'aboutValues' => []])
+
+<section id="about"
+    class="js-about-section relative bg-gradient-to-br from-slate-50 via-white to-teal-50 overflow-hidden py-16 lg:py-24">
+
+    {{-- 1. ORIGINAL ATMOSPHERE (Aurora Background) --}}
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-20 -left-20 w-96 h-96 bg-maklos-200/30 rounded-full blur-3xl animate-aurora"></div>
-        <div class="absolute bottom-20 -right-20 w-96 h-96 bg-eucalyptus-200/30 rounded-full blur-3xl animate-aurora" style="animation-delay: 2s;"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-maklos-100/20 rounded-full blur-3xl animate-aurora" style="animation-delay: 4s;"></div>
+        <div class="absolute top-20 -left-20 w-96 h-96 bg-[#1f58be]/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-20 -right-20 w-96 h-96 bg-[#0d9488]/10 rounded-full blur-3xl animate-pulse"
+            style="animation-delay: 2s;"></div>
     </div>
 
     <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
-        <div class="text-center mb-12 lg:mb-24">
-            <!-- Section header styled like Product header -->
-            <div class="js-about-header mb-8 lg:mb-10 flex items-center justify-center h-12 lg:h-24">
-                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-center">
-                    <span class="text-black">About</span>
-                    <span class="ml-3" style="color: #0d9488;">Us</span>
+
+        {{-- 2. HEADER SECTION --}}
+        <div class="text-center mb-16">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+                <span class="text-slate-900">About</span>
+                <span class="text-[#0d9488]">Us</span>
+            </h2>
+
+            <div class="flex flex-col items-center justify-center">
+                <h2
+                    class="font-display text-2xl lg:text-3xl font-bold tracking-tight mb-4 flex items-center justify-center gap-2">
+                    <span
+                        class="bg-gradient-to-r from-[#1f58be] via-[#0d9488] to-[#1f58be] bg-clip-text text-transparent font-extrabold">
+                        {{ $aboutContent->experience_years ?? 11 }}
+                    </span>
+                    <span class="text-slate-400 font-light">years of expertise</span>
                 </h2>
-            </div>
-            <div class="js-about-expertise-wrapper space-y-6">
-                <h2 class="js-about-expertise font-display text-3xl sm:text-4xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight px-4">
-                    <span class="js-about-expertise-number inline-flex items-baseline gap-2 bg-gradient-to-r from-maklos-600 to-eucalyptus-600 bg-clip-text text-transparent">{{ $aboutContent->experience_years ?? 11 }}</span>
-                    <span class="js-about-expertise-text inline-flex items-baseline ml-2 sm:ml-3 text-charcoal font-light">years of expertise</span>
-                </h2>
-                <p class="js-about-description text-justify lg:text-justify text-sm sm:text-base lg:text-lg text-charcoal/70 max-w-3xl mx-auto px-4 leading-relaxed">
-                    {{ $aboutContent->description ?? 'Maklos Trading is a high-quality soap manufacturing company serving Africa and beyond. We design, manufacture, and supply premium bathing soaps with a focus on natural freshness, consistent quality, and export-ready packaging. Our signature product line, Future Eucalyptus Soap, delivers a clean, refreshing experience with natural antibacterial and antifungal benefits.' }}
+                <p class="text-slate-600 text-sm lg:text-lg max-w-3xl mx-auto leading-relaxed">
+                    {{ $aboutContent->description ?? 'Maklos Trading designs, manufactures, and supplies premium bathing soaps with a focus on natural freshness and export-ready quality.' }}
                 </p>
             </div>
         </div>
-        <!-- Interconnected Mission, Vision, Values Section -->
-        <div class="js-mvv-section relative mb-12 lg:mb-20">
-            <!-- SVG Lines Container for connecting lines -->
-            <svg class="js-mvv-lines absolute inset-0 w-full h-full pointer-events-none z-0" style="overflow: visible;">
+
+        {{-- 3. INTERCONNECTED CARDS SECTION --}}
+        <div class="relative">
+
+            {{-- Connecting Lines (Visual only) --}}
+            <svg class="absolute top-1/2 left-0 w-full h-20 -translate-y-1/2 hidden lg:block pointer-events-none z-0"
+                style="overflow: visible;">
                 <defs>
-                    <linearGradient id="mvvLineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" style="stop-color:#1f58be;stop-opacity:0.7" />
-                        <stop offset="50%" style="stop-color:#0d9488;stop-opacity:0.9" />
-                        <stop offset="100%" style="stop-color:#1f58be;stop-opacity:0.7" />
+                    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#1f58be;stop-opacity:0" />
+                        <stop offset="50%" style="stop-color:#0d9488;stop-opacity:0.4" />
+                        <stop offset="100%" style="stop-color:#1f58be;stop-opacity:0" />
                     </linearGradient>
-                    <filter id="glow">
-                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                        <feMerge>
-                            <feMergeNode in="coloredBlur"/>
-                            <feMergeNode in="SourceGraphic"/>
-                        </feMerge>
-                    </filter>
                 </defs>
-                <!-- Connecting lines will be drawn here by GSAP -->
-                <path class="js-mvv-line-1" d="" stroke="url(#mvvLineGradient)" stroke-width="2" fill="none" opacity="0" filter="url(#glow)"/>
-                <path class="js-mvv-line-2" d="" stroke="url(#mvvLineGradient)" stroke-width="2" fill="none" opacity="0" filter="url(#glow)"/>
+                <line x1="10%" y1="50%" x2="90%" y2="50%" stroke="url(#lineGradient)" stroke-width="1"
+                    stroke-dasharray="6 6" />
             </svg>
 
-            <!-- Floating Bubbles Container -->
-            <div class="js-mvv-bubbles absolute inset-0 pointer-events-none z-0"></div>
+            {{-- THE CARDS GRID --}}
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 relative z-10">
 
-            <!-- 3 Column Grid -->
-            <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-12 px-4 sm:px-0">
-                <!-- Mission Column -->
-                <div class="js-mvv-column js-mvv-mission group relative perspective-1000">
-                    <div class="js-mvv-card-wrapper relative h-[380px] lg:h-[520px] preserve-3d">
-                        <!-- Front Face -->
-                        <div class="js-mvv-card js-mvv-card-front absolute inset-0 w-full h-full rounded-2xl border-2 border-eucalyptus-500/50 bg-gradient-to-br from-white via-eucalyptus-50/30 to-white p-5 lg:p-10 shadow-2xl shadow-eucalyptus-500/20 cursor-pointer overflow-hidden" style="backface-visibility: hidden; transform-style: preserve-3d;">
-                            <!-- Content -->
-                            <div class="relative z-10 h-full flex flex-col items-center justify-center text-center">
+                {{-- CARD 1: MISSION --}}
+                <div class="group relative perspective-1000 h-[340px]">
+                    <div
+                        class="relative w-full h-full preserve-3d transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:rotate-y-180">
 
-                                <!-- Title -->
-                                <h3 class="js-mvv-title font-display text-xl lg:text-4xl font-bold text-eucalyptus-600 mb-2 lg:mb-4 drop-shadow-lg" style="color: #0d9488;">
-                                    {{ $aboutContent->mission_title ?? 'Our Mission' }}
-                                </h3>
-
-                                <!-- Default Description -->
-                                <div class="js-mvv-default">
-                                    <p class="text-xs lg:text-lg leading-snug lg:leading-relaxed max-w-xs px-1" style="color: #0d9488;">
-                                        {{ $aboutContent->mission_description ?? 'To be Africa\'s trusted source of high-quality, affordable, and safe bathing soaps.' }}
-                                    </p>
-                                </div>
+                        {{-- FRONT --}}
+                        <div
+                            class="absolute inset-0 backface-hidden rounded-2xl border-2 border-[#0d9488]/20 bg-white shadow-xl shadow-[#0d9488]/5 flex flex-col items-center justify-center p-6 text-center">
+                            {{-- Inner "Border Perfect" Frame --}}
+                            <div
+                                class="absolute inset-3 border border-dashed border-[#0d9488]/20 rounded-xl pointer-events-none">
                             </div>
+
+                            <div
+                                class="w-14 h-14 rounded-full bg-[#0d9488]/10 flex items-center justify-center mb-4 text-[#0d9488]">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-800 mb-3">
+                                {{ $aboutContent->mission_title ?? 'Our Mission' }}
+                            </h3>
+                            <p class="text-slate-500 text-sm leading-relaxed px-4 line-clamp-3">
+                                {{ $aboutContent->mission_description ?? 'To be Africa\'s trusted source of high-quality, affordable, and safe bathing soaps.' }}
+                            </p>
+                            <span
+                                class="absolute bottom-6 text-[10px] font-bold text-[#0d9488] uppercase tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">Hover
+                                to View</span>
                         </div>
 
-                        <!-- Back Face -->
-                        <div class="js-mvv-card js-mvv-card-back absolute inset-0 w-full h-full rounded-2xl border-2 border-eucalyptus-500/50 bg-gradient-to-br from-white via-eucalyptus-50/30 to-white p-6 lg:p-8 shadow-2xl shadow-eucalyptus-500/20 cursor-pointer overflow-hidden" style="backface-visibility: hidden; transform: rotateY(180deg); transform-style: preserve-3d;">
-                            <!-- Expanded Content -->
-                            <div class="js-mvv-expanded relative z-10 h-full flex flex-col justify-center">
-                                <div class="text-center mb-4">
-                                    <h3 class="font-display text-2xl lg:text-3xl font-bold mb-3 drop-shadow-lg" style="color: #0d9488;">
-                                        {{ $aboutContent->mission_title ?? 'Our Mission' }}
-                                    </h3>
-                                    <p class="text-sm leading-relaxed mb-4" style="color: #0d9488;">
-                                        {{ $aboutContent->mission_description ?? 'To be Africa\'s trusted source of high-quality, affordable, and safe bathing soaps.' }}
-                    </p>
-                                </div>
-                                <div class="space-y-2">
-                        @if ($aboutContent && $aboutContent->mission_highlights)
-                            @foreach (json_decode($aboutContent->mission_highlights, true) as $item)
-                                        <div class="rounded-xl border border-eucalyptus-600/30 bg-eucalyptus-600/10 backdrop-blur-sm p-2.5 shadow-sm">
-                                            <p class="text-xs font-semibold uppercase tracking-[0.1em] mb-0.5" style="color: #0d9488;">{{ $item['label'] }}</p>
-                                            <p class="text-xs leading-tight" style="color: #0d9488;">{{ $item['copy'] }}</p>
-                            </div>
-                        @endforeach
-                        @else
-                            @foreach ([
-                                ['label' => 'Quality Control', 'copy' => 'Every formulation is tested for purity, stability, and consistency.'],
-                                ['label' => 'Affordable Care', 'copy' => 'Pricing remains accessible without compromising performance.'],
-                            ] as $item)
-                                        <div class="rounded-xl border border-eucalyptus-600/30 bg-eucalyptus-600/10 backdrop-blur-sm p-2.5 shadow-sm">
-                                            <p class="text-xs font-semibold uppercase tracking-[0.1em] mb-0.5" style="color: #0d9488;">{{ $item['label'] }}</p>
-                                            <p class="text-xs leading-tight" style="color: #0d9488;">{{ $item['copy'] }}</p>
-                            </div>
-                        @endforeach
-                        @endif
-                    </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Vision Column -->
-                <div class="js-mvv-column js-mvv-vision group relative perspective-1000">
-                    <div class="js-mvv-card-wrapper relative h-[380px] lg:h-[520px] preserve-3d">
-                        <!-- Front Face -->
-                        <div class="js-mvv-card js-mvv-card-front absolute inset-0 w-full h-full rounded-2xl border-2 border-eucalyptus-500/50 bg-gradient-to-br from-white via-eucalyptus-50/30 to-white p-5 lg:p-10 shadow-2xl shadow-eucalyptus-500/20 cursor-pointer overflow-hidden" style="backface-visibility: hidden; transform-style: preserve-3d;">
-                            <!-- Content -->
-                            <div class="relative z-10 h-full flex flex-col items-center justify-center text-center">
-
-                                <!-- Title -->
-                                <h3 class="js-mvv-title font-display text-xl lg:text-4xl font-bold mb-2 lg:mb-4 drop-shadow-lg" style="color: #0d9488;">
-                                    {{ $aboutContent->vision_title ?? 'Our Vision' }}
-                                </h3>
-
-                                <!-- Default Description -->
-                                <div class="js-mvv-default">
-                                    <p class="text-xs lg:text-lg leading-snug lg:leading-relaxed max-w-xs px-1" style="color: #0d9488;">
-                                        {{ $aboutContent->vision_description ?? 'To lead the region\'s soap manufacturing industry through sustainable innovation.' }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Back Face -->
-                        <div class="js-mvv-card js-mvv-card-back absolute inset-0 w-full h-full rounded-2xl border-2 border-eucalyptus-500/50 bg-gradient-to-br from-white via-eucalyptus-50/30 to-white p-6 lg:p-8 shadow-2xl shadow-eucalyptus-500/20 cursor-pointer overflow-hidden" style="backface-visibility: hidden; transform: rotateY(180deg); transform-style: preserve-3d;">
-                            <!-- Expanded Content -->
-                            <div class="js-mvv-expanded relative z-10 h-full flex flex-col justify-center">
-                                <div class="text-center mb-4">
-                                    <h3 class="font-display text-2xl lg:text-3xl font-bold mb-3 drop-shadow-lg" style="color: #0d9488;">
-                                        {{ $aboutContent->vision_title ?? 'Our Vision' }}
-                                    </h3>
-                                    <p class="text-sm leading-relaxed mb-4" style="color: #0d9488;">
-                                        {{ $aboutContent->vision_description ?? 'To lead the region\'s soap manufacturing industry through sustainable innovation, customer partnership, and export excellence.' }}
-                    </p>
-                                </div>
-                                <div class="space-y-2">
-                        @if ($aboutContent && $aboutContent->vision_highlights)
-                            @foreach (json_decode($aboutContent->vision_highlights, true) as $point)
-                                        <div class="rounded-xl border border-eucalyptus-600/30 bg-eucalyptus-600/10 backdrop-blur-sm p-2.5 shadow-sm">
-                                            <p class="text-xs font-semibold mb-0.5" style="color: #0d9488;">{{ $point['title'] }}</p>
-                                            <p class="text-xs leading-tight" style="color: #0d9488;">{{ $point['detail'] }}</p>
+                        {{-- BACK --}}
+                        <div
+                            class="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl border-2 border-[#0d9488] bg-[#f0fdfa] flex flex-col justify-center p-6 shadow-2xl overflow-hidden">
+                            <h3
+                                class="text-lg font-bold text-[#0d9488] mb-4 text-center border-b border-[#0d9488]/20 pb-2">
+                                Mission Highlights</h3>
+                            <div class="space-y-3">
+                                @php
+                                    $missionPoints = $aboutContent && $aboutContent->mission_highlights
+                                        ? json_decode($aboutContent->mission_highlights, true)
+                                        : [['label' => 'Quality', 'copy' => 'Tested for purity & safety.'], ['label' => 'Affordability', 'copy' => 'Accessible premium care.']];
+                                @endphp
+                                @foreach($missionPoints as $item)
+                                    <div
+                                        class="flex items-start gap-3 bg-white/60 p-2.5 rounded-lg border border-[#0d9488]/20">
+                                        <div class="mt-1 w-1.5 h-1.5 rounded-full bg-[#0d9488] flex-shrink-0"></div>
+                                        <div>
+                                            <span
+                                                class="block text-[11px] font-bold text-[#0d9488] uppercase">{{ $item['label'] }}</span>
+                                            <span class="text-xs text-slate-600 leading-tight">{{ $item['copy'] }}</span>
                                         </div>
-                                    @endforeach
-                                @else
-                                    @foreach ([
-                                        ['title' => 'Sustainable Innovation', 'detail' => 'Scale greener production systems that elevate quality while reducing waste.'],
-                                        ['title' => 'Customer Partnership', 'detail' => 'Co-create OEM and white-label runs tailored to regional market shifts.'],
-                                    ] as $point)
-                                        <div class="rounded-xl border border-eucalyptus-600/30 bg-eucalyptus-600/10 backdrop-blur-sm p-2.5 shadow-sm">
-                                            <p class="text-xs font-semibold mb-0.5" style="color: #0d9488;">{{ $point['title'] }}</p>
-                                            <p class="text-xs leading-tight" style="color: #0d9488;">{{ $point['detail'] }}</p>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- CARD 2: VISION --}}
+                <div class="group relative perspective-1000 h-[340px]">
+                    <div
+                        class="relative w-full h-full preserve-3d transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:rotate-y-180">
+
+                        {{-- FRONT --}}
+                        <div
+                            class="absolute inset-0 backface-hidden rounded-2xl border-2 border-[#1f58be]/20 bg-white shadow-xl shadow-[#1f58be]/5 flex flex-col items-center justify-center p-6 text-center">
+                            <div
+                                class="absolute inset-3 border border-dashed border-[#1f58be]/20 rounded-xl pointer-events-none">
+                            </div>
+
+                            <div
+                                class="w-14 h-14 rounded-full bg-[#1f58be]/10 flex items-center justify-center mb-4 text-[#1f58be]">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-800 mb-3">
+                                {{ $aboutContent->vision_title ?? 'Our Vision' }}
+                            </h3>
+                            <p class="text-slate-500 text-sm leading-relaxed px-4 line-clamp-3">
+                                {{ $aboutContent->vision_description ?? 'To lead the region\'s soap industry through sustainable innovation.' }}
+                            </p>
+                            <span
+                                class="absolute bottom-6 text-[10px] font-bold text-[#1f58be] uppercase tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">Hover
+                                to View</span>
+                        </div>
+
+                        {{-- BACK --}}
+                        <div
+                            class="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl border-2 border-[#1f58be] bg-[#eff6ff] flex flex-col justify-center p-6 shadow-2xl overflow-hidden">
+                            <h3
+                                class="text-lg font-bold text-[#1f58be] mb-4 text-center border-b border-[#1f58be]/20 pb-2">
+                                Future Goals</h3>
+                            <div class="space-y-3">
+                                @php
+                                    $visionPoints = $aboutContent && $aboutContent->vision_highlights
+                                        ? json_decode($aboutContent->vision_highlights, true)
+                                        : [['title' => 'Innovation', 'detail' => 'Greener production systems.'], ['title' => 'Growth', 'detail' => 'Pan-African distribution.']];
+                                @endphp
+                                @foreach($visionPoints as $item)
+                                    <div
+                                        class="flex items-start gap-3 bg-white/60 p-2.5 rounded-lg border border-[#1f58be]/20">
+                                        <div class="mt-1 w-1.5 h-1.5 rounded-full bg-[#1f58be] flex-shrink-0"></div>
+                                        <div>
+                                            <span
+                                                class="block text-[11px] font-bold text-[#1f58be] uppercase">{{ $item['title'] }}</span>
+                                            <span class="text-xs text-slate-600 leading-tight">{{ $item['detail'] }}</span>
                                         </div>
-                                    @endforeach
-                                @endif
-                                </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Values Column -->
-                <div class="js-mvv-column js-mvv-values group relative perspective-1000">
-                    <div class="js-mvv-card-wrapper relative h-[380px] lg:h-[520px] preserve-3d">
-                        <!-- Front Face -->
-                        <div class="js-mvv-card js-mvv-card-front absolute inset-0 w-full h-full rounded-2xl border-2 border-eucalyptus-500/50 bg-gradient-to-br from-white via-eucalyptus-50/30 to-white p-5 lg:p-10 shadow-2xl shadow-eucalyptus-500/20 cursor-pointer overflow-hidden" style="backface-visibility: hidden; transform-style: preserve-3d;">
-                            <!-- Content -->
-                            <div class="relative z-10 h-full flex flex-col items-center justify-center text-center">
+                {{-- CARD 3: VALUES --}}
+                <div class="group relative perspective-1000 h-[340px]">
+                    <div
+                        class="relative w-full h-full preserve-3d transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:rotate-y-180">
 
-                                <!-- Title -->
-                                <h3 class="js-mvv-title font-display text-xl lg:text-4xl font-bold mb-2 lg:mb-4 drop-shadow-lg" style="color: #0d9488;">
-                                    {{ $aboutContent->values_title ?? 'Our Values' }}
-                                </h3>
-
-                                <!-- Default Description -->
-                                <div class="js-mvv-default">
-                                    <p class="text-xs lg:text-lg leading-snug lg:leading-relaxed max-w-xs px-1" style="color: #0d9488;">
-                                        {{ $aboutContent->values_description ?? 'These pillars guide every Maklos partnership—from R&D to on-time fulfilment.' }}
-                                    </p>
-                                </div>
+                        {{-- FRONT --}}
+                        <div
+                            class="absolute inset-0 backface-hidden rounded-2xl border-2 border-slate-200 bg-white shadow-xl shadow-slate-200/50 flex flex-col items-center justify-center p-6 text-center">
+                            <div
+                                class="absolute inset-3 border border-dashed border-slate-200 rounded-xl pointer-events-none">
                             </div>
+
+                            <div
+                                class="w-14 h-14 rounded-full bg-slate-100 flex items-center justify-center mb-4 text-slate-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-800 mb-3">
+                                {{ $aboutContent->values_title ?? 'Our Values' }}
+                            </h3>
+                            <p class="text-slate-500 text-sm leading-relaxed px-4 line-clamp-3">
+                                {{ $aboutContent->values_description ?? 'Pillars guiding every partnership—from R&D to on-time fulfilment.' }}
+                            </p>
+                            <span
+                                class="absolute bottom-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">Hover
+                                to View</span>
                         </div>
 
-                        <!-- Back Face -->
-                        <div class="js-mvv-card js-mvv-card-back absolute inset-0 w-full h-full rounded-2xl border-2 border-eucalyptus-500/50 bg-gradient-to-br from-white via-eucalyptus-50/30 to-white p-6 lg:p-8 shadow-2xl shadow-eucalyptus-500/20 cursor-pointer overflow-hidden" style="backface-visibility: hidden; transform: rotateY(180deg); transform-style: preserve-3d;">
-                            <!-- Expanded Content -->
-                            <div class="js-mvv-expanded relative z-10 h-full flex flex-col justify-center">
-                                <div class="text-center mb-4">
-                                    <h3 class="font-display text-2xl lg:text-3xl font-bold mb-3 drop-shadow-lg" style="color: #0d9488;">
-                                        {{ $aboutContent->values_title ?? 'Our Values' }}
-                                    </h3>
-                                    <p class="text-sm leading-relaxed mb-4" style="color: #0d9488;">
-                        {{ $aboutContent->values_description ?? 'These pillars guide every Maklos partnership—from R&D to on-time fulfilment.' }}
-                    </p>
-                                </div>
-                                <div class="space-y-2">
-                        @if ($aboutValues && $aboutValues->count() > 0)
-                            @foreach ($aboutValues as $value)
-                                        <div class="rounded-xl border border-eucalyptus-600/30 bg-eucalyptus-600/10 backdrop-blur-sm p-2.5 shadow-sm">
-                                            <p class="text-xs font-semibold uppercase tracking-[0.1em] mb-0.5" style="color: #0d9488;">{{ $value->title }}</p>
-                                            <p class="text-xs leading-tight" style="color: #0d9488;">{{ $value->summary }}</p>
-                            </div>
-                        @endforeach
-                        @else
-                            @foreach ([
-                                ['name' => 'Quality', 'desc' => 'Every batch is tested for purity, stability, and consistency.'],
-                                ['name' => 'Integrity', 'desc' => 'Ethical sourcing and transparent operations with every supplier.'],
-                                ['name' => 'Innovation', 'desc' => 'Product development driven by science and market feedback loops.'],
-                            ] as $value)
-                                        <div class="rounded-xl border border-eucalyptus-600/30 bg-eucalyptus-600/10 backdrop-blur-sm p-2.5 shadow-sm">
-                                            <p class="text-xs font-semibold uppercase tracking-[0.1em] mb-0.5" style="color: #0d9488;">{{ $value['name'] }}</p>
-                                            <p class="text-xs leading-tight" style="color: #0d9488;">{{ $value['desc'] }}</p>
-                            </div>
-                        @endforeach
-                        @endif
-            </div>
+                        {{-- BACK --}}
+                        <div
+                            class="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl border-2 border-slate-400 bg-slate-50 flex flex-col justify-center p-6 shadow-2xl overflow-hidden">
+                            <h3
+                                class="text-lg font-bold text-slate-700 mb-4 text-center border-b border-slate-200 pb-2">
+                                Core Principles</h3>
+                            <div class="space-y-3">
+                                @php
+                                    $vals = $aboutValues ?? [];
+                                    $defaults = [
+                                        (object) ['title' => 'Integrity', 'summary' => 'Transparent Ops'],
+                                        (object) ['title' => 'Quality', 'summary' => 'Consistent output']
+                                    ];
+                                    $displayValues = count($vals) > 0 ? $vals : $defaults;
+                                @endphp
+                                @foreach($displayValues as $val)
+                                    @if($loop->index < 2) {{-- Limit to 2 items to ensure fit in reduced height --}}
+                                        <div class="flex items-start gap-3 bg-white p-2.5 rounded-lg border border-slate-200">
+                                            <div class="mt-1 w-1.5 h-1.5 rounded-full bg-slate-600 flex-shrink-0"></div>
+                                            <div>
+                                                <span
+                                                    class="block text-[11px] font-bold text-slate-700 uppercase">{{ $val->title }}</span>
+                                                <span class="text-xs text-slate-500 leading-tight">{{ $val->summary }}</span>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
-
-        {{-- <div class="js-about-cta text-center mt-16">
-            <div class="inline-block rounded-3xl bg-gradient-to-r from-maklos-500 to-eucalyptus-500 p-[2px] shadow-2xl">
-                <div class="rounded-3xl bg-white px-8 py-6">
-                    <p class="text-lg font-semibold text-charcoal mb-2">Ready to partner with us?</p>
-                    <a href="mailto:{{ config('app.contact_email', 'info@maklostrader.com') }}" class="inline-flex items-center gap-2 text-maklos-600 font-semibold hover:gap-4 transition-all duration-300 group">
-                        Get in touch
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div> --}}
     </div>
+
+    {{-- REQUIRED CSS FOR 3D FLIP --}}
+    <style>
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        .preserve-3d {
+            transform-style: preserve-3d;
+        }
+
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+    </style>
 </section>

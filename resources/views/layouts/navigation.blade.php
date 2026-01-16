@@ -4,15 +4,16 @@
     :class="solid ? 'bg-white/95 shadow-lg shadow-black/5' : 'bg-white/80'"
     class="fixed inset-x-0 top-0 z-50 transition-colors duration-300 backdrop-blur"
 >
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-6" style="height: 60px; overflow: visible;">
-        <a href="{{ url('/') }}" class="flex items-center" style="overflow: visible;">
+    <div class="mx-auto flex max-w-7xl items-center justify-between lg:justify-center px-6" style="height: 60px; overflow: visible;">
+        <a href="{{ url('/') }}" class="flex items-center lg:hidden" style="overflow: visible;">
             <x-animated-navbar-text />
         </a>
 
-        <div class="hidden items-center gap-10 lg:flex">
+        <div class="hidden items-center gap-12 lg:flex">
             @foreach ([
                 ['label' => 'Home', 'href' => '#home'],
                 ['label' => 'Products', 'href' => '#products'],
+                ['label' => 'Services', 'href' => '#services'],
                 ['label' => 'About Us', 'href' => '#about'],
                 ['label' => 'Manufacturing', 'href' => '#manufacturing'],
                 ['label' => 'FAQ', 'href' => '#faq'],
@@ -24,21 +25,6 @@
                     {{ $item['label'] }}
                 </a>
             @endforeach
-
-            <div class="flex items-center gap-3">
-                <a
-                    href="https://wa.me/{{ config('app.whatsapp_number', '251000000000') }}"
-                    class="rounded-full bg-maklos-500 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-maklos-500/30 transition duration-300 hover:-translate-y-0.5 hover:bg-maklos-400"
-                >
-                    WhatsApp
-                </a>
-                <a
-                    href="mailto:{{ config('app.contact_email', 'info@maklostrader.com') }}"
-                    class="rounded-full border border-maklos-200 px-5 py-2 text-sm font-semibold text-maklos-700/85 transition duration-300 hover:border-maklos-400 hover:text-maklos-500"
-                >
-                    Email Us
-                </a>
-            </div>
         </div>
 
         <button
@@ -57,7 +43,7 @@
 
     <div x-show="open" x-transition class="lg:hidden">
         <div class="space-y-3 bg-white/95 px-6 pb-6 pt-2 backdrop-blur">
-            @foreach (['home', 'products', 'about', 'manufacturing', 'faq'] as $section)
+            @foreach (['home', 'products', 'services', 'about', 'manufacturing', 'faq'] as $section)
                 <a
                     href="#{{ $section }}"
                     class="block rounded-lg px-4 py-3 text-base font-semibold text-maklos-700/85 transition hover:bg-maklos-50"
@@ -67,26 +53,7 @@
                 </a>
             @endforeach
 
-            <div class="flex flex-col gap-3 pt-4">
-                <a
-                    href="https://wa.me/{{ config('app.whatsapp_number', '251000000000') }}"
-                    class="rounded-full bg-maklos-500 px-4 py-3 text-center text-sm font-semibold text-white shadow-lg shadow-maklos-500/30 transition hover:bg-maklos-400"
-                >
-                    WhatsApp
-                </a>
-                <a
-                    href="mailto:{{ config('app.contact_email', 'info@maklostrader.com') }}"
-                    class="rounded-full border border-maklos-200 px-4 py-3 text-center text-sm font-semibold text-maklos-700/80 transition hover:border-maklos-400 hover:text-maklos-500"
-                >
-                    Email Us
-                </a>
-                <a
-                    href="tel:{{ config('app.contact_phone', '+251-000-000-000') }}"
-                    class="rounded-full border border-maklos-200 px-4 py-3 text-center text-sm font-semibold text-maklos-700/80 transition hover:border-maklos-400 hover:text-maklos-500"
-                >
-                    Call Us
-                </a>
-            </div>
+            <!-- Contact buttons (WhatsApp, Email, Call) removed from mobile menu as requested -->
         </div>
     </div>
 </nav>

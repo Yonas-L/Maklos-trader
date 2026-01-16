@@ -10,6 +10,7 @@ use App\Models\AboutValue;
 use App\Models\ManufacturingStep;
 use App\Models\FaqItem;
 use App\Models\SiteSetting;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
@@ -43,8 +44,8 @@ class HomeController extends Controller
 
             $heroContent = HeroContent::where('is_active', true)->first();
 
-            $productHighlights = ProductHighlight::orderBy('sort_order')
-                ->take(3)
+            $productHighlights = ProductHighlight::where('is_featured', true)
+                ->orderBy('sort_order')
                 ->get()
                 ->map(function ($item) {
                     return [
@@ -52,7 +53,13 @@ class HomeController extends Controller
                         'title' => $item->title,
                         'description' => $item->description,
                         'slug' => $item->slug,
+                        'image_path' => $item->image_path,
                         'image' => $item->image_path ? asset('storage/' . $item->image_path) : asset('storage/assets/IMG_6745.JPG'),
+                        'price' => $item->price,
+                        'weight' => $item->weight,
+                        'source' => $item->source,
+                        'benefits' => $item->benefits ?? [],
+                        'in_stock' => $item->in_stock ?? true,
                     ];
                 });
 
@@ -90,6 +97,10 @@ class HomeController extends Controller
             $siteSettings = SiteSetting::pluck('value', 'key')->all();
             $manufacturingPromo = \App\Models\ManufacturingPromo::where('is_active', true)->first();
 
+            $services = Service::where('is_active', true)
+                ->orderBy('sort_order')
+                ->get();
+
             return compact(
                 'heroSlides',
                 'heroContent',
@@ -98,9 +109,9 @@ class HomeController extends Controller
                 'aboutValues',
                 'manufacturingSteps',
                 'faqItems',
-                'faqItems',
                 'siteSettings',
-                'manufacturingPromo'
+                'manufacturingPromo',
+                'services'
             );
         });
 

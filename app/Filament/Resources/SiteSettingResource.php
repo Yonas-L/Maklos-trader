@@ -52,6 +52,8 @@ class SiteSettingResource extends Resource
                     ->imagePreviewHeight('200')
                     ->helperText('Upload logo image (max 2MB, PNG/JPG/SVG/WebP)')
                     ->visible(fn(callable $get) => $get('type') === 'image')
+                    ->formatStateUsing(fn($state, callable $get) => $get('type') === 'image' ? $state : null)
+                    ->dehydrated(fn(callable $get) => $get('type') === 'image')
                     ->columnSpanFull(),
 
                 Forms\Components\Textarea::make('value')

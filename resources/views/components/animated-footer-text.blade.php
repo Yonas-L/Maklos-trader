@@ -150,16 +150,16 @@
     /* Responsive adjustments */
     @media (max-width: 768px) {
       .animated-footer-text {
-        height: 200px;
+        height: 80px;
       }
 
       .animated-footer-text svg {
-        max-width: 150%;
+        max-width: 220%;
         height: auto;
       }
 
       .bubble {
-        transform: scale(1);
+        transform: scale(0.6);
       }
     }
 

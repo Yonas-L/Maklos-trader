@@ -27,6 +27,18 @@ class HeroContentResource extends Resource
                     ->maxLength(255),
                 Forms\Components\Textarea::make('description')
                     ->columnSpanFull(),
+                Forms\Components\Textarea::make('description_one')
+                    ->label('Description One')
+                    ->helperText('First paragraph shown below the title')
+                    ->columnSpanFull(),
+                Forms\Components\Textarea::make('description_two')
+                    ->label('Description Two')
+                    ->helperText('Second paragraph shown below the title')
+                    ->columnSpanFull(),
+                Forms\Components\TextInput::make('whatsapp_number')
+                    ->label('WhatsApp Number')
+                    ->helperText('Phone number for WhatsApp button (e.g., 251912345678)')
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('button_primary_label')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('button_primary_url')

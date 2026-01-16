@@ -15,11 +15,18 @@ class ProductHighlight extends Model
         'description',
         'slug',
         'image_path',
+        'price',
+        'weight',
+        'source',
+        'benefits',
+        'in_stock',
         'is_featured',
         'sort_order',
     ];
 
     protected $casts = [
         'is_featured' => 'boolean',
+        'in_stock' => 'boolean',
+        'benefits' => 'array',
     ];
 }

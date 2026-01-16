@@ -12,6 +12,9 @@ class HeroContent extends Model
     protected $fillable = [
         'title',
         'description',
+        'description_one',
+        'description_two',
+        'whatsapp_number',
         'button_primary_label',
         'button_primary_url',
         'button_secondary_label',

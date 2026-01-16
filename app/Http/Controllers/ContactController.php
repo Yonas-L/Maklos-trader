@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ContactSubmission;
+use App\Mail\ContactFormMail;
+use App\Models\ContactMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Exception;
 
 class ContactController extends Controller
 {
@@ -15,35 +18,41 @@ class ContactController extends Controller
             'email' => 'required|email|max:255',
             'phone' => 'nullable|string|max:20',
             'subject' => 'required|string|max:255',
-            'message' => 'required|string|max:5000',
+            'message' => 'required|string',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
+                'message' => 'Please correct the errors below.'
             ], 422);
         }
 
         try {
-            ContactSubmission::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'subject' => $request->subject,
-                'message' => $request->message,
-                'ip_address' => $request->ip(),
-                'user_agent' => $request->userAgent(),
-            ]);
+            // 1. Save to Database
+            $contactMessage = ContactMessage::create($validator->validated());
+
+            // 2. Send Email
+            // Use the MAIL_FROM_ADDRESS or a configure support email as the recipient
+            $recipient = config('mail.from.address');
+
+            if ($recipient) {
+                Mail::to($recipient)->send(new ContactFormMail($contactMessage));
+            }
 
             return response()->json([
                 'success' => true,
-                'message' => 'Thank you for contacting us! We will get back to you soon.'
+                'message' => 'Thank you! Your message has been sent successfully.'
             ]);
-        } catch (\Exception $e) {
+
+        } catch (Exception $e) {
+            // Log the error
+            \Log::error('Contact form error: ' . $e->getMessage());
+
             return response()->json([
                 'success' => false,
-                'message' => 'Something went wrong. Please try again later.'
+                'message' => 'Sorry, there was a problem sending your message. Please try again later.'
             ], 500);
         }
     }

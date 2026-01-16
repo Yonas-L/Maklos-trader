@@ -1,14 +1,14 @@
 @props(['settings'])
 
 <!-- Contact Section with Gradient Background -->
-<section id="contact" class="relative py-20 overflow-hidden bg-white">
+<section id="contact" class="relative py-8 lg:py-20 overflow-hidden bg-white">
     <!-- Gradient Shadow Background -->
     <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-teal-50 to-cyan-50 opacity-60"></div>
 
     <div class="container mx-auto px-4 relative z-10">
         <!-- Section Header -->
-        <div class="text-center mb-16 contact-header">
-            <div class="js-contact-header mb-2 flex items-center justify-center h-16 lg:h-24">
+        <div class="text-center mb-8 lg:mb-16 contact-header">
+            <div class="js-contact-header mb-2 flex items-center justify-center h-12 lg:h-24">
                 <h2
                     class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-center transform translate-y-1 lg:translate-y-2">
                     <span class="text-black">Get In</span>
@@ -20,38 +20,12 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             <!-- Contact Form -->
             <div class="contact-form order-2 lg:order-1">
                 <div class="bg-white rounded-xl p-6 border border-gray-200 shadow-xl">
                     <form id="contactForm" class="space-y-6">
                         @csrf
-
-                        <!-- Success Message -->
-                        <div id="successMessage"
-                            class="hidden bg-green-500/20 border border-green-500 text-green-200 px-4 py-3 rounded-lg mb-4">
-                            <div class="flex items-center">
-                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span id="successText"></span>
-                            </div>
-                        </div>
-
-                        <!-- Error Message -->
-                        <div id="errorMessage"
-                            class="hidden bg-red-500/20 border border-red-500 text-red-200 px-4 py-3 rounded-lg mb-4">
-                            <div class="flex items-center">
-                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span id="errorText"></span>
-                            </div>
-                        </div>
 
                         <!-- Name Input -->
                         <div class="form-group">
@@ -59,7 +33,7 @@
                             <input type="text" id="name" name="name" required
                                 class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-charcoal placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-maklos-500 focus:border-transparent transition-all duration-300"
                                 placeholder="John Doe">
-                            <span class="error-message text-red-400 text-sm mt-1 hidden"></span>
+                            <span class="error-message text-red-500 text-sm mt-1 hidden"></span>
                         </div>
 
                         <!-- Email Input -->
@@ -68,7 +42,7 @@
                             <input type="email" id="email" name="email" required
                                 class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-charcoal placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-maklos-500 focus:border-transparent transition-all duration-300"
                                 placeholder="john@example.com">
-                            <span class="error-message text-red-400 text-sm mt-1 hidden"></span>
+                            <span class="error-message text-red-500 text-sm mt-1 hidden"></span>
                         </div>
 
                         <!-- Phone Input -->
@@ -77,7 +51,7 @@
                             <input type="tel" id="phone" name="phone"
                                 class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-charcoal placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-maklos-500 focus:border-transparent transition-all duration-300"
                                 placeholder="+123 456 7890">
-                            <span class="error-message text-red-400 text-sm mt-1 hidden"></span>
+                            <span class="error-message text-red-500 text-sm mt-1 hidden"></span>
                         </div>
 
                         <!-- Subject Input -->
@@ -86,7 +60,7 @@
                             <input type="text" id="subject" name="subject" required
                                 class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-charcoal placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-maklos-500 focus:border-transparent transition-all duration-300"
                                 placeholder="Product Inquiry">
-                            <span class="error-message text-red-400 text-sm mt-1 hidden"></span>
+                            <span class="error-message text-red-500 text-sm mt-1 hidden"></span>
                         </div>
 
                         <!-- Message Textarea -->
@@ -95,7 +69,7 @@
                             <textarea id="message" name="message" rows="5" required
                                 class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-charcoal placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-maklos-500 focus:border-transparent transition-all duration-300 resize-none"
                                 placeholder="Tell us about your inquiry..."></textarea>
-                            <span class="error-message text-red-400 text-sm mt-1 hidden"></span>
+                            <span class="error-message text-red-500 text-sm mt-1 hidden"></span>
                         </div>
 
                         <!-- Submit Button -->
@@ -118,7 +92,7 @@
             </div>
 
             <!-- Contact Information Cards -->
-            <div class="space-y-6 contact-info order-1 lg:order-2">
+            <div class="space-y-4 lg:space-y-6 contact-info order-1 lg:order-2">
                 <!-- Email Card -->
                 <div
                     class="contact-card bg-white rounded-xl p-6 border border-gray-200 hover:border-maklos-500 transition-all duration-300 hover:shadow-lg shadow-md transform hover:-translate-y-1">
@@ -194,27 +168,84 @@
             </div>
         </div>
     </div>
+
+    <!-- Notification Modal -->
+    <div id="notificationModal"
+        class="fixed inset-0 z-[100] flex items-center justify-center px-4 pointer-events-none opacity-0 transition-opacity duration-300">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity" style="clip-path: none;"
+            onclick="closeModal()"></div>
+
+        <!-- Modal Card -->
+        <div
+            class="relative bg-white rounded-2xl shadow-2xl p-8 max-w-sm w-full text-center transform scale-95 transition-all duration-300 pointer-events-auto">
+            <!-- Icon Wrapper -->
+            <div id="modalIconBg"
+                class="mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-4 transition-colors">
+                <i id="modalIcon" class="text-2xl"></i>
+            </div>
+
+            <h3 id="modalTitle" class="text-xl font-bold text-slate-900 mb-2"></h3>
+            <p id="modalMessage" class="text-slate-600 mb-6"></p>
+
+            <button onclick="closeModal()" id="modalBtn"
+                class="w-full py-3 px-4 rounded-xl font-semibold text-white transition-all transform active:scale-95 hover:shadow-lg">
+                Close
+            </button>
+        </div>
+    </div>
 </section>
 
 <!-- Contact Form JavaScript -->
 <script>
+    const modal = document.getElementById('notificationModal');
+    const modalIconBg = document.getElementById('modalIconBg');
+    const modalIcon = document.getElementById('modalIcon');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMessage = document.getElementById('modalMessage');
+    const modalBtn = document.getElementById('modalBtn');
+    let autoCloseTimer;
+
+    function showModal(type, title, message) {
+        // Stop any pending auto-close
+        clearTimeout(autoCloseTimer);
+
+        // Styling based on type
+        if (type === 'success') {
+            modalIconBg.className = 'mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-green-100 text-green-600';
+            modalIcon.className = 'fa-solid fa-check text-2xl';
+            modalBtn.className = 'w-full py-3 px-4 rounded-xl font-semibold text-white bg-green-600 hover:bg-green-700 shadow-green-200';
+
+            // Auto close for success
+            autoCloseTimer = setTimeout(closeModal, 5000);
+        } else {
+            modalIconBg.className = 'mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-red-100 text-red-600';
+            modalIcon.className = 'fa-solid fa-xmark text-2xl';
+            modalBtn.className = 'w-full py-3 px-4 rounded-xl font-semibold text-white bg-red-600 hover:bg-red-700 shadow-red-200';
+        }
+
+        modalTitle.textContent = title;
+        modalMessage.textContent = message;
+
+        // Show (Fade In)
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modal.querySelector('.transform').classList.remove('scale-95');
+        modal.querySelector('.transform').classList.add('scale-100');
+    }
+
+    function closeModal() {
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        modal.querySelector('.transform').classList.remove('scale-100');
+        modal.querySelector('.transform').classList.add('scale-95');
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('contactForm');
         const submitBtn = document.getElementById('submitBtn');
-        const successMessage = document.getElementById('successMessage');
-        const errorMessage = document.getElementById('errorMessage');
-        const successText = document.getElementById('successText');
-        const errorText = document.getElementById('errorText');
-
-        // GSAP Animations are now handled in resources/js/animations/ContactAnimations.js
 
         // Form submission handler
         form.addEventListener('submit', async function (e) {
             e.preventDefault();
-
-            // Clear previous messages
-            successMessage.classList.add('hidden');
-            errorMessage.classList.add('hidden');
 
             // Clear previous field errors
             document.querySelectorAll('.error-message').forEach(el => {
@@ -243,27 +274,8 @@
                 const data = await response.json();
 
                 if (response.ok && data.success) {
-                    // Show success message
-                    successText.textContent = data.message;
-                    successMessage.classList.remove('hidden');
-
-                    // Animate success message
-                    if (typeof gsap !== 'undefined') {
-                        gsap.from('#successMessage', {
-                            opacity: 0,
-                            y: -20,
-                            duration: 0.5,
-                            ease: 'power2.out'
-                        });
-                    }
-
-                    // Reset form
+                    showModal('success', 'Email Sent Successfully!', 'Your email has been sent successfully. We will get back to you shortly.');
                     form.reset();
-
-                    // Hide success message after 5 seconds
-                    setTimeout(() => {
-                        successMessage.classList.add('hidden');
-                    }, 5000);
                 } else {
                     // Show error messages
                     if (data.errors) {
@@ -278,34 +290,17 @@
                                 }
                             }
                         });
+
+                        // Also show modal for clarity
+                        showModal('error', 'Submission Failed', 'Please fix the errors highlighted in the form.');
                     } else {
                         // Show general error message
-                        errorText.textContent = data.message || 'Something went wrong. Please try again.';
-                        errorMessage.classList.remove('hidden');
-
-                        if (typeof gsap !== 'undefined') {
-                            gsap.from('#errorMessage', {
-                                opacity: 0,
-                                y: -20,
-                                duration: 0.5,
-                                ease: 'power2.out'
-                            });
-                        }
+                        showModal('error', 'Email Not Sent', data.message || 'Email not sent. Try again please.');
                     }
                 }
             } catch (error) {
                 console.error('Error:', error);
-                errorText.textContent = 'Network error. Please check your connection and try again.';
-                errorMessage.classList.remove('hidden');
-
-                if (typeof gsap !== 'undefined') {
-                    gsap.from('#errorMessage', {
-                        opacity: 0,
-                        y: -20,
-                        duration: 0.5,
-                        ease: 'power2.out'
-                    });
-                }
+                showModal('error', 'Connection Error', 'Network error. Please check your connection and try again.');
             } finally {
                 // Reset button state
                 submitBtn.disabled = false;

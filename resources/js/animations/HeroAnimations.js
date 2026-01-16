@@ -54,7 +54,13 @@ export default class HeroAnimations {
         const buttons = hero.querySelectorAll('.hero-button');
 
         // Create main timeline with smooth, elegant defaults
+        // Create main timeline with smooth, elegant defaults
         const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: hero,
+                start: 'top 60%',
+                toggleActions: 'play none none reverse'
+            },
             defaults: {
                 ease: 'power3.out',
                 duration: 0.9

@@ -23,26 +23,66 @@ class ProductHighlightResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('label')
-                    ->required()
-                    ->maxLength(255)
-                    ->default('Products'),
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('description')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('slug')
-                    ->maxLength(255),
-                Forms\Components\FileUpload::make('image_path')
-                    ->image(),
-                Forms\Components\Toggle::make('is_featured')
-                    ->required(),
-                Forms\Components\TextInput::make('sort_order')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
+                Forms\Components\Section::make('Basic Information')
+                    ->schema([
+                        Forms\Components\TextInput::make('label')
+                            ->required()
+                            ->maxLength(255)
+                            ->default('Products'),
+                        Forms\Components\TextInput::make('title')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\Textarea::make('description')
+                            ->required()
+                            ->rows(3)
+                            ->columnSpanFull(),
+                        Forms\Components\TextInput::make('slug')
+                            ->maxLength(255),
+                        Forms\Components\FileUpload::make('image_path')
+                            ->image()
+                            ->directory('products')
+                            ->columnSpanFull(),
+                    ])
+                    ->columns(2),
+
+                Forms\Components\Section::make('Product Details (for Expanded Card)')
+                    ->description('These fields are displayed when hovering over the product card.')
+                    ->schema([
+                        Forms\Components\TextInput::make('price')
+                            ->placeholder('e.g., 450 ETB')
+                            ->maxLength(50),
+                        Forms\Components\TextInput::make('weight')
+                            ->placeholder('e.g., 150g')
+                            ->maxLength(50),
+                        Forms\Components\TextInput::make('source')
+                            ->placeholder('e.g., Organic Extract')
+                            ->maxLength(100),
+                        Forms\Components\Repeater::make('benefits')
+                            ->label('Benefits (displayed as bullet list)')
+                            ->simple(
+                                Forms\Components\TextInput::make('benefit')
+                                    ->placeholder('e.g., Deep Cleansing')
+                                    ->required()
+                            )
+                            ->addActionLabel('Add Benefit')
+                            ->defaultItems(1)
+                            ->columnSpanFull(),
+                        Forms\Components\Toggle::make('in_stock')
+                            ->label('In Stock')
+                            ->default(true),
+                    ])
+                    ->columns(2),
+
+                Forms\Components\Section::make('Display Settings')
+                    ->schema([
+                        Forms\Components\Toggle::make('is_featured')
+                            ->label('Featured on Homepage'),
+                        Forms\Components\TextInput::make('sort_order')
+                            ->required()
+                            ->numeric()
+                            ->default(0),
+                    ])
+                    ->columns(2),
             ]);
     }
 

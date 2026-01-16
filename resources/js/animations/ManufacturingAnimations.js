@@ -28,7 +28,7 @@ export default class ManufacturingAnimations {
             ScrollTrigger.create({
                 trigger: section,
                 start: 'top 80%',
-                once: true,
+                toggleActions: 'play none none reverse',
                 onEnter: () => {
                     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
@@ -43,7 +43,7 @@ export default class ManufacturingAnimations {
                     if (title) {
                         tl.from(title, {
                             opacity: 0,
-                            y: 40,
+                            y: 20,
                             scale: 0.95,
                             duration: 1,
                         }, label ? 0.15 : 0);
@@ -52,7 +52,7 @@ export default class ManufacturingAnimations {
                     if (highlightWords.length) {
                         tl.from(highlightWords, {
                             opacity: 0,
-                            y: 28,
+                            y: 15,
                             rotateX: 18,
                             skewY: 6,
                             duration: 0.9,
@@ -63,7 +63,7 @@ export default class ManufacturingAnimations {
                     if (description) {
                         tl.from(description, {
                             opacity: 0,
-                            y: 24,
+                            y: 15,
                             filter: 'blur(6px)',
                             duration: 0.8,
                         }, '-=0.2');
@@ -88,7 +88,7 @@ export default class ManufacturingAnimations {
                 ScrollTrigger.create({
                     trigger: card,
                     start: 'top 85%',
-                    once: true,
+                    toggleActions: 'play none none reverse',
                     onEnter: () => {
                         gsap.to(card, {
                             opacity: 1,
@@ -208,11 +208,12 @@ export default class ManufacturingAnimations {
         // Pin the section and scrub horizontal translation based on scroll progress
         ScrollTrigger.create({
             trigger: section,
-            start: 'bottom bottom',
+            start: 'top 15%', // Add distinct vertical space (breathing room)
             end: () => `+=${scrollDistance}`,
             pin: pinWrapper,
             pinSpacing: true,
             scrub: 1.1,
+            invalidateOnRefresh: true, // Handle resize/recalc
             anticipatePin: 1,
             onUpdate: (self) => {
                 const progress = self.progress;

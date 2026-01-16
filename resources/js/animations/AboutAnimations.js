@@ -69,8 +69,8 @@ export default class AboutAnimations {
                 delay: index * 0.1,
                 scrollTrigger: {
                     trigger: value,
-                    start: 'top 85%',
-                    once: true
+                    start: 'top 90%',
+                    toggleActions: 'play none none reverse'
                 },
                 ease: 'power3.out'
             });
@@ -109,8 +109,8 @@ export default class AboutAnimations {
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: expertiseSection,
-                    start: 'top 85%',
-                    once: true
+                    start: 'top 90%',
+                    toggleActions: 'play none none reverse'
                 }
             });
 

@@ -1533,11 +1533,25 @@
         <x-hero :slides="$heroSlides" :heroContent="$heroContent" />
 
         {{-- Products section --}}
-        {{-- Desktop Product Showcase --}}
-        <x-product-showcase :products="$productHighlights" />
+        <div id="products">
+            {{-- Desktop Product Showcase --}}
+            <div class="hidden lg:block">
+                <x-product-showcase :products="$productHighlights" />
+            </div>
 
-        {{-- Mobile Product Showcase --}}
-        <x-product-showcase-mobile :products="$productHighlights" />
+            {{-- Mobile Product Showcase --}}
+            <div class="block lg:hidden">
+                <x-product-showcase-mobile :products="$productHighlights" />
+            </div>
+        </div>
+
+        {{-- Services Section --}}
+        <div id="services" class="w-full">
+            <div class="hidden lg:block">
+                <x-services-section :services="$services ?? collect()" />
+            </div>
+            <x-services-section-mobile :services="$services ?? collect()" />
+        </div>
 
         <div class="w-full lg:col-span-2">
             @include('partials.shape-divider')
