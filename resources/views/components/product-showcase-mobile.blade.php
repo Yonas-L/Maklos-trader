@@ -22,7 +22,7 @@
         <div class="js-bubble js-bubble-12 absolute rounded-full opacity-55 z-15"></div>
     </div>
 
-    <div class="relative z-10">
+    <div class="relative z-30">
         {{-- Section header --}}
         <div class="mb-8 flex items-center justify-center px-4">
             <h2 class="text-4xl font-bold leading-tight text-center">

@@ -1,5 +1,5 @@
 <section id="faq" class="scroll-mt-24 bg-white py-12 lg:py-24 text-charcoal">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6">
+    <div class="relative z-20 mx-auto max-w-5xl px-4 sm:px-6">
         <p class="text-sm font-semibold uppercase tracking-[0.3em] text-maklos-500">FAQ</p>
         <h2 class="mt-4 font-display text-3xl text-charcoal sm:text-4xl">Answers for quick decision-making</h2>
         <div class="mt-8 lg:mt-10 space-y-4 lg:space-y-6">
