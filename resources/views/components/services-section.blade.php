@@ -75,11 +75,6 @@
 
                 @forelse ($services as $service)
                     @php
-                        // Override DB position with automatic cyclic distribution to prevent stacking
-                        // Maps index 0->TL, 1->TR, 2->BL, 3->BR
-                        $positions = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
-                        $service->setAttribute('position', $positions[$loop->index % 4]);
-
                         $colors = $service->color_classes;
                         $positionClass = $service->position_classes;
                         $dotPosition = $service->dot_position;

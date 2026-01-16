@@ -74,7 +74,11 @@ class Service extends Model
             'bottom-right' => 'lg:bottom-10 lg:right-10',
         ];
 
-        return $positions[$this->position] ?? $positions['top-left'];
+        // Normalize string to handle cases where Label might be saved instead of Key
+        // e.g., 'Top Right' -> 'top-right'
+        $key = \Illuminate\Support\Str::slug($this->position ?? 'top-left');
+
+        return $positions[$key] ?? $positions['top-left'];
     }
 
     /**
@@ -89,6 +93,8 @@ class Service extends Model
             'bottom-right' => 'top-8 -left-2',
         ];
 
-        return $dotPositions[$this->position] ?? 'bottom-8 -right-2';
+        $key = \Illuminate\Support\Str::slug($this->position ?? 'top-left');
+
+        return $dotPositions[$key] ?? 'bottom-8 -right-2';
     }
 }
