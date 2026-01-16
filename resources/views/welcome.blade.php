@@ -1533,7 +1533,7 @@
         <x-hero :slides="$heroSlides" :heroContent="$heroContent" />
 
         {{-- Products section --}}
-        <div id="products">
+        <div id="products" class="scroll-mt-24">
             {{-- Desktop Product Showcase --}}
             <div class="hidden lg:block">
                 <x-product-showcase :products="$productHighlights" />
@@ -1546,7 +1546,7 @@
         </div>
 
         {{-- Services Section --}}
-        <div id="services" class="w-full">
+        <div id="services" class="w-full scroll-mt-24">
             <div class="hidden lg:block">
                 <x-services-section :services="$services ?? collect()" />
             </div>
@@ -1565,11 +1565,13 @@
         </div>
 
         {{-- Manufacturing Excellence Section --}}
-        {{-- Desktop Manufacturing --}}
-        <x-manufacturing-section :manufacturing-steps="$manufacturingSteps" />
+        <div id="manufacturing" class="scroll-mt-24">
+            {{-- Desktop Manufacturing --}}
+            <x-manufacturing-section :manufacturing-steps="$manufacturingSteps" />
 
-        {{-- Mobile Manufacturing --}}
-        <x-manufacturing-section-mobile :manufacturing-steps="$manufacturingSteps" />
+            {{-- Mobile Manufacturing --}}
+            <x-manufacturing-section-mobile :manufacturing-steps="$manufacturingSteps" />
+        </div>
 
         <!-- Image promo under manufacturing section -->
 

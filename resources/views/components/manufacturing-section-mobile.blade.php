@@ -1,8 +1,6 @@
 @props(['manufacturingSteps' => []])
 
-<section id="manufacturing-mobile"
-    class="lg:hidden relative bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden py-12">
-
+<section class="lg:hidden relative bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden pt-12 pb-2">
     <!-- Floating bubbles background -->
     <div class="js-manufacturing-bubbles-mobile pointer-events-none absolute inset-0 overflow-hidden z-0">
         @foreach (range(1, 8) as $i)
@@ -99,7 +97,7 @@
         </div>
 
         <!-- Optional CTA or footer -->
-        <div class="text-center mt-10" data-animate="fade-in" data-delay="0.5">
+        <div class="text-center mt-6" data-animate="fade-in" data-delay="0.5">
             <p class="text-xs text-slate-400 uppercase tracking-wider">
                 Quality you can trust, every single time
             </p>

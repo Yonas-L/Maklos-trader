@@ -1,4 +1,4 @@
-\<section id="manufacturing"
+\<section
   class="js-manufacturing-section hidden lg:flex relative bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden py-8 md:py-10 lg:py-10 items-center justify-center">
 
   <!-- 1. Ambient Background Effects (Matches other sections) -->

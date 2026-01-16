@@ -3,14 +3,24 @@
     'heading' => 'Crafted to Captivate. Engineered to Perform.',
 ])
 
-<section id="manufacturing-image-promo" class="relative bg-white overflow-hidden py-12 md:py-16">
+<section id="manufacturing-image-promo" class="relative bg-white overflow-hidden py-4 md:py-16">
     <div class="w-full px-4 sm:px-6 lg:px-8">
-        <div class="js-mip-header mb-16 flex items-center justify-center min-h-[4rem]">
+        <div class="js-mip-header mb-8 lg:mb-16 flex items-center justify-center min-h-[4rem]">
             <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-center">
                 @php
+                    // Mobile-specific split: "From Essentials" (black) | Rest (teal)
+                    // Desktop: maintain existing split logic
                     $parts = explode('—', $heading, 2);
                     $part1 = $parts[0] ?? $heading;
                     $part2 = isset($parts[1]) ? '—' . $parts[1] : '';
+                    
+                    // Simple logic: Wrap first few words in black, rest in teal if no em dash found
+                    if (!$part2 && str_contains($heading, ' ')) {
+                         $words = explode(' ', $heading);
+                         $half = ceil(count($words) / 2);
+                         $part1 = implode(' ', array_slice($words, 0, $half));
+                         $part2 = implode(' ', array_slice($words, $half));
+                    }
                 @endphp
                 <span class="text-black">{{ $part1 }}</span>
                 @if($part2)

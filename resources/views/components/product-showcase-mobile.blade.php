@@ -53,11 +53,12 @@
                         $benefits = [$benefits];
                     }
                 @endphp
-                <div class="js-product-mobile-item block space-y-4 group" data-animate="fade-up"
-                    data-delay="{{ $index * 0.1 }}" x-data="{ expanded: false }">
-                    <a href="{{ route('products.show', $product['slug']) }}" class="block">
-                        <div
-                            class="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-gradient-to-br from-maklos-50 to-maklos-100 transition-transform duration-200 active:scale-[0.98]">
+                <div class="js-product-mobile-item block space-y-4 group relative" data-animate="fade-up"
+                    data-delay="{{ $index * 0.1 }}" x-data="{ expanded: false, zoomed: false }">
+                    {{-- Image with Zoom Effect (No Link) --}}
+                    <div class="block cursor-pointer z-10" @click="zoomed = !zoomed" @click.outside="zoomed = false">
+                        <div class="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-gradient-to-br from-maklos-50 to-maklos-100 transition-all duration-300 ease-out"
+                            :class="zoomed ? 'scale-110 shadow-xl z-50' : 'scale-100 shadow-none z-0'">
                             <img src="{{ $imageUrl }}" alt="{{ $title }}"
                                 class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
 
@@ -69,7 +70,7 @@
                                 </span>
                             </div>
                         </div>
-                    </a>
+                    </div>
 
                     <div>
                         <p class="text-xs font-semibold uppercase tracking-wider text-maklos-500 mb-2"
@@ -88,13 +89,14 @@
                         </p>
 
                         {{-- Expand Button --}}
+                        {{-- Expand Button --}}
                         <button @click="expanded = !expanded"
-                            class="inline-flex items-center gap-2 text-sm font-semibold text-maklos-600 focus:outline-none"
+                            class="w-full flex items-center justify-between px-4 py-3 mt-2 rounded-lg bg-slate-50 text-sm font-semibold text-maklos-600 active:bg-slate-100 transition-colors"
                             data-animate="fade-in" data-delay="{{ $index * 0.1 + 0.25 }}">
                             <span>View details</span>
                             {{-- Chevron Down Icon --}}
                             <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-4 w-4 transition-transform duration-300 transform"
+                                class="h-5 w-5 transition-transform duration-300 transform"
                                 :class="expanded ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                 stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -104,7 +106,8 @@
 
                     {{-- Expanded Details Section --}}
                     {{-- Expanded Details Section (Accordion Animation) --}}
-                    <div class="grid transition-[grid-template-rows] duration-500 ease-in-out"
+                    {{-- Expanded Details Section (Accordion Animation) --}}
+                    <div class="grid transition-[grid-template-rows] duration-300 ease-in-out"
                         :class="expanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'">
                         <div class="overflow-hidden">
                             <div class="bg-white rounded-xl p-5 border border-slate-100 shadow-sm mt-2">
