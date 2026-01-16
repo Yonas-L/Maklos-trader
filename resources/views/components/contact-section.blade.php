@@ -133,10 +133,20 @@
                         </div>
                         <div>
                             <h3 class="text-charcoal font-semibold text-xl mb-1">Call Us</h3>
-                            <a href="tel:{{ $settings->phone ?? '+1234567890' }}"
-                                class="text-maklos-600 hover:text-maklos-700 transition-colors text-lg">
-                                {{ $settings->phone ?? '+123 456 7890' }}
-                            </a>
+                            @php
+                                $phoneRaw = $settings->phone ?? '';
+                                $phones = json_decode($phoneRaw, true);
+                                if (json_last_error() !== JSON_ERROR_NONE || !is_array($phones)) {
+                                    $phones = $phoneRaw ? [$phoneRaw] : ['+251 91 126 6949'];
+                                }
+                            @endphp
+
+                            @foreach($phones as $phone)
+                                <a href="tel:{{ $phone }}"
+                                    class="block text-maklos-600 hover:text-maklos-700 transition-colors text-lg">
+                                    {{ $phone }}
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                 </div>
