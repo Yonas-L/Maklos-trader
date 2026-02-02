@@ -27,7 +27,7 @@
                     </div>
                     <div class="absolute inset-0 rounded-full flex items-center justify-center">
                         <i
-                            class="fa-solid fa-industry text-xl bg-gradient-to-br from-blue-600 to-blue-500 bg-clip-text text-transparent"></i>
+                            class="fa-solid fa-industry text-2xl text-blue-600"></i>
                     </div>
                 </div>
                 {{-- Text --}}
@@ -48,7 +48,7 @@
                     </div>
                     <div class="absolute inset-0 rounded-full flex items-center justify-center">
                         <i
-                            class="fa-solid fa-boxes-stacked text-xl bg-gradient-to-br from-teal-500 to-emerald-500 bg-clip-text text-transparent"></i>
+                            class="fa-solid fa-boxes-stacked text-2xl text-teal-600"></i>
                     </div>
                 </div>
                 {{-- Text --}}
@@ -69,7 +69,7 @@
                     </div>
                     <div class="absolute inset-0 rounded-full flex items-center justify-center">
                         <i
-                            class="fa-solid fa-ship text-xl bg-gradient-to-br from-indigo-600 to-purple-600 bg-clip-text text-transparent"></i>
+                            class="fa-solid fa-ship text-2xl text-indigo-600"></i>
                     </div>
                 </div>
                 {{-- Text --}}
@@ -89,7 +89,7 @@
                     </div>
                     <div class="absolute inset-0 rounded-full flex items-center justify-center">
                         <i
-                            class="fa-solid fa-plane-departure text-xl bg-gradient-to-br from-cyan-600 to-blue-600 bg-clip-text text-transparent"></i>
+                            class="fa-solid fa-plane-departure text-2xl text-cyan-600"></i>
                     </div>
                 </div>
                 {{-- Text --}}
